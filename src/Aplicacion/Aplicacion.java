@@ -4,8 +4,6 @@ package Aplicacion;
  * @author Jesus Blanco, Rodrigo Lardies, Daniel Calonge
  */
 
-/*modificandofuncion*/
-
 import Exceptions.CancionNoExistente;
 import Exceptions.ContrasenaIncorrecta;
 import Exceptions.UsuarioNoExistente;
