@@ -1,7 +1,7 @@
 package Aplicacion;
 /**
  * Clase de Aplicacion
- * @author Jesus Blanco, Rodrigo Lardies, Daniel Calong
+ * @author Jesus Blanco, Rodrigo Lardies, Daniel along
  */
 
 import Exceptions.CancionNoExistente;
