@@ -32,7 +32,7 @@ public class ControladorInicio implements ActionListener {
                 JOptionPane.showMessageDialog(panelInicio, "Usuario no existente", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             } catch (ContrasenaIncorrecta e) {
-                JOptionPane.showMessageDialog(panelInicio, "El nombre de usuario o la password son incorrectas", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(panelInicio, "El nombre de usuario o la contraseña son incorrectas", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
