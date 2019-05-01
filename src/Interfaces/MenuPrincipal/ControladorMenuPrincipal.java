@@ -70,6 +70,9 @@ public class ControladorMenuPrincipal implements ActionListener {
                 e.printStackTrace();
             }
 
+        } else if(actionEvent.getActionCommand().equals("Unlogin")) {
+            app.cerrarSesion();
+            ventana.mostrarPanel(GuiBrawlify.PANEL_LOGIN);
         }
     }
 
