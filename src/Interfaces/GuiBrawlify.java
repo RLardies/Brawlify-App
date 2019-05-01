@@ -3,10 +3,14 @@ package Interfaces;
 import Aplicacion.Aplicacion;
 import Interfaces.Login.ControladorInicio;
 import Interfaces.Login.PanelInicio;
+import Interfaces.MenuPrincipal.ControladorMenuPrincipal;
 import Interfaces.MenuPrincipal.PanelMenuPrincipal;
 
 import javax.swing.*;
 import java.awt.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class GuiBrawlify extends JFrame {
 
@@ -17,15 +21,22 @@ public class GuiBrawlify extends JFrame {
     public GuiBrawlify() {
         super("Brawlify");
 
+        Aplicacion app = null;
 
-        Aplicacion app = new Aplicacion();
+        Path path = Paths.get("ficheroobj");
 
+        if (Files.exists(path)) {
+            app = Aplicacion.cargarDatos();
+        } else if (Files.notExists(path)) {
+            app = new Aplicacion();
+        }
 
         PanelInicio pLogin = new PanelInicio();
         PanelMenuPrincipal panelMenuPrincipal = new PanelMenuPrincipal();
 
 
         pLogin.setControlador(new ControladorInicio(this, app, pLogin));
+        panelMenuPrincipal.setControlador(new ControladorMenuPrincipal(this, app, panelMenuPrincipal));
 
         layout = new CardLayout();
         setLayout(layout);
