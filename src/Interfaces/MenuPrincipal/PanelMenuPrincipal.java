@@ -16,6 +16,7 @@ public class PanelMenuPrincipal extends JPanel {
     private BuscarCanciones buscarCanciones = new BuscarCanciones();
     private MisCanciones misCanciones = new MisCanciones();
     private MisListas misListas = new MisListas();
+    private MisNotificaciones misNotificaciones = new MisNotificaciones();
 
     private JButton unlogin = new JButton();
 
@@ -26,6 +27,7 @@ public class PanelMenuPrincipal extends JPanel {
         tabbedPane.addTab("Buscar Canciones", buscarCanciones);
         tabbedPane.addTab("Mis Canciones", misCanciones);
         tabbedPane.addTab("Mis Listas", misListas);
+        tabbedPane.addTab("Notificaciones", misNotificaciones);
         tabbedPane.setPreferredSize(new Dimension(950,600));
 
         JPanel botonera = new JPanel();
@@ -40,6 +42,8 @@ public class PanelMenuPrincipal extends JPanel {
         buscarCanciones.setControlador(c);
         misCanciones.setControlador(c);
         misListas.setControlador(c);
+        misNotificaciones.setControlador(c);
+
         unlogin.setActionCommand("Unlogin");
         unlogin.addActionListener(c);
     }
@@ -54,5 +58,9 @@ public class PanelMenuPrincipal extends JPanel {
 
     public MisListas getMisListas() {
         return misListas;
+    }
+
+    public MisNotificaciones getMisNotificaciones() {
+        return misNotificaciones;
     }
 }

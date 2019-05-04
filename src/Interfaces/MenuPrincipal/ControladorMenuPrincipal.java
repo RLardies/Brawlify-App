@@ -4,6 +4,7 @@ import Aplicacion.Aplicacion;
 import Interfaces.GuiBrawlify;
 import Interfaces.Login.Login;
 import Interfaces.Login.PanelInicio;
+import Notificacion.Notificacion;
 import Reproducible.Cancion;
 import pads.musicPlayer.exceptions.Mp3PlayerException;
 
@@ -54,21 +55,27 @@ public class ControladorMenuPrincipal implements ActionListener {
             int[] selected = panelMenuPrincipal.getBuscarCanciones().getTabla().getSelectedRows();
             Cancion[] cancionesSeleccionadas = new Cancion[selected.length];
 
-            int i;
-            for(i = 0; i < selected.length; i++) {
-                cancionesSeleccionadas[i] = panelMenuPrincipal.getBuscarCanciones().getResultados()[selected[i]];
+            if(cancionesSeleccionadas.length > 0) {
+                int i;
+                for(i = 0; i < selected.length; i++) {
+                    cancionesSeleccionadas[i] = panelMenuPrincipal.getBuscarCanciones().getResultados()[selected[i]];
+                }
+
+                try {
+                    app.reproducir(cancionesSeleccionadas);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (Mp3PlayerException e) {
+                    e.printStackTrace();
+                }
             }
 
-            try {
-                app.reproducir(cancionesSeleccionadas);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (Mp3PlayerException e) {
-                e.printStackTrace();
-            }
 
         } else if(actionEvent.getActionCommand().equals("Unlogin")) {
             app.cerrarSesion();
+            panelMenuPrincipal.getBuscarCanciones().limpiarTabla();
+            panelMenuPrincipal.getMisNotificaciones().limpiarTabla();
+            app.stopReproductor();
             ventana.mostrarPanel(GuiBrawlify.PANEL_LOGIN);
         }
     }

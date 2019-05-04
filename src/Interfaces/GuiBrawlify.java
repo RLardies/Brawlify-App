@@ -35,7 +35,7 @@ public class GuiBrawlify extends JFrame {
         PanelMenuPrincipal panelMenuPrincipal = new PanelMenuPrincipal();
 
 
-        pLogin.setControlador(new ControladorInicio(this, app, pLogin));
+        pLogin.setControlador(new ControladorInicio(this, app, pLogin, panelMenuPrincipal));
         panelMenuPrincipal.setControlador(new ControladorMenuPrincipal(this, app, panelMenuPrincipal));
 
         layout = new CardLayout();

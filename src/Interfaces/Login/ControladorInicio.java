@@ -4,6 +4,8 @@ import Aplicacion.Aplicacion;
 import Exceptions.ContrasenaIncorrecta;
 import Exceptions.UsuarioNoExistente;
 import Interfaces.GuiBrawlify;
+import Interfaces.MenuPrincipal.PanelMenuPrincipal;
+import Notificacion.Notificacion;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,11 +16,13 @@ public class ControladorInicio implements ActionListener {
     private GuiBrawlify ventana;
     private Aplicacion app;
     private PanelInicio panelInicio;
+    private PanelMenuPrincipal panelMenuPrincipal;
 
-    public ControladorInicio(GuiBrawlify ventana, Aplicacion app, PanelInicio panelInicio) {
+    public ControladorInicio(GuiBrawlify ventana, Aplicacion app, PanelInicio panelInicio, PanelMenuPrincipal panelMenuPrincipal) {
         this.ventana = ventana;
         this.app = app;
         this.panelInicio = panelInicio;
+        this.panelMenuPrincipal = panelMenuPrincipal;
     }
 
     @Override
@@ -37,8 +41,13 @@ public class ControladorInicio implements ActionListener {
             }
 
             ventana.mostrarPanel(GuiBrawlify.PANEL_PRINCIPAL);
-            JOptionPane.showMessageDialog(ventana, app.getUsuarioLogueado().getNotificaciones().toString(), "Notificaciones", JOptionPane.INFORMATION_MESSAGE);
-            app.getUsuarioLogueado().emptyNotificacion();
+            if(app.getUsuarioLogueado().getNotificaciones().size() > 0) {
+                for(Notificacion n : app.getUsuarioLogueado().getNotificaciones()) {
+                    panelMenuPrincipal.getMisNotificaciones().getModeloDatos().addRow(new Object[]{n.toString()});
+                }
+                JOptionPane.showMessageDialog(ventana, "Tiene nuevas notificaciones.", "Notificaciones", JOptionPane.INFORMATION_MESSAGE);
+            }
+
 
         } else if(actionEvent.getActionCommand().equals("ContinuarSinRegistrarse")) {
 

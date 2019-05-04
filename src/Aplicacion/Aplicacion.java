@@ -405,7 +405,10 @@ public class Aplicacion implements Serializable {
      * Finaliza la sesion del usuario logueado
      */
     public void cerrarSesion() {
-        usuarioLogueado = null;
+        if(usuarioLogueado != null) {
+            usuarioLogueado.emptyNotificacion();
+            usuarioLogueado = null;
+        }
     }
 
     /**
@@ -772,6 +775,12 @@ public class Aplicacion implements Serializable {
         return true;
     }
 
+
+    public void stopReproductor() {
+        if(reproductor != null) {
+            reproductor.stop();
+        }
+    }
 
     /**
      * Reproduce una cancion o canciones. Se incrementan el numero de reproducciones del usuario no premium y el repToPremium del autor de la cancion.
