@@ -383,8 +383,8 @@ public class Aplicacion implements Serializable {
 
 
 
-                    System.out.println(usuarioLogueado.getNotificaciones());
-                    usuarioLogueado.emptyNotificacion();
+                    /*System.out.println(usuarioLogueado.getNotificaciones());
+                    usuarioLogueado.emptyNotificacion();*/
                     return;
                 }
                 else{

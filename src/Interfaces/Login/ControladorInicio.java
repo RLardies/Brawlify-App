@@ -37,6 +37,8 @@ public class ControladorInicio implements ActionListener {
             }
 
             ventana.mostrarPanel(GuiBrawlify.PANEL_PRINCIPAL);
+            JOptionPane.showMessageDialog(ventana, app.getUsuarioLogueado().getNotificaciones().toString(), "Notificaciones", JOptionPane.INFORMATION_MESSAGE);
+            app.getUsuarioLogueado().emptyNotificacion();
 
         } else if(actionEvent.getActionCommand().equals("ContinuarSinRegistrarse")) {
 

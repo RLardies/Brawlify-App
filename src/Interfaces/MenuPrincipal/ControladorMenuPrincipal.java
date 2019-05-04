@@ -37,20 +37,17 @@ public class ControladorMenuPrincipal implements ActionListener {
                 resultados = app.buscarCancionPorAutor(panelMenuPrincipal.getBuscarCanciones().getTextoABuscar());
             }
 
-            String[] titulos = {"Titulo", "Autor", "Duracion"};
-
-            Object [][] filas = new Object[resultados.size()][3];
             Cancion[] canciones = new Cancion[resultados.size()];
+
+            panelMenuPrincipal.getBuscarCanciones().limpiarTabla();
 
             int i;
             for(i = 0; i < resultados.size(); i++) {
-                filas[i][0] = resultados.get(i).getTitulo();
-                filas[i][1] = resultados.get(i).getAutor().getUsername();
-                filas[i][2] = resultados.get(i).getDuracion();
                 canciones[i] = resultados.get(i);
+                panelMenuPrincipal.getBuscarCanciones().getModeloDatos().addRow(new Object[]{resultados.get(i).getTitulo(), resultados.get(i).getAutor().getUsername(), resultados.get(i).getDuracion()});
             }
 
-            panelMenuPrincipal.getBuscarCanciones().setTabla(filas, titulos, canciones);
+            panelMenuPrincipal.getBuscarCanciones().guardarResultados(canciones);
 
         } else if(actionEvent.getActionCommand().equals("Reproducir")) {
 
