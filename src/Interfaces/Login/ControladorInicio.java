@@ -40,12 +40,14 @@ public class ControladorInicio implements ActionListener {
                 return;
             }
 
+            panelMenuPrincipal.getTabbedPane().setSelectedIndex(0);
             ventana.mostrarPanel(GuiBrawlify.PANEL_PRINCIPAL);
             if(app.getUsuarioLogueado().getNotificaciones().size() > 0) {
+                panelMenuPrincipal.getTabbedPane().setSelectedIndex(3);
                 for(Notificacion n : app.getUsuarioLogueado().getNotificaciones()) {
                     panelMenuPrincipal.getMisNotificaciones().getModeloDatos().addRow(new Object[]{n.toString()});
                 }
-                JOptionPane.showMessageDialog(ventana, "Tiene nuevas notificaciones.", "Notificaciones", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(ventana, "Tiene nuevas notificaciones. Desapareceran cuando cierre sesion", "Notificaciones", JOptionPane.INFORMATION_MESSAGE);
             }
 
 

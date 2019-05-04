@@ -63,4 +63,8 @@ public class PanelMenuPrincipal extends JPanel {
     public MisNotificaciones getMisNotificaciones() {
         return misNotificaciones;
     }
+
+    public JTabbedPane getTabbedPane() {
+        return tabbedPane;
+    }
 }
