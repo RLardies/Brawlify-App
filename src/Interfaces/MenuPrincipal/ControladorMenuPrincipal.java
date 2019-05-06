@@ -143,7 +143,11 @@ public class ControladorMenuPrincipal implements ActionListener {
                 listaSeleccionada = panelMenuPrincipal.getMisListas().getResultados()[selected[0]];
                 panelMenuPrincipal.getMisListas().limpiarTablaReproducibles();
 
+                panelMenuPrincipal.getMisListas().setListaSelec(listaSeleccionada);
 
+                Reproducible[] reps = new Reproducible[listaSeleccionada.getElementos().size()];
+
+                int k = 0;
                 for(Reproducible r : listaSeleccionada.getElementos()){
                     String tipo;
                     if(r.esLista()){
@@ -154,7 +158,11 @@ public class ControladorMenuPrincipal implements ActionListener {
                         tipo = "Canción";
 
                     panelMenuPrincipal.getMisListas().getModeloReproducibles().addRow(new Object[]{r.getTitulo(),tipo,r.getNumeroCanciones()});
+
+                    reps[k] = r;
+                    k++;
                 }
+                panelMenuPrincipal.getMisListas().guardarReps(reps);
             }
 
         } else if(actionEvent.getActionCommand().equals("Reportar")) {
@@ -180,8 +188,42 @@ public class ControladorMenuPrincipal implements ActionListener {
                     JOptionPane.showMessageDialog(panelMenuPrincipal, "Canciones reportadas correctamente", "Ok", JOptionPane.INFORMATION_MESSAGE);
 
                 }
+            }
+
+        } else if(actionEvent.getActionCommand().equals("Eliminar")){
+
+            int[] selected = panelMenuPrincipal.getMisListas().getTabla2().getSelectedRows();
+            Reproducible[] reproduciblesSeleccionados = new Reproducible[selected.length];
+
+            int i;
+            if(reproduciblesSeleccionados.length > 0) {
+                for (i = 0; i < selected.length; i++) {
+                    reproduciblesSeleccionados[i] = panelMenuPrincipal.getMisListas().getReps()[selected[i]];
+                    panelMenuPrincipal.getMisListas().getModeloReproducibles().removeRow(selected[i]-i);
+                }
 
 
+                for(Reproducible r : reproduciblesSeleccionados) {
+                    panelMenuPrincipal.getMisListas().getListaSelec().removeReproducible(r);
+                }
+            }
+
+        }else if(actionEvent.getActionCommand().equals("BorrarLista")){
+
+            int[] selected = panelMenuPrincipal.getMisListas().getTabla().getSelectedRows();
+            Lista[] listasSeleccionadas = new Lista[selected.length];
+
+            int i;
+            if(listasSeleccionadas.length > 0) {
+                for (i = 0; i < selected.length; i++) {
+                    listasSeleccionadas[i] = panelMenuPrincipal.getMisListas().getResultados()[selected[i]];
+                    panelMenuPrincipal.getMisListas().getModeloDatos().removeRow(selected[i]-i);
+                }
+
+                for(Lista l : listasSeleccionadas) {
+                    app.getReproducibles().remove(l);
+                    app.getUsuarioLogueado().getReproducibles().remove(l);
+                }
             }
         }
 

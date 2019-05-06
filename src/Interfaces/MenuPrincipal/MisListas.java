@@ -14,7 +14,10 @@ public class MisListas extends JPanel {
     private SpringLayout layout;
     private JButton reproducir;
     private JButton borrar;
+    private JButton eliminar;
     private Lista[] resultados;
+    private Lista listaSelec;
+    private Reproducible[] reps;
     private JButton mostrar;
     DefaultTableModel modeloDatos;
     DefaultTableModel modeloReproducibles;
@@ -46,12 +49,14 @@ public class MisListas extends JPanel {
         reproducir = new JButton("Reproducir");
         borrar = new JButton("Borrar");
         mostrar = new JButton("Mostrar");
+        eliminar = new JButton("Eliminar");
 
         this.add(scroll);
         this.add(scroll2);
         this.add(reproducir);
         this.add(borrar);
         this.add(mostrar);
+        this.add(eliminar);
 
         layout.putConstraint(SpringLayout.WEST, scroll, 30, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.NORTH, scroll, 30, SpringLayout.NORTH, this);
@@ -67,21 +72,31 @@ public class MisListas extends JPanel {
 
         layout.putConstraint(SpringLayout.WEST, borrar, 0, SpringLayout.WEST, reproducir);
         layout.putConstraint(SpringLayout.NORTH, borrar, 50, SpringLayout.NORTH, reproducir);
+
+        layout.putConstraint(SpringLayout.WEST, eliminar, 0, SpringLayout.WEST, borrar);
+        layout.putConstraint(SpringLayout.NORTH, eliminar, 230, SpringLayout.NORTH, borrar);
     }
 
     public void setControlador(ActionListener c) {
         reproducir.setActionCommand("ReproducirLista");
         reproducir.addActionListener(c);
 
-        borrar.setActionCommand("Borrar");
+        borrar.setActionCommand("BorrarLista");
         borrar.addActionListener(c);
 
         mostrar.setActionCommand("Mostrar");
         mostrar.addActionListener(c);
+
+        eliminar.setActionCommand("Eliminar");
+        eliminar.addActionListener(c);
     }
 
     public JTable getTabla() {
         return tabla;
+    }
+
+    public JTable getTabla2(){
+        return tabla2;
     }
 
     public void limpiarTabla() {
@@ -102,6 +117,11 @@ public class MisListas extends JPanel {
         modeloReproducibles.fireTableDataChanged();
     }
 
+    public Lista getListaSelec(){ return listaSelec; }
+
+    public void setListaSelec(Lista l){
+        listaSelec = l;
+    }
 
     public Lista[] getResultados() {
         return resultados;
@@ -116,5 +136,11 @@ public class MisListas extends JPanel {
 
     public void guardarResultados(Lista[] listas) {
         resultados = listas;
+    }
+
+    public Reproducible[] getReps(){ return reps; }
+
+    public void guardarReps(Reproducible[] reproducibles){
+        reps = reproducibles;
     }
 }
