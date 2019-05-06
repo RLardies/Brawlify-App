@@ -7,11 +7,15 @@ import Exceptions.UsuarioYaExistente;
 import Interfaces.GuiBrawlify;
 import Interfaces.MenuPrincipal.PanelMenuPrincipal;
 import Notificacion.Notificacion;
+import Reproducible.Reproducible;
+import Reproducible.Cancion;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class ControladorInicio implements ActionListener {
 
@@ -67,6 +71,27 @@ public class ControladorInicio implements ActionListener {
                     panelMenuPrincipal.getMisNotificaciones().getModeloDatos().addRow(new Object[]{n.toString()});
                 }
                 JOptionPane.showMessageDialog(ventana, "Tiene nuevas notificaciones. Desapareceran cuando cierre sesion", "Notificaciones", JOptionPane.INFORMATION_MESSAGE);
+            }
+            if(app.getUsuarioLogueado().getReproducibles().size() > 0){
+                panelMenuPrincipal.getTabbedPane().setSelectedIndex(3);
+
+                ArrayList<Cancion> canciones = new ArrayList<Cancion>();
+
+                for(Reproducible r : app.getUsuarioLogueado().getReproducibles()){
+                    if(r.esCancion()){
+                        canciones.add((Cancion)r);
+                        panelMenuPrincipal.getMisCanciones().getModeloDatos().addRow(new Object[]{r.getTitulo(), r.getAutor().getUsername(), r.getDuracion()});
+                    }
+                }
+
+                Cancion[] resultados = new Cancion[canciones.size()];
+                int i;
+                for(i = 0; i < canciones.size(); i++){
+                    resultados[i] = canciones.get(i);
+                }
+
+                panelMenuPrincipal.getMisCanciones().guardarResultados(resultados);
+
             }
 
 

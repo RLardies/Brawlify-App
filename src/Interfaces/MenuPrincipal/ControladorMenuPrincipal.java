@@ -54,7 +54,7 @@ public class ControladorMenuPrincipal implements ActionListener {
 
             panelMenuPrincipal.getBuscarCanciones().guardarResultados(canciones);
 
-        } else if(actionEvent.getActionCommand().equals("Reproducir")) {
+        } else if(actionEvent.getActionCommand().equals("ReproducirBuscar")) {
 
             int[] selected = panelMenuPrincipal.getBuscarCanciones().getTabla().getSelectedRows();
             Cancion[] cancionesSeleccionadas = new Cancion[selected.length];
@@ -103,6 +103,27 @@ public class ControladorMenuPrincipal implements ActionListener {
             }
 
             panelMenuPrincipal.getMisCanciones().limpiarTabla();
+
+        } else if(actionEvent.getActionCommand().equals("ReproducirMis")) {
+
+            int[] selected = panelMenuPrincipal.getMisCanciones().getTabla().getSelectedRows();
+            Cancion[] cancionesSeleccionadas = new Cancion[selected.length];
+
+            int i;
+            if (cancionesSeleccionadas.length > 0) {
+                for (i = 0; i < selected.length; i++) {
+                    cancionesSeleccionadas[i] = panelMenuPrincipal.getMisCanciones().getResultados()[selected[i]];
+                }
+
+                try {
+                    app.reproducir(cancionesSeleccionadas);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (Mp3PlayerException e) {
+                    e.printStackTrace();
+                }
+            }
+
         }
 
     }

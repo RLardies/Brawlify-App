@@ -65,7 +65,7 @@ public class BuscarCanciones extends JPanel {
     public void setControlador(ActionListener c) {
         iniciarBusqueda.setActionCommand("Buscar");
         iniciarBusqueda.addActionListener(c);
-        reproducir.setActionCommand("Reproducir");
+        reproducir.setActionCommand("ReproducirBuscar");
         reproducir.addActionListener(c);
     }
 

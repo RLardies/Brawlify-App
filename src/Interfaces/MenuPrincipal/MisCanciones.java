@@ -21,8 +21,8 @@ public class MisCanciones extends JPanel {
         layout = new SpringLayout();
         this.setLayout(layout);
 
-        String[] titulos = {"Mis Canciones"};
-        Object[][] filas = new Object[0][1];
+        String[] titulos = {"Titulo","Autor","Duración"};
+        Object[][] filas = new Object[0][3];
         modeloDatos = new DefaultTableModel(filas, titulos);
         tabla = new JTable(modeloDatos);
         JScrollPane scroll = new JScrollPane(tabla);
@@ -49,7 +49,7 @@ public class MisCanciones extends JPanel {
 
     }
     public void setControlador(ActionListener c) {
-        reproducir.setActionCommand("Reproducir");
+        reproducir.setActionCommand("ReproducirMis");
         reproducir.addActionListener(c);
 
         reproducir.setActionCommand("Borrar");
@@ -68,6 +68,12 @@ public class MisCanciones extends JPanel {
         }
         modeloDatos.fireTableDataChanged();
     }
+
+
+    public Cancion[] getResultados() {
+        return resultados;
+    }
+
     public DefaultTableModel getModeloDatos() {
         return modeloDatos;
     }
