@@ -6,6 +6,7 @@ import Exceptions.UsuarioNoExistente;
 import Exceptions.UsuarioYaExistente;
 import Interfaces.GuiBrawlify;
 import Interfaces.MenuPrincipal.PanelMenuPrincipal;
+import Interfaces.MenuPrincipal.Reportes;
 import Notificacion.Notificacion;
 import Reproducible.Reproducible;
 import Reproducible.Cancion;
@@ -51,6 +52,7 @@ public class ControladorInicio implements ActionListener {
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Canciones", panelMenuPrincipal.getMisCanciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Listas", panelMenuPrincipal.getMisListas());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Notificaciones", panelMenuPrincipal.getMisNotificaciones());
+                panelMenuPrincipal.getTabbedPane().addTab("Reportes", panelMenuPrincipal.getReportes());
             } else if(app.getUsuarioLogueado().esPremium()) {
                 panelMenuPrincipal.getTabbedPane().addTab("Buscar Canciones", panelMenuPrincipal.getBuscarCanciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Canciones", panelMenuPrincipal.getMisCanciones());

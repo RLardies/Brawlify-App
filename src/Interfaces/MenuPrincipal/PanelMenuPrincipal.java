@@ -17,7 +17,7 @@ public class PanelMenuPrincipal extends JPanel {
     private MisCanciones misCanciones = new MisCanciones();
     private MisListas misListas = new MisListas();
     private MisNotificaciones misNotificaciones = new MisNotificaciones();
-
+    private Reportes reportes = new Reportes();
     private JButton unlogin = new JButton();
 
     public PanelMenuPrincipal(){
@@ -43,6 +43,7 @@ public class PanelMenuPrincipal extends JPanel {
         misCanciones.setControlador(c);
         misListas.setControlador(c);
         misNotificaciones.setControlador(c);
+        reportes.setControlador(c);
 
         unlogin.setActionCommand("Unlogin");
         unlogin.addActionListener(c);
@@ -68,5 +69,7 @@ public class PanelMenuPrincipal extends JPanel {
         return tabbedPane;
     }
 
-
+    public Reportes getReportes() {
+        return reportes;
+    }
 }
