@@ -52,8 +52,8 @@ public class MisCanciones extends JPanel {
         reproducir.setActionCommand("ReproducirMis");
         reproducir.addActionListener(c);
 
-        reproducir.setActionCommand("Borrar");
-        reproducir.addActionListener(c);
+        borrar.setActionCommand("Borrar");
+        borrar.addActionListener(c);
     }
 
     public JTable getTabla() {

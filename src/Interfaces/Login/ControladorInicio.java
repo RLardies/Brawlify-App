@@ -72,9 +72,8 @@ public class ControladorInicio implements ActionListener {
                 }
                 JOptionPane.showMessageDialog(ventana, "Tiene nuevas notificaciones. Desapareceran cuando cierre sesion", "Notificaciones", JOptionPane.INFORMATION_MESSAGE);
             }
-            if(app.getUsuarioLogueado().getReproducibles().size() > 0){
 
-                panelMenuPrincipal.getTabbedPane().setSelectedIndex(3);
+            if(app.getUsuarioLogueado().getReproducibles().size() > 0){
 
                 panelMenuPrincipal.getMisCanciones().limpiarTabla();
 
@@ -94,7 +93,6 @@ public class ControladorInicio implements ActionListener {
                 }
 
                 panelMenuPrincipal.getMisCanciones().guardarResultados(resultados);
-
             }
 
 
