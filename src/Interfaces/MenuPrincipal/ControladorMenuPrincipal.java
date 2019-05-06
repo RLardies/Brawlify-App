@@ -140,7 +140,7 @@ public class ControladorMenuPrincipal implements ActionListener {
 
             if(selected.length == 1){
                 listaSeleccionada = panelMenuPrincipal.getMisListas().getResultados()[selected[0]];
-                panelMenuPrincipal.getMisListas().limpiarTabla();
+                panelMenuPrincipal.getMisListas().limpiarTablaReproducibles();
 
 
                 for(Reproducible r : listaSeleccionada.getElementos()){

@@ -88,6 +88,15 @@ public class MisListas extends JPanel {
         int i;
         int rows = modeloDatos.getRowCount();
         for(i = 0; i < rows; i++) {
+            modeloDatos.removeRow(0);
+        }
+        modeloDatos.fireTableDataChanged();
+    }
+
+    public void limpiarTablaReproducibles() {
+        int i;
+        int rows = modeloReproducibles.getRowCount();
+        for(i = 0; i < rows; i++) {
             modeloReproducibles.removeRow(0);
         }
         modeloReproducibles.fireTableDataChanged();
