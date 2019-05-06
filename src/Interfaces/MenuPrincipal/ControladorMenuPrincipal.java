@@ -86,6 +86,9 @@ public class ControladorMenuPrincipal implements ActionListener {
             panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getMisCanciones());
             panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getMisListas());
             panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getMisNotificaciones());
+            panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getReportes());
+            panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getValidaciones());
+            panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getAjustes());
             ventana.mostrarPanel(GuiBrawlify.PANEL_LOGIN);
 
         }else if(actionEvent.getActionCommand().equals("Borrar")){
@@ -130,32 +133,6 @@ public class ControladorMenuPrincipal implements ActionListener {
                 }
             }
 
-        } else if(actionEvent.getActionCommand().equals("Reportar")) {
-            if(app.getUsuarioLogueado() == null) {
-                JOptionPane.showMessageDialog(panelMenuPrincipal, "Inicia sesión para reportar una cancion", "Inicia Sesion", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                String comentario = new String(panelMenuPrincipal.getBuscarCanciones().getComentario().getText());
-
-                int[] selected = panelMenuPrincipal.getBuscarCanciones().getTabla().getSelectedRows();
-                Cancion[] cancionesSeleccionadas = new Cancion[selected.length];
-
-                int i;
-                if (cancionesSeleccionadas.length > 0) {
-                    for (i = 0; i < selected.length; i++) {
-                        cancionesSeleccionadas[i] = panelMenuPrincipal.getBuscarCanciones().getResultados()[selected[i]];
-                        panelMenuPrincipal.getBuscarCanciones().getModeloDatos().removeRow(selected[i]-i);
-                        try {
-                            app.reportarCancion(cancionesSeleccionadas[i], comentario);
-                        } catch (CancionNoExistente cancionNoExistente) {
-                            cancionNoExistente.printStackTrace();
-                        }
-                    }
-                    JOptionPane.showMessageDialog(panelMenuPrincipal, "Canciones reportadas correctamente", "Ok", JOptionPane.INFORMATION_MESSAGE);
-
-                }
-
-
-            }
         }
 
     }

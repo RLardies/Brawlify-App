@@ -18,6 +18,8 @@ public class PanelMenuPrincipal extends JPanel {
     private MisListas misListas = new MisListas();
     private MisNotificaciones misNotificaciones = new MisNotificaciones();
     private Reportes reportes = new Reportes();
+    private Validaciones validaciones = new Validaciones();
+    private Ajustes ajustes = new Ajustes();
     private JButton unlogin = new JButton();
 
     public PanelMenuPrincipal(){
@@ -44,6 +46,8 @@ public class PanelMenuPrincipal extends JPanel {
         misListas.setControlador(c);
         misNotificaciones.setControlador(c);
         reportes.setControlador(c);
+        validaciones.setControlador(c);
+        ajustes.setControlador(c);
 
         unlogin.setActionCommand("Unlogin");
         unlogin.addActionListener(c);
@@ -71,5 +75,13 @@ public class PanelMenuPrincipal extends JPanel {
 
     public Reportes getReportes() {
         return reportes;
+    }
+
+    public Validaciones getValidaciones() {
+        return validaciones;
+    }
+
+    public Ajustes getAjustes() {
+        return ajustes;
     }
 }
