@@ -87,6 +87,9 @@ public class ControladorMenuPrincipal implements ActionListener {
             panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getMisCanciones());
             panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getMisListas());
             panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getMisNotificaciones());
+            panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getReportes());
+            panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getValidaciones());
+            panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getAjustes());
             ventana.mostrarPanel(GuiBrawlify.PANEL_LOGIN);
 
         }else if(actionEvent.getActionCommand().equals("Borrar")){
