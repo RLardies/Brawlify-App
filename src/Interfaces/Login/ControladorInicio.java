@@ -73,14 +73,17 @@ public class ControladorInicio implements ActionListener {
                 JOptionPane.showMessageDialog(ventana, "Tiene nuevas notificaciones. Desapareceran cuando cierre sesion", "Notificaciones", JOptionPane.INFORMATION_MESSAGE);
             }
             if(app.getUsuarioLogueado().getReproducibles().size() > 0){
+
                 panelMenuPrincipal.getTabbedPane().setSelectedIndex(3);
+
+                panelMenuPrincipal.getMisCanciones().limpiarTabla();
 
                 ArrayList<Cancion> canciones = new ArrayList<Cancion>();
 
                 for(Reproducible r : app.getUsuarioLogueado().getReproducibles()){
-                    if(r.esCancion()){
+                    if(r.esCancion() && r.getEstado() != Cancion.Estado.BORRADO){
                         canciones.add((Cancion)r);
-                        panelMenuPrincipal.getMisCanciones().getModeloDatos().addRow(new Object[]{r.getTitulo(), r.getAutor().getUsername(), r.getDuracion()});
+                        panelMenuPrincipal.getMisCanciones().getModeloDatos().addRow(new Object[]{r.getTitulo(), r.getEstado(), r.getDuracion()});
                     }
                 }
 
