@@ -156,11 +156,8 @@ public class ControladorMenuPrincipal implements ActionListener {
                     JOptionPane.showMessageDialog(panelMenuPrincipal, "Canciones reportadas correctamente", "Ok", JOptionPane.INFORMATION_MESSAGE);
 
                 }
-
-
             }
         }
-
     }
 
 }
