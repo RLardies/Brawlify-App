@@ -142,10 +142,6 @@ public class ControladorMenuPrincipal implements ActionListener {
                 listaSeleccionada = panelMenuPrincipal.getMisListas().getResultados()[selected[0]];
                 panelMenuPrincipal.getMisListas().limpiarTabla();
 
-                String[] titulos = {"Titulo", "Tipo", "Nº de Canciones"};
-                Object[][] filas = new Object[0][3];
-
-                panelMenuPrincipal.getMisListas().modeloDatos = new DefaultTableModel(filas,titulos);
 
                 for(Reproducible r : listaSeleccionada.getElementos()){
                     String tipo;
@@ -156,7 +152,7 @@ public class ControladorMenuPrincipal implements ActionListener {
                     }else
                         tipo = "Canción";
 
-                    panelMenuPrincipal.getMisListas().getModeloDatos().addRow(new Object[]{r.getTitulo(),tipo,r.getNumeroCanciones()});
+                    panelMenuPrincipal.getMisListas().getModeloReproducibles().addRow(new Object[]{r.getTitulo(),tipo,r.getNumeroCanciones()});
                 }
             }
         } else if(actionEvent.getActionCommand().equals("Reportar")) {

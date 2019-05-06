@@ -7,13 +7,17 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class MisListas extends JPanel {private JTable tabla;
+public class MisListas extends JPanel {
+
+    private JTable tabla;
+    private JTable tabla2;
     private SpringLayout layout;
     private JButton reproducir;
     private JButton borrar;
     private Lista[] resultados;
     private JButton mostrar;
     DefaultTableModel modeloDatos;
+    DefaultTableModel modeloReproducibles;
 
 
     public MisListas() {
@@ -23,7 +27,14 @@ public class MisListas extends JPanel {private JTable tabla;
         String[] titulos = {"Listas", "Nº de Canciones", "Duración"};
         Object[][] filas = new Object[0][3];
         modeloDatos = new DefaultTableModel(filas, titulos);
+
+        String[] titulos2 = {"Titulo", "Tipo", "Nº de Canciones"};
+        Object[][] filas2 = new Object[0][3];
+        modeloReproducibles = new DefaultTableModel(filas2,titulos2);
+
         tabla = new JTable(modeloDatos);
+        tabla2 = new JTable(modeloReproducibles);
+
         JScrollPane scroll = new JScrollPane(tabla);
 
         scroll.setPreferredSize(new Dimension(600, 530));
@@ -69,11 +80,11 @@ public class MisListas extends JPanel {private JTable tabla;
 
     public void limpiarTabla() {
         int i;
-        int rows = modeloDatos.getRowCount();
+        int rows = modeloReproducibles.getRowCount();
         for(i = 0; i < rows; i++) {
-            modeloDatos.removeRow(0);
+            modeloReproducibles.removeRow(0);
         }
-        modeloDatos.fireTableDataChanged();
+        modeloReproducibles.fireTableDataChanged();
     }
 
 
@@ -84,6 +95,8 @@ public class MisListas extends JPanel {private JTable tabla;
     public DefaultTableModel getModeloDatos() {
         return modeloDatos;
     }
+
+    public DefaultTableModel getModeloReproducibles(){ return modeloReproducibles; }
 
 
     public void guardarResultados(Lista[] listas) {
