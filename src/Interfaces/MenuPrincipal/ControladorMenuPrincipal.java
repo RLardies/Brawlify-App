@@ -155,13 +155,33 @@ public class ControladorMenuPrincipal implements ActionListener {
 
                     panelMenuPrincipal.getMisListas().getModeloDatos().addRow(new Object[]{r.getTitulo(),tipo,r.getNumeroCanciones()});
                 }
+            }
+        } else if(actionEvent.getActionCommand().equals("Reportar")) {
+            if (app.getUsuarioLogueado() == null) {
+                JOptionPane.showMessageDialog(panelMenuPrincipal, "Inicia sesión para reportar una cancion", "Inicia Sesion", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                String comentario = new String(panelMenuPrincipal.getBuscarCanciones().getComentario().getText());
 
+                int[] selected = panelMenuPrincipal.getBuscarCanciones().getTabla().getSelectedRows();
+                Cancion[] cancionesSeleccionadas = new Cancion[selected.length];
 
+                int i;
+                if (cancionesSeleccionadas.length > 0) {
+                    for (i = 0; i < selected.length; i++) {
+                        cancionesSeleccionadas[i] = panelMenuPrincipal.getBuscarCanciones().getResultados()[selected[i]];
+                        panelMenuPrincipal.getBuscarCanciones().getModeloDatos().removeRow(selected[i] - i);
+                        try {
+                            app.reportarCancion(cancionesSeleccionadas[i], comentario);
+                        } catch (CancionNoExistente cancionNoExistente) {
+                            cancionNoExistente.printStackTrace();
+                        }
+                    }
+                    JOptionPane.showMessageDialog(panelMenuPrincipal, "Canciones reportadas correctamente", "Ok", JOptionPane.INFORMATION_MESSAGE);
+
+                }
 
 
             }
-
-
         }
 
     }
