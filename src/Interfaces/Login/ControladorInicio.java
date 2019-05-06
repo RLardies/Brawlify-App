@@ -43,7 +43,10 @@ public class ControladorInicio implements ActionListener {
             }
 
             if(app.getUsuarioLogueado().esAdmin()) {
-
+                panelMenuPrincipal.getTabbedPane().addTab("Buscar Canciones", panelMenuPrincipal.getBuscarCanciones());
+                panelMenuPrincipal.getTabbedPane().addTab("Mis Canciones", panelMenuPrincipal.getMisCanciones());
+                panelMenuPrincipal.getTabbedPane().addTab("Mis Listas", panelMenuPrincipal.getMisListas());
+                panelMenuPrincipal.getTabbedPane().addTab("Mis Notificaciones", panelMenuPrincipal.getMisNotificaciones());
             } else if(app.getUsuarioLogueado().esPremium()) {
                 panelMenuPrincipal.getTabbedPane().addTab("Buscar Canciones", panelMenuPrincipal.getBuscarCanciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Canciones", panelMenuPrincipal.getMisCanciones());
@@ -82,8 +85,6 @@ public class ControladorInicio implements ActionListener {
             }
             ventana.mostrarPanel(GuiBrawlify.PANEL_PRINCIPAL);
         }
-
-
 
     }
 }
