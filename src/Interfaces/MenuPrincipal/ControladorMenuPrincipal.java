@@ -135,7 +135,7 @@ public class ControladorMenuPrincipal implements ActionListener {
             }
 
         } else if(actionEvent.getActionCommand().equals("Mostrar")){
-            int[] selected = panelMenuPrincipal.getMisCanciones().getTabla().getSelectedRows();
+            int[] selected = panelMenuPrincipal.getMisListas().getTabla().getSelectedRows();
             Lista listaSeleccionada;
 
             if(selected.length == 1){

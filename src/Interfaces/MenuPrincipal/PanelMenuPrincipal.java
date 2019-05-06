@@ -45,7 +45,6 @@ public class PanelMenuPrincipal extends JPanel {
         misCanciones.setControlador(c);
         misListas.setControlador(c);
         misNotificaciones.setControlador(c);
-        misListas.setControlador(c);
         reportes.setControlador(c);
         validaciones.setControlador(c);
         ajustes.setControlador(c);
