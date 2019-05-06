@@ -19,7 +19,9 @@ import java.awt.event.ActionListener;
     }
 
     public void setControlador(ActionListener c) {
+
         login.setControlador(c);
+        registro.setControlador(c);
     }
 
 
