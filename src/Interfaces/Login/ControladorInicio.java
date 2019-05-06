@@ -42,6 +42,20 @@ public class ControladorInicio implements ActionListener {
                 return;
             }
 
+            if(app.getUsuarioLogueado().esAdmin()) {
+
+            } else if(app.getUsuarioLogueado().esPremium()) {
+                panelMenuPrincipal.getTabbedPane().addTab("Buscar Canciones", panelMenuPrincipal.getBuscarCanciones());
+                panelMenuPrincipal.getTabbedPane().addTab("Mis Canciones", panelMenuPrincipal.getMisCanciones());
+                panelMenuPrincipal.getTabbedPane().addTab("Mis Listas", panelMenuPrincipal.getMisListas());
+                panelMenuPrincipal.getTabbedPane().addTab("Mis Notificaciones", panelMenuPrincipal.getMisNotificaciones());
+            } else {
+                panelMenuPrincipal.getTabbedPane().addTab("Buscar Canciones", panelMenuPrincipal.getBuscarCanciones());
+                panelMenuPrincipal.getTabbedPane().addTab("Mis Canciones", panelMenuPrincipal.getMisCanciones());
+                panelMenuPrincipal.getTabbedPane().addTab("Mis Listas", panelMenuPrincipal.getMisListas());
+                panelMenuPrincipal.getTabbedPane().addTab("Mis Notificaciones", panelMenuPrincipal.getMisNotificaciones());
+            }
+
             panelMenuPrincipal.getTabbedPane().setSelectedIndex(0);
             ventana.mostrarPanel(GuiBrawlify.PANEL_PRINCIPAL);
             if(app.getUsuarioLogueado().getNotificaciones().size() > 0) {
@@ -56,6 +70,7 @@ public class ControladorInicio implements ActionListener {
         } else if(actionEvent.getActionCommand().equals("ContinuarSinRegistrarse")) {
 
             ventana.mostrarPanel(GuiBrawlify.PANEL_PRINCIPAL);
+            panelMenuPrincipal.getTabbedPane().addTab("Buscar Canciones", panelMenuPrincipal.getBuscarCanciones());
 
         }else if(actionEvent.getActionCommand().equals("Registrarse")){
             Registro registro = panelInicio.getRegistro();

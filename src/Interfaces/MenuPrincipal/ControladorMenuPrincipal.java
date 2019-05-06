@@ -76,6 +76,11 @@ public class ControladorMenuPrincipal implements ActionListener {
             panelMenuPrincipal.getBuscarCanciones().limpiarTabla();
             panelMenuPrincipal.getMisNotificaciones().limpiarTabla();
             app.stopReproductor();
+
+            panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getBuscarCanciones());
+            panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getMisCanciones());
+            panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getMisListas());
+            panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getMisNotificaciones());
             ventana.mostrarPanel(GuiBrawlify.PANEL_LOGIN);
         }
     }

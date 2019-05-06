@@ -24,10 +24,10 @@ public class PanelMenuPrincipal extends JPanel {
 
         layout = new BorderLayout();
 
-        tabbedPane.addTab("Buscar Canciones", buscarCanciones);
+        /*tabbedPane.addTab("Buscar Canciones", buscarCanciones);
         tabbedPane.addTab("Mis Canciones", misCanciones);
         tabbedPane.addTab("Mis Listas", misListas);
-        tabbedPane.addTab("Notificaciones", misNotificaciones);
+        tabbedPane.addTab("Notificaciones", misNotificaciones);*/
         tabbedPane.setPreferredSize(new Dimension(950,600));
 
         JPanel botonera = new JPanel();
@@ -67,4 +67,6 @@ public class PanelMenuPrincipal extends JPanel {
     public JTabbedPane getTabbedPane() {
         return tabbedPane;
     }
+
+
 }
