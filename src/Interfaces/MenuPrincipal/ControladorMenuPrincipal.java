@@ -1,11 +1,13 @@
 package Interfaces.MenuPrincipal;
 
 import Aplicacion.Aplicacion;
+import Exceptions.CancionNoExistente;
 import Interfaces.GuiBrawlify;
 import Interfaces.Login.Login;
 import Interfaces.Login.PanelInicio;
 import Notificacion.Notificacion;
 import Reproducible.Cancion;
+import Reproducible.Reproducible;
 import pads.musicPlayer.exceptions.Mp3PlayerException;
 
 import javax.swing.*;
@@ -27,6 +29,8 @@ public class ControladorMenuPrincipal implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent actionEvent) {
+
+
 
         if(actionEvent.getActionCommand().equals("Buscar")) {
             String filtro = (String) panelMenuPrincipal.getBuscarCanciones().getFiltro().getSelectedItem();
@@ -55,8 +59,8 @@ public class ControladorMenuPrincipal implements ActionListener {
             int[] selected = panelMenuPrincipal.getBuscarCanciones().getTabla().getSelectedRows();
             Cancion[] cancionesSeleccionadas = new Cancion[selected.length];
 
+            int i;
             if(cancionesSeleccionadas.length > 0) {
-                int i;
                 for(i = 0; i < selected.length; i++) {
                     cancionesSeleccionadas[i] = panelMenuPrincipal.getBuscarCanciones().getResultados()[selected[i]];
                 }
@@ -82,7 +86,25 @@ public class ControladorMenuPrincipal implements ActionListener {
             panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getMisListas());
             panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getMisNotificaciones());
             ventana.mostrarPanel(GuiBrawlify.PANEL_LOGIN);
+
+        }else if(actionEvent.getActionCommand().equals("Borrar")){
+            int[] selected = panelMenuPrincipal.getMisCanciones().getTabla().getSelectedRows();
+            Cancion[] cancionesSeleccionadas = new Cancion[selected.length];
+
+            if(cancionesSeleccionadas.length > 0) {
+
+                for(Cancion c : cancionesSeleccionadas) {
+                    try {
+                        app.borrarCancion(c);
+                    }catch (CancionNoExistente e){
+                        System.out.println(e);
+                    }
+                }
+            }
+
+            panelMenuPrincipal.getMisCanciones().limpiarTabla();
         }
+
     }
 
 }
