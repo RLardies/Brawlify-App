@@ -3,6 +3,7 @@ package Aplicacion;
 import Exceptions.CancionNoExistente;
 import Exceptions.ContrasenaIncorrecta;
 import Exceptions.UsuarioNoExistente;
+import Exceptions.UsuarioYaExistente;
 import Reproducible.Album;
 import Reproducible.Cancion;
 import Reproducible.Lista;
@@ -39,7 +40,12 @@ public class AplicacionTest {
         c5 = new Cancion("prueba5",1000,u,"nwop.mp3");
         c6 = new Cancion("prueba6",1000,u,"nwoasdp.mp3");
 
-        app.registrarUsuario("fidel", "12345", LocalDate.of(1997, 6, 13), "Fidel");
+        try {
+            app.registrarUsuario("fidel", "12345", LocalDate.of(1997, 6, 13), "Fidel");
+        }catch (UsuarioYaExistente e){
+            System.out.println(e);
+        }
+
         app.login("fidel","12345");
         l = new Lista("Chill",u);
         l2 = new Lista("MenosChill",u);
@@ -50,7 +56,13 @@ public class AplicacionTest {
 
     @Test
     public void registrarUsuario() {
-        app.registrarUsuario("Ciórraga","12345",LocalDate.of(2011,4,24),"Rodrigo");
+
+        try {
+            app.registrarUsuario("Ciórraga", "12345", LocalDate.of(2011, 4, 24), "Rodrigo");
+        }catch (UsuarioYaExistente e){
+            System.out.println(e);
+        }
+
         ArrayList<Usuario> usuarios = app.getUsuarios();
         for(Usuario u: usuarios){
             if(u.getUsername().equals("Ciórraga")){

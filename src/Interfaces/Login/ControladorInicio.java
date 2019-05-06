@@ -3,6 +3,7 @@ package Interfaces.Login;
 import Aplicacion.Aplicacion;
 import Exceptions.ContrasenaIncorrecta;
 import Exceptions.UsuarioNoExistente;
+import Exceptions.UsuarioYaExistente;
 import Interfaces.GuiBrawlify;
 import Interfaces.MenuPrincipal.PanelMenuPrincipal;
 import Notificacion.Notificacion;
@@ -10,6 +11,7 @@ import Notificacion.Notificacion;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 
 public class ControladorInicio implements ActionListener {
 
@@ -55,6 +57,18 @@ public class ControladorInicio implements ActionListener {
 
             ventana.mostrarPanel(GuiBrawlify.PANEL_PRINCIPAL);
 
+        }else if(actionEvent.getActionCommand().equals("Registrarse")){
+            Registro registro = panelInicio.getRegistro();
+            try{
+                app.registrarUsuario(registro.getUserText(),registro.getPasswordText(), LocalDate.parse(registro.getFechaText()),registro.getNombretext());
+            } catch (UsuarioYaExistente e) {
+                JOptionPane.showMessageDialog(panelInicio,"Este usuario ya existe","Error",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            ventana.mostrarPanel(GuiBrawlify.PANEL_PRINCIPAL);
         }
+
+
+
     }
 }

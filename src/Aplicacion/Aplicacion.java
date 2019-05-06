@@ -7,6 +7,7 @@ package Aplicacion;
 import Exceptions.CancionNoExistente;
 import Exceptions.ContrasenaIncorrecta;
 import Exceptions.UsuarioNoExistente;
+import Exceptions.UsuarioYaExistente;
 import Reporte.Reporte;
 import Reproducible.Reproducible;
 import Reproducible.Cancion;
@@ -285,7 +286,9 @@ public class Aplicacion implements Serializable {
      * @param nombre Nombre real
      * @return true si el usuario se ha registrado, false si ya hay un usuario con ese nombre o si el usuario esta loguead en la aplicacion
      */
-    public boolean registrarUsuario(String username, String contrasena, LocalDate fechaNac, String nombre){
+    public boolean registrarUsuario(String username, String contrasena, LocalDate fechaNac, String nombre) throws UsuarioYaExistente {
+
+        boolean flag = false;
 
         if(usuarioLogueado != null) {
             return false;
@@ -297,7 +300,7 @@ public class Aplicacion implements Serializable {
 
         for(Usuario u : usuarios) {
             if(username.equals(u.getUsername())) {
-                return false;
+                throw new UsuarioYaExistente();
             }
         }
 

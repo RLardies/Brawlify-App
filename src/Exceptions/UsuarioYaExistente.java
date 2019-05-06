@@ -1,4 +1,4 @@
 package Exceptions;
 
-public class UsuarioYaExistente {
+public class UsuarioYaExistente extends Exception {
 }

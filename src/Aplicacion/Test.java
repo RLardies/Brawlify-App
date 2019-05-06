@@ -3,6 +3,7 @@ package Aplicacion;
 import Exceptions.CancionNoExistente;
 import Exceptions.ContrasenaIncorrecta;
 import Exceptions.UsuarioNoExistente;
+import Exceptions.UsuarioYaExistente;
 import Reproducible.Cancion;
 import Reproducible.Lista;
 import Reproducible.Album;
@@ -39,13 +40,16 @@ public class Test {
         Lista l;
         Lista l2;
 
-
-        app.registrarUsuario("user1","holaquetal", LocalDate.of(1950, 1, 1), "User1");
-        app.registrarUsuario("user2","holaquetal", LocalDate.of(1980, 2, 2), "User2");
-        app.registrarUsuario("user3","holaquetal", LocalDate.of(1987, 3, 3), "User3");
-        app.registrarUsuario("user4","holaquetal", LocalDate.of(1990, 4, 4), "User4");
-        app.registrarUsuario("user5","holaquetal", LocalDate.of(2004, 5, 5), "User5");
-        app.registrarUsuario("user6","holaquetal", LocalDate.of(2005, 6, 6), "User6");
+        try {
+            app.registrarUsuario("user1", "holaquetal", LocalDate.of(1950, 1, 1), "User1");
+            app.registrarUsuario("user2", "holaquetal", LocalDate.of(1980, 2, 2), "User2");
+            app.registrarUsuario("user3", "holaquetal", LocalDate.of(1987, 3, 3), "User3");
+            app.registrarUsuario("user4", "holaquetal", LocalDate.of(1990, 4, 4), "User4");
+            app.registrarUsuario("user5", "holaquetal", LocalDate.of(2004, 5, 5), "User5");
+            app.registrarUsuario("user6", "holaquetal", LocalDate.of(2005, 6, 6), "User6");
+        }catch (UsuarioYaExistente e){
+            System.out.println(e);
+        }
 
         for(Usuario u : usuarios) {
             System.out.println(u);
