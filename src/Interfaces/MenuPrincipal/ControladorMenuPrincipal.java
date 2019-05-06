@@ -156,6 +156,7 @@ public class ControladorMenuPrincipal implements ActionListener {
                     panelMenuPrincipal.getMisListas().getModeloReproducibles().addRow(new Object[]{r.getTitulo(),tipo,r.getNumeroCanciones()});
                 }
             }
+
         } else if(actionEvent.getActionCommand().equals("Reportar")) {
             if (app.getUsuarioLogueado() == null) {
                 JOptionPane.showMessageDialog(panelMenuPrincipal, "Inicia sesión para reportar una cancion", "Inicia Sesion", JOptionPane.INFORMATION_MESSAGE);

@@ -36,8 +36,10 @@ public class MisListas extends JPanel {
         tabla2 = new JTable(modeloReproducibles);
 
         JScrollPane scroll = new JScrollPane(tabla);
+        JScrollPane scroll2 = new JScrollPane(tabla2);
 
-        scroll.setPreferredSize(new Dimension(600, 530));
+        scroll.setPreferredSize(new Dimension(600, 230));
+        scroll2.setPreferredSize(new Dimension(600,250));
 
 
 
@@ -46,12 +48,16 @@ public class MisListas extends JPanel {
         mostrar = new JButton("Mostrar");
 
         this.add(scroll);
+        this.add(scroll2);
         this.add(reproducir);
         this.add(borrar);
         this.add(mostrar);
 
         layout.putConstraint(SpringLayout.WEST, scroll, 30, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.NORTH, scroll, 30, SpringLayout.NORTH, this);
+
+        layout.putConstraint(SpringLayout.WEST, scroll2, 0, SpringLayout.WEST, scroll);
+        layout.putConstraint(SpringLayout.NORTH, scroll2, 40, SpringLayout.SOUTH, scroll);
 
         layout.putConstraint(SpringLayout.EAST, mostrar, 210, SpringLayout.EAST, scroll);
         layout.putConstraint(SpringLayout.NORTH, mostrar, 30, SpringLayout.NORTH, scroll);
@@ -80,7 +86,7 @@ public class MisListas extends JPanel {
 
     public void limpiarTabla() {
         int i;
-        int rows = modeloReproducibles.getRowCount();
+        int rows = modeloDatos.getRowCount();
         for(i = 0; i < rows; i++) {
             modeloReproducibles.removeRow(0);
         }
