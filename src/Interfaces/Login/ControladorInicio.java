@@ -10,6 +10,7 @@ import Interfaces.MenuPrincipal.Reportes;
 import Notificacion.Notificacion;
 import Reproducible.Reproducible;
 import Reproducible.Cancion;
+import Reproducible.Lista;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -53,9 +54,6 @@ public class ControladorInicio implements ActionListener {
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Listas", panelMenuPrincipal.getMisListas());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Notificaciones", panelMenuPrincipal.getMisNotificaciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Reportes", panelMenuPrincipal.getReportes());
-                panelMenuPrincipal.getTabbedPane().addTab("Validaciones", panelMenuPrincipal.getValidaciones());
-                panelMenuPrincipal.getTabbedPane().addTab("Ajustes", panelMenuPrincipal.getAjustes());
-
             } else if(app.getUsuarioLogueado().esPremium()) {
                 panelMenuPrincipal.getTabbedPane().addTab("Buscar Canciones", panelMenuPrincipal.getBuscarCanciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Canciones", panelMenuPrincipal.getMisCanciones());
@@ -98,6 +96,28 @@ public class ControladorInicio implements ActionListener {
                 }
 
                 panelMenuPrincipal.getMisCanciones().guardarResultados(resultados);
+            }
+
+            if(app.getUsuarioLogueado().esPremium()){
+                panelMenuPrincipal.getMisListas().limpiarTabla();
+
+                ArrayList<Lista> listas = new ArrayList<Lista>();
+
+                for(Reproducible r : app.getUsuarioLogueado().getReproducibles()){
+                    if(r.esLista() && r.getEstado() != Cancion.Estado.BLOQUEADO){
+                        listas.add((Lista) r);
+                        panelMenuPrincipal.getMisListas().getModeloDatos().addRow(new Object[]{r.getTitulo(),r.getNumeroCanciones(),r.getDuracion()});
+                    }
+                }
+
+                Lista[] l = new Lista[listas.size()];
+                int j;
+                for(j=0; j < listas.size(); j++){
+                    l[j] = listas.get(j);
+                }
+
+                panelMenuPrincipal.getMisListas().guardarResultados(l);
+
             }
 
 

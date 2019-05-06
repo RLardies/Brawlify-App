@@ -7,10 +7,11 @@ import Interfaces.Login.Login;
 import Interfaces.Login.PanelInicio;
 import Notificacion.Notificacion;
 import Reproducible.Cancion;
-import Reproducible.Reproducible;
+import Reproducible.*;
 import pads.musicPlayer.exceptions.Mp3PlayerException;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -86,9 +87,6 @@ public class ControladorMenuPrincipal implements ActionListener {
             panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getMisCanciones());
             panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getMisListas());
             panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getMisNotificaciones());
-            panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getReportes());
-            panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getValidaciones());
-            panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getAjustes());
             ventana.mostrarPanel(GuiBrawlify.PANEL_LOGIN);
 
         }else if(actionEvent.getActionCommand().equals("Borrar")){
@@ -133,31 +131,39 @@ public class ControladorMenuPrincipal implements ActionListener {
                 }
             }
 
-        } else if(actionEvent.getActionCommand().equals("Reportar")) {
-            if(app.getUsuarioLogueado() == null) {
-                JOptionPane.showMessageDialog(panelMenuPrincipal, "Inicia sesión para reportar una cancion", "Inicia Sesion", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                String comentario = new String(panelMenuPrincipal.getBuscarCanciones().getComentario().getText());
+        } else if(actionEvent.getActionCommand().equals("Mostrar")){
+            int[] selected = panelMenuPrincipal.getMisCanciones().getTabla().getSelectedRows();
+            Lista listaSeleccionada;
 
-                int[] selected = panelMenuPrincipal.getBuscarCanciones().getTabla().getSelectedRows();
-                Cancion[] cancionesSeleccionadas = new Cancion[selected.length];
+            if(selected.length == 1){
+                listaSeleccionada = panelMenuPrincipal.getMisListas().getResultados()[selected[0]];
+                panelMenuPrincipal.getMisListas().limpiarTabla();
 
-                int i;
-                if (cancionesSeleccionadas.length > 0) {
-                    for (i = 0; i < selected.length; i++) {
-                        cancionesSeleccionadas[i] = panelMenuPrincipal.getBuscarCanciones().getResultados()[selected[i]];
-                        panelMenuPrincipal.getBuscarCanciones().getModeloDatos().removeRow(selected[i] - i);
-                        try {
-                            app.reportarCancion(cancionesSeleccionadas[i], comentario);
-                        } catch (CancionNoExistente cancionNoExistente) {
-                            cancionNoExistente.printStackTrace();
-                        }
-                    }
-                    JOptionPane.showMessageDialog(panelMenuPrincipal, "Canciones reportadas correctamente", "Ok", JOptionPane.INFORMATION_MESSAGE);
+                String[] titulos = {"Titulo", "Tipo", "Nº de Canciones"};
+                Object[][] filas = new Object[0][3];
 
+                panelMenuPrincipal.getMisListas().modeloDatos = new DefaultTableModel(filas,titulos);
+
+                for(Reproducible r : listaSeleccionada.getElementos()){
+                    String tipo;
+                    if(r.esLista()){
+                        tipo = "Lista";
+                    }else if(r.esAlbum()){
+                        tipo = "Álbum";
+                    }else
+                        tipo = "Canción";
+
+                    panelMenuPrincipal.getMisListas().getModeloDatos().addRow(new Object[]{r.getTitulo(),tipo,r.getNumeroCanciones()});
                 }
+
+
+
+
             }
+
+
         }
+
     }
 
 }
