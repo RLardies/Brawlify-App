@@ -79,6 +79,7 @@ public class ControladorMenuPrincipal implements ActionListener {
             app.cerrarSesion();
             panelMenuPrincipal.getBuscarCanciones().limpiarTabla();
             panelMenuPrincipal.getMisNotificaciones().limpiarTabla();
+            panelMenuPrincipal.getMisCanciones().limpiarTabla();
             app.stopReproductor();
 
             panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getBuscarCanciones());
@@ -91,7 +92,13 @@ public class ControladorMenuPrincipal implements ActionListener {
             int[] selected = panelMenuPrincipal.getMisCanciones().getTabla().getSelectedRows();
             Cancion[] cancionesSeleccionadas = new Cancion[selected.length];
 
+            int i;
             if(cancionesSeleccionadas.length > 0) {
+                for (i = 0; i < selected.length; i++) {
+                    cancionesSeleccionadas[i] = panelMenuPrincipal.getMisCanciones().getResultados()[selected[i]];
+                    panelMenuPrincipal.getMisCanciones().getModeloDatos().removeRow(selected[i]-i);
+                }
+
 
                 for(Cancion c : cancionesSeleccionadas) {
                     try {
@@ -100,9 +107,8 @@ public class ControladorMenuPrincipal implements ActionListener {
                         System.out.println(e);
                     }
                 }
+                panelMenuPrincipal.getBuscarCanciones().limpiarTabla();
             }
-
-            panelMenuPrincipal.getMisCanciones().limpiarTabla();
 
         } else if(actionEvent.getActionCommand().equals("ReproducirMis")) {
 
