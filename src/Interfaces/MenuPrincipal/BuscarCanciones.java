@@ -18,6 +18,9 @@ public class BuscarCanciones extends JPanel {
     private SpringLayout layout;
     private JButton reproducir;
     private Cancion[] resultados;
+    private JButton reportarCancion;
+    private JLabel comentarioLabel;
+    private JTextField comentario;
     DefaultTableModel modeloDatos;
 
     public BuscarCanciones() {
@@ -36,7 +39,12 @@ public class BuscarCanciones extends JPanel {
         tabla = new JTable(modeloDatos);
         JScrollPane scroll = new JScrollPane(tabla);
 
+        reportarCancion = new JButton("Reportar Cancion");
+
         reproducir = new JButton("Reproducir");
+
+        comentarioLabel = new JLabel("Comentario del reporte:");
+        comentario = new JTextField(20);
 
 
         layout.putConstraint(SpringLayout.WEST, textoABuscar, 30, SpringLayout.WEST, this);
@@ -54,11 +62,23 @@ public class BuscarCanciones extends JPanel {
         layout.putConstraint(SpringLayout.WEST, scroll, 30, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.NORTH, scroll, 30, SpringLayout.SOUTH, textoABuscar);
 
+        layout.putConstraint(SpringLayout.WEST, reportarCancion, 20, SpringLayout.EAST, reproducir);
+        layout.putConstraint(SpringLayout.NORTH, reportarCancion, 0, SpringLayout.NORTH, reproducir);
+
+        layout.putConstraint(SpringLayout.WEST, comentarioLabel, 0, SpringLayout.WEST, reproducir);
+        layout.putConstraint(SpringLayout.NORTH, comentarioLabel, 0, SpringLayout.NORTH, scroll);
+
+        layout.putConstraint(SpringLayout.WEST, comentario, 0, SpringLayout.WEST, comentarioLabel);
+        layout.putConstraint(SpringLayout.NORTH, comentario, 10, SpringLayout.SOUTH, comentarioLabel);
+
         this.add(textoABuscar);
         this.add(iniciarBusqueda);
         this.add(filtro);
         this.add(reproducir);
         this.add(scroll);
+        this.add(reportarCancion);
+        this.add(comentario);
+        this.add(comentarioLabel);
     }
 
 
@@ -67,6 +87,8 @@ public class BuscarCanciones extends JPanel {
         iniciarBusqueda.addActionListener(c);
         reproducir.setActionCommand("ReproducirBuscar");
         reproducir.addActionListener(c);
+        reportarCancion.setActionCommand("Reportar");
+        reportarCancion.addActionListener(c);
     }
 
     public String getTextoABuscar() {
@@ -101,5 +123,9 @@ public class BuscarCanciones extends JPanel {
             modeloDatos.removeRow(0);
         }
         modeloDatos.fireTableDataChanged();
+    }
+
+    public JTextField getComentario() {
+        return comentario;
     }
 }
