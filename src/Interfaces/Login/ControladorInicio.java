@@ -78,12 +78,14 @@ public class ControladorInicio implements ActionListener {
         }else if(actionEvent.getActionCommand().equals("Registrarse")){
             Registro registro = panelInicio.getRegistro();
             try{
+                //Comprobar que los campos no sean null
+                //Comprobar que la fecha este en formato correcto (Da error si no: java.time.format.DateTimeParseException)
+                //Si se ha registrado correcctamente poner el mensaje, pero no loguear directamente
                 app.registrarUsuario(registro.getUserText(),registro.getPasswordText(), LocalDate.parse(registro.getFechaText()),registro.getNombretext());
             } catch (UsuarioYaExistente e) {
                 JOptionPane.showMessageDialog(panelInicio,"Este usuario ya existe","Error",JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            ventana.mostrarPanel(GuiBrawlify.PANEL_PRINCIPAL);
         }
 
     }
