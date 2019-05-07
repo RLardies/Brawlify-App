@@ -1,5 +1,8 @@
 package Interfaces.MenuPrincipal;
 
+import Reproducible.Cancion;
+import Reproducible.Lista;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -12,6 +15,7 @@ public class Validaciones extends JPanel {
     private JButton validar;
     private JButton rechazar;
     private JButton reproducir;
+    private Cancion[] resultados;
 
 
     public Validaciones() {
@@ -54,7 +58,7 @@ public class Validaciones extends JPanel {
         validar.addActionListener(c);
         rechazar.setActionCommand("Rechazar");
         rechazar.addActionListener(c);
-        reproducir.setActionCommand("Reproducir");
+        reproducir.setActionCommand("ReproducirValidaciones");
         reproducir.addActionListener(c);    }
 
     public void limpiarTabla() {
@@ -66,7 +70,14 @@ public class Validaciones extends JPanel {
         modeloDatos.fireTableDataChanged();
     }
 
+    public JTable getTabla() {
+        return tabla;
+    }
+
     public DefaultTableModel getModeloDatos() {
         return modeloDatos;
+    }
+    public void guardarResultados(Cancion[] canciones) {
+        resultados = canciones;
     }
 }

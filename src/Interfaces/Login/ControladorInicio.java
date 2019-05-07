@@ -8,6 +8,7 @@ import Interfaces.GuiBrawlify;
 import Interfaces.MenuPrincipal.PanelMenuPrincipal;
 import Interfaces.MenuPrincipal.Reportes;
 import Notificacion.Notificacion;
+import Reporte.Reporte;
 import Reproducible.Reproducible;
 import Reproducible.Cancion;
 import Reproducible.Lista;
@@ -120,6 +121,43 @@ public class ControladorInicio implements ActionListener {
                 }
 
                 panelMenuPrincipal.getMisListas().guardarResultados(l);
+
+            }
+
+            if(app.getUsuarioLogueado().esAdmin()){
+                panelMenuPrincipal.getValidaciones().limpiarTabla();
+
+                ArrayList<Cancion> canciones = app.mostrarCancionesAValidar();
+
+                for(Cancion c : canciones){
+                    panelMenuPrincipal.getValidaciones().getModeloDatos().addRow(new Object[]{c.getTitulo(),c.getAutor()});
+
+                }
+
+                Cancion[] l = new Cancion[canciones.size()];
+                int j;
+                for(j=0; j < canciones.size(); j++){
+                    l[j] = canciones.get(j);
+                }
+                panelMenuPrincipal.getValidaciones().guardarResultados(l);
+
+
+
+                panelMenuPrincipal.getReportes().limpiarTabla();
+                ArrayList<Reporte> reportes = app.mostrarReportes();
+
+                for (Reporte r : reportes){
+                    panelMenuPrincipal.getReportes().getModeloDatos().addRow(new Object[]{r.getCancionReportada().getTitulo(), r.getUsuario().getUsername(), r.getComentario()});
+                }
+
+                Reporte[] r = new Reporte[reportes.size()];
+                int k;
+                for(k=0; k < reportes.size(); k++){
+                    r[k] = reportes.get(k);
+                }
+                panelMenuPrincipal.getReportes().guardarResultados(r);
+
+
 
             }
 

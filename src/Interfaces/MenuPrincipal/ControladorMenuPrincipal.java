@@ -6,6 +6,7 @@ import Interfaces.GuiBrawlify;
 import Interfaces.Login.Login;
 import Interfaces.Login.PanelInicio;
 import Notificacion.Notificacion;
+import Reporte.Reporte;
 import Reproducible.Cancion;
 import Reproducible.*;
 import pads.musicPlayer.exceptions.Mp3PlayerException;
@@ -223,6 +224,51 @@ public class ControladorMenuPrincipal implements ActionListener {
                 for(Lista l : listasSeleccionadas) {
                     app.getReproducibles().remove(l);
                     app.getUsuarioLogueado().getReproducibles().remove(l);
+                }
+            }
+        }else if(actionEvent.getActionCommand().equals("ReproducirValidaciones")) {
+
+            int[] selected = panelMenuPrincipal.getBuscarCanciones().getTabla().getSelectedRows();
+            Cancion[] cancionesSeleccionadas = new Cancion[selected.length];
+
+            int i;
+            if (cancionesSeleccionadas.length > 0) {
+                for (i = 0; i < selected.length; i++) {
+                    cancionesSeleccionadas[i] = panelMenuPrincipal.getBuscarCanciones().getResultados()[selected[i]];
+                }
+
+                try {
+                    app.reproducir(cancionesSeleccionadas);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (Mp3PlayerException e) {
+                    e.printStackTrace();
+                }
+            }
+        }else if(actionEvent.getActionCommand().equals("Confirmar")){
+            int[] selected = panelMenuPrincipal.getReportes().getTabla().getSelectedRows();
+            Reporte[] reportesSeleccionados = new Reporte[selected.length];
+
+            int i;
+            if (reportesSeleccionados.length > 0) {
+                for (i = 0; i < selected.length; i++) {
+                    reportesSeleccionados[i] = panelMenuPrincipal.getReportes().getResultados()[selected[i]];
+                    panelMenuPrincipal.getReportes().getModeloDatos().removeRow(selected[i] - i);
+
+                    app.procesarPlagio(reportesSeleccionados[i], true);
+                }
+            }
+        }else if(actionEvent.getActionCommand().equals("Desmentir")){
+            int[] selected = panelMenuPrincipal.getReportes().getTabla().getSelectedRows();
+            Reporte[] reportesSeleccionados = new Reporte[selected.length];
+
+            int i;
+            if (reportesSeleccionados.length > 0) {
+                for (i = 0; i < selected.length; i++) {
+                    reportesSeleccionados[i] = panelMenuPrincipal.getReportes().getResultados()[selected[i]];
+                    panelMenuPrincipal.getReportes().getModeloDatos().removeRow(selected[i] - i);
+
+                    app.procesarPlagio(reportesSeleccionados[i], false);
                 }
             }
         }

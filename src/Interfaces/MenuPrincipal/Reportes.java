@@ -1,5 +1,8 @@
 package Interfaces.MenuPrincipal;
 
+import Reporte.Reporte;
+import Reproducible.Cancion;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -12,6 +15,7 @@ public class Reportes extends JPanel {
     DefaultTableModel modeloDatos;
     private JButton confirmar;
     private JButton desmentir;
+    private Reporte[] resultados;
 
 
     public Reportes() {
@@ -60,7 +64,19 @@ public class Reportes extends JPanel {
         modeloDatos.fireTableDataChanged();
     }
 
+    public JTable getTabla() {
+        return tabla;
+    }
+
     public DefaultTableModel getModeloDatos() {
         return modeloDatos;
+    }
+
+    public void guardarResultados(Reporte[] reportes) {
+        resultados = reportes;
+    }
+
+    public Reporte[] getResultados() {
+        return resultados;
     }
 }
