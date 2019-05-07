@@ -65,8 +65,8 @@ public class Ajustes extends JPanel {
     public void setControlador(ActionListener c) {
         cambiar1.setActionCommand("CambiarRepToPremium");
         cambiar1.addActionListener(c);
-        cambiar1.setActionCommand("CambiarMaxRepNoPremium");
-        cambiar1.addActionListener(c);
+        cambiar2.setActionCommand("CambiarMaxRepNoPremium");
+        cambiar2.addActionListener(c);
 
     }
     public int getMaxRepNoPremium() {

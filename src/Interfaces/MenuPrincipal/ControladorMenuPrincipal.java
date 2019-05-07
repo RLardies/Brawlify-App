@@ -361,9 +361,23 @@ public class ControladorMenuPrincipal implements ActionListener {
                 JOptionPane.showMessageDialog(panelMenuPrincipal, "Canciones no validadas ", "Ok", JOptionPane.INFORMATION_MESSAGE);
             }
         }else if(actionEvent.getActionCommand().equals("CambiarRepToPremium")){
-            if(panelMenuPrincipal.getAjustes().getNewRepToPremium(). > 0){
+            if(Integer.parseInt(panelMenuPrincipal.getAjustes().getNewRepToPremium()) > 0){
+                app.setRepToPremium(Integer.parseInt(panelMenuPrincipal.getAjustes().getNewRepToPremium()));
+                JOptionPane.showMessageDialog(panelMenuPrincipal, "Los cambios se han realizado correctamente", "Ok", JOptionPane.INFORMATION_MESSAGE);
 
+            }else {
+                JOptionPane.showMessageDialog(panelMenuPrincipal, "El numero de reproducciones debe ser mayor que 0 ", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             }
+
+        }else if(actionEvent.getActionCommand().equals("CambiarMaxRepNoPremium")){
+            if(Integer.parseInt(panelMenuPrincipal.getAjustes().getNewMaxRepNoPremium()) > 0){
+                app.setRepToPremium(Integer.parseInt(panelMenuPrincipal.getAjustes().getNewMaxRepNoPremium()));
+                JOptionPane.showMessageDialog(panelMenuPrincipal, "Los cambios se han realizado correctamente", "Ok", JOptionPane.INFORMATION_MESSAGE);
+
+            }else {
+                JOptionPane.showMessageDialog(panelMenuPrincipal, "El numero de reproducciones debe ser mayor que 0 ", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            }
+
         } else if(actionEvent.getActionCommand().equals("ReproducirLista")){
             if (app.getUsuarioLogueado().esPremium() == false) {
                 JOptionPane.showMessageDialog(panelMenuPrincipal, "Funcion para usuarios Premium", "Funcion Premium", JOptionPane.INFORMATION_MESSAGE);
