@@ -20,16 +20,12 @@ public class PanelMenuPrincipal extends JPanel {
     private Reportes reportes = new Reportes();
     private Validaciones validaciones = new Validaciones();
     private Ajustes ajustes = new Ajustes();
-    private JButton unlogin = new JButton();
+    private JButton unlogin;
 
     public PanelMenuPrincipal(){
 
         layout = new BorderLayout();
 
-        /*tabbedPane.addTab("Buscar Canciones", buscarCanciones);
-        tabbedPane.addTab("Mis Canciones", misCanciones);
-        tabbedPane.addTab("Mis Listas", misListas);
-        tabbedPane.addTab("Notificaciones", misNotificaciones);*/
         tabbedPane.setPreferredSize(new Dimension(950,600));
 
         JPanel botonera = new JPanel();

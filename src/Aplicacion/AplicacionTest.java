@@ -1,9 +1,6 @@
 package Aplicacion;
 
-import Exceptions.CancionNoExistente;
-import Exceptions.ContrasenaIncorrecta;
-import Exceptions.UsuarioNoExistente;
-import Exceptions.UsuarioYaExistente;
+import Exceptions.*;
 import Reproducible.Album;
 import Reproducible.Cancion;
 import Reproducible.Lista;
@@ -29,7 +26,7 @@ public class AplicacionTest {
     private ArrayList<Cancion> canciones2 = new ArrayList<Cancion>();
 
     @Before
-    public void iniciarAplicacion() throws UsuarioNoExistente, ContrasenaIncorrecta {
+    public void iniciarAplicacion() throws UsuarioNoExistente, ContrasenaIncorrecta, UsuarioBloqueado {
         app = new Aplicacion();
         u = new Usuario("rodri88", "12345", LocalDate.of(1997, 6, 13), "Rodrigo");
         u2 = new Usuario("calongenio", "12345", LocalDate.of(2011, 6, 13), "Rodrigo");
@@ -74,7 +71,7 @@ public class AplicacionTest {
     }
 
     @Test
-    public void login() throws UsuarioNoExistente, ContrasenaIncorrecta{
+    public void login() throws UsuarioNoExistente, ContrasenaIncorrecta, UsuarioBloqueado{
         app.cerrarSesion();
         assertTrue(app.getUsuarioLogueado() == null);
         ArrayList<Usuario> usuarios = app.getUsuarios();
@@ -89,7 +86,7 @@ public class AplicacionTest {
     }
 
     @Test
-    public void cerrarSesion()  throws UsuarioNoExistente, ContrasenaIncorrecta{
+    public void cerrarSesion()  throws UsuarioNoExistente, ContrasenaIncorrecta, UsuarioBloqueado{
         app.login("fidel","12345");
         app.cerrarSesion();
         assertTrue(app.getUsuarioLogueado() == null);
@@ -108,7 +105,7 @@ public class AplicacionTest {
     }
 
     @Test
-    public void modificarCancion() throws CancionNoExistente, UsuarioNoExistente, ContrasenaIncorrecta {
+    public void modificarCancion() throws CancionNoExistente, UsuarioNoExistente, ContrasenaIncorrecta, UsuarioBloqueado {
         app.login("fidel","12345");
         app.subirCancion("Prueba2","hive.mp3");
         for(Reproducible r : app.getReproducibles()){

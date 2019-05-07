@@ -4,10 +4,7 @@ package Aplicacion;
  * @author Jesus Blanco, Rodrigo Lardies, Daniel Calonge
  */
 
-import Exceptions.CancionNoExistente;
-import Exceptions.ContrasenaIncorrecta;
-import Exceptions.UsuarioNoExistente;
-import Exceptions.UsuarioYaExistente;
+import Exceptions.*;
 import Reporte.Reporte;
 import Reproducible.Reproducible;
 import Reproducible.Cancion;
@@ -321,7 +318,7 @@ public class Aplicacion implements Serializable {
      * @throws UsuarioNoExistente
      * @throws ContrasenaIncorrecta
      */
-    public void login(String username,String contrasena) throws UsuarioNoExistente, ContrasenaIncorrecta {
+    public void login(String username,String contrasena) throws UsuarioNoExistente, ContrasenaIncorrecta, UsuarioBloqueado {
 
         if(usuarioLogueado != null) {
             return;
@@ -342,7 +339,7 @@ public class Aplicacion implements Serializable {
                 if(u.getContrasena().equals(contrasena)){
 
                     if(u.esBloqueado()) {
-                        return;
+                        throw new UsuarioBloqueado();
                     }
 
                     usuarioLogueado = u;

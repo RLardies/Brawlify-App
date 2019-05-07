@@ -2,6 +2,7 @@ package Interfaces.Login;
 
 import Aplicacion.Aplicacion;
 import Exceptions.ContrasenaIncorrecta;
+import Exceptions.UsuarioBloqueado;
 import Exceptions.UsuarioNoExistente;
 import Exceptions.UsuarioYaExistente;
 import Interfaces.GuiBrawlify;
@@ -46,6 +47,9 @@ public class ControladorInicio implements ActionListener {
                 return;
             } catch (ContrasenaIncorrecta e) {
                 JOptionPane.showMessageDialog(panelInicio, "El nombre de usuario o la contraseña son incorrectas", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            } catch (UsuarioBloqueado e) {
+                JOptionPane.showMessageDialog(panelInicio, "Tu cuenta ha sido bloqueada", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 

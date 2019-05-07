@@ -1,9 +1,6 @@
 package Aplicacion;
 
-import Exceptions.CancionNoExistente;
-import Exceptions.ContrasenaIncorrecta;
-import Exceptions.UsuarioNoExistente;
-import Exceptions.UsuarioYaExistente;
+import Exceptions.*;
 import Reporte.Reporte;
 import Reproducible.Cancion;
 import Reproducible.Lista;
@@ -26,7 +23,7 @@ import static java.lang.Thread.sleep;
 
 public class Test {
 
-    public static void main(String[] args) throws FileNotFoundException, Mp3PlayerException, InterruptedException, UsuarioNoExistente, ContrasenaIncorrecta , CancionNoExistente {
+    public static void main(String[] args) throws FileNotFoundException, Mp3PlayerException, InterruptedException, UsuarioNoExistente, ContrasenaIncorrecta , CancionNoExistente, UsuarioBloqueado {
         Aplicacion app = new Aplicacion();
 
         ArrayList<Reproducible> reproducibles;
