@@ -20,6 +20,8 @@ public class MisListas extends JPanel {
     private Lista listaSelec;
     private Reproducible[] reps;
     private JButton mostrar;
+    private JLabel nombreLabel;
+    private JTextField nombre;
     DefaultTableModel modeloDatos;
     DefaultTableModel modeloReproducibles;
 
@@ -51,7 +53,10 @@ public class MisListas extends JPanel {
         borrar = new JButton("Borrar");
         mostrar = new JButton("Mostrar");
         eliminar = new JButton("Eliminar");
-        crear = new JButton("Crear:");
+        crear = new JButton("Crear");
+
+        nombreLabel = new JLabel("Nombre de la Lista:");
+        nombre = new JTextField(15);
 
         this.add(scroll);
         this.add(scroll2);
@@ -60,6 +65,8 @@ public class MisListas extends JPanel {
         this.add(mostrar);
         this.add(eliminar);
         this.add(crear);
+        this.add(nombre);
+        this.add(nombreLabel);
 
         layout.putConstraint(SpringLayout.WEST, scroll, 30, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.NORTH, scroll, 30, SpringLayout.NORTH, this);
@@ -78,6 +85,12 @@ public class MisListas extends JPanel {
 
         layout.putConstraint(SpringLayout.WEST, crear, 0, SpringLayout.WEST, borrar);
         layout.putConstraint(SpringLayout.NORTH, crear, 50, SpringLayout.NORTH, borrar);
+
+        layout.putConstraint(SpringLayout.WEST, nombreLabel, 0, SpringLayout.WEST, crear);
+        layout.putConstraint(SpringLayout.NORTH, nombreLabel, 40, SpringLayout.NORTH, crear);
+
+        layout.putConstraint(SpringLayout.WEST, nombre, 0, SpringLayout.WEST, nombreLabel);
+        layout.putConstraint(SpringLayout.NORTH, nombre, 10, SpringLayout.SOUTH, nombreLabel);
 
         layout.putConstraint(SpringLayout.WEST, eliminar, 0, SpringLayout.WEST, borrar);
         layout.putConstraint(SpringLayout.NORTH, eliminar, 230, SpringLayout.NORTH, borrar);
@@ -152,4 +165,6 @@ public class MisListas extends JPanel {
     public void guardarReps(Reproducible[] reproducibles){
         reps = reproducibles;
     }
+
+    public JTextField getNombre(){ return nombre; }
 }

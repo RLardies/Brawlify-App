@@ -137,33 +137,38 @@ public class ControladorMenuPrincipal implements ActionListener {
             }
 
         } else if(actionEvent.getActionCommand().equals("Mostrar")){
-            int[] selected = panelMenuPrincipal.getMisListas().getTabla().getSelectedRows();
-            Lista listaSeleccionada;
 
-            if(selected.length == 1){
-                listaSeleccionada = panelMenuPrincipal.getMisListas().getResultados()[selected[0]];
-                panelMenuPrincipal.getMisListas().limpiarTablaReproducibles();
+            if (app.getUsuarioLogueado().esPremium() == false) {
+                JOptionPane.showMessageDialog(panelMenuPrincipal, "Funcion para usuarios Premium", "Funcion Premium", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                int[] selected = panelMenuPrincipal.getMisListas().getTabla().getSelectedRows();
+                Lista listaSeleccionada;
 
-                panelMenuPrincipal.getMisListas().setListaSelec(listaSeleccionada);
+                if (selected.length == 1) {
+                    listaSeleccionada = panelMenuPrincipal.getMisListas().getResultados()[selected[0]];
+                    panelMenuPrincipal.getMisListas().limpiarTablaReproducibles();
 
-                Reproducible[] reps = new Reproducible[listaSeleccionada.getElementos().size()];
+                    panelMenuPrincipal.getMisListas().setListaSelec(listaSeleccionada);
 
-                int k = 0;
-                for(Reproducible r : listaSeleccionada.getElementos()){
-                    String tipo;
-                    if(r.esLista()){
-                        tipo = "Lista";
-                    }else if(r.esAlbum()){
-                        tipo = "Álbum";
-                    }else
-                        tipo = "Canción";
+                    Reproducible[] reps = new Reproducible[listaSeleccionada.getElementos().size()];
 
-                    panelMenuPrincipal.getMisListas().getModeloReproducibles().addRow(new Object[]{r.getTitulo(),tipo,r.getNumeroCanciones()});
+                    int k = 0;
+                    for (Reproducible r : listaSeleccionada.getElementos()) {
+                        String tipo;
+                        if (r.esLista()) {
+                            tipo = "Lista";
+                        } else if (r.esAlbum()) {
+                            tipo = "Álbum";
+                        } else
+                            tipo = "Canción";
 
-                    reps[k] = r;
-                    k++;
+                        panelMenuPrincipal.getMisListas().getModeloReproducibles().addRow(new Object[]{r.getTitulo(), tipo, r.getNumeroCanciones()});
+
+                        reps[k] = r;
+                        k++;
+                    }
+                    panelMenuPrincipal.getMisListas().guardarReps(reps);
                 }
-                panelMenuPrincipal.getMisListas().guardarReps(reps);
             }
 
         } else if(actionEvent.getActionCommand().equals("Reportar")) {
@@ -192,38 +197,47 @@ public class ControladorMenuPrincipal implements ActionListener {
             }
 
         } else if(actionEvent.getActionCommand().equals("Eliminar")){
+            if (app.getUsuarioLogueado().esPremium() == false) {
+                JOptionPane.showMessageDialog(panelMenuPrincipal, "Funcion para usuarios Premium", "Funcion Premium", JOptionPane.INFORMATION_MESSAGE);
+            } else {
 
-            int[] selected = panelMenuPrincipal.getMisListas().getTabla2().getSelectedRows();
-            Reproducible[] reproduciblesSeleccionados = new Reproducible[selected.length];
+                int[] selected = panelMenuPrincipal.getMisListas().getTabla2().getSelectedRows();
+                Reproducible[] reproduciblesSeleccionados = new Reproducible[selected.length];
 
-            int i;
-            if(reproduciblesSeleccionados.length > 0) {
-                for (i = 0; i < selected.length; i++) {
-                    reproduciblesSeleccionados[i] = panelMenuPrincipal.getMisListas().getReps()[selected[i]];
-                    panelMenuPrincipal.getMisListas().getModeloReproducibles().removeRow(selected[i]-i);
-                }
+                int i;
+                if (reproduciblesSeleccionados.length > 0) {
+                    for (i = 0; i < selected.length; i++) {
+                        reproduciblesSeleccionados[i] = panelMenuPrincipal.getMisListas().getReps()[selected[i]];
+                        panelMenuPrincipal.getMisListas().getModeloReproducibles().removeRow(selected[i] - i);
+                    }
 
 
-                for(Reproducible r : reproduciblesSeleccionados) {
-                    panelMenuPrincipal.getMisListas().getListaSelec().removeReproducible(r);
+                    for (Reproducible r : reproduciblesSeleccionados) {
+                        panelMenuPrincipal.getMisListas().getListaSelec().removeReproducible(r);
+                    }
                 }
             }
 
         }else if(actionEvent.getActionCommand().equals("BorrarLista")){
 
-            int[] selected = panelMenuPrincipal.getMisListas().getTabla().getSelectedRows();
-            Lista[] listasSeleccionadas = new Lista[selected.length];
+            if (app.getUsuarioLogueado().esPremium() == false) {
+                JOptionPane.showMessageDialog(panelMenuPrincipal, "Funcion para usuarios Premium", "Funcion Premium", JOptionPane.INFORMATION_MESSAGE);
+            } else {
 
-            int i;
-            if(listasSeleccionadas.length > 0) {
-                for (i = 0; i < selected.length; i++) {
-                    listasSeleccionadas[i] = panelMenuPrincipal.getMisListas().getResultados()[selected[i]];
-                    panelMenuPrincipal.getMisListas().getModeloDatos().removeRow(selected[i]-i);
-                }
+                int[] selected = panelMenuPrincipal.getMisListas().getTabla().getSelectedRows();
+                Lista[] listasSeleccionadas = new Lista[selected.length];
 
-                for(Lista l : listasSeleccionadas) {
-                    app.getReproducibles().remove(l);
-                    app.getUsuarioLogueado().getReproducibles().remove(l);
+                int i;
+                if (listasSeleccionadas.length > 0) {
+                    for (i = 0; i < selected.length; i++) {
+                        listasSeleccionadas[i] = panelMenuPrincipal.getMisListas().getResultados()[selected[i]];
+                        panelMenuPrincipal.getMisListas().getModeloDatos().removeRow(selected[i] - i);
+                    }
+
+                    for (Lista l : listasSeleccionadas) {
+                        app.getReproducibles().remove(l);
+                        app.getUsuarioLogueado().getReproducibles().remove(l);
+                    }
                 }
             }
         }else if(actionEvent.getActionCommand().equals("Confirmar")){
@@ -346,6 +360,44 @@ public class ControladorMenuPrincipal implements ActionListener {
                 }
                 JOptionPane.showMessageDialog(panelMenuPrincipal, "Canciones no validadas ", "Ok", JOptionPane.INFORMATION_MESSAGE);
             }
+        } else if(actionEvent.getActionCommand().equals("ReproducirLista")){
+            if (app.getUsuarioLogueado().esPremium() == false) {
+                JOptionPane.showMessageDialog(panelMenuPrincipal, "Funcion para usuarios Premium", "Funcion Premium", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+
+                int[] selected = panelMenuPrincipal.getMisListas().getTabla().getSelectedRows();
+                Lista listaSeleccionada;
+
+                if (selected.length == 1) {
+                    listaSeleccionada = panelMenuPrincipal.getMisListas().getResultados()[selected[0]];
+
+                    panelMenuPrincipal.getMisListas().setListaSelec(listaSeleccionada);
+
+                    try {
+                        app.reproducir(listaSeleccionada);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (Mp3PlayerException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        }else if (actionEvent.getActionCommand().equals("Crear")){
+
+            if (app.getUsuarioLogueado().esPremium() == false) {
+                JOptionPane.showMessageDialog(panelMenuPrincipal, "Funcion para usuarios Premium", "Funcion Premium", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                String nombre = panelMenuPrincipal.getMisListas().getNombre().getText();
+
+                if(nombre.length() == 0){
+                    JOptionPane.showMessageDialog(panelMenuPrincipal,"Escriba un nombre para la lista","Nombre de Lista",JOptionPane.ERROR_MESSAGE);
+                }else {
+                    app.crearLista(nombre);
+                    panelMenuPrincipal.getMisListas().getModeloDatos().addRow(new Object[]{nombre,0,0});
+                }
+            }
+
         }
     }
 
