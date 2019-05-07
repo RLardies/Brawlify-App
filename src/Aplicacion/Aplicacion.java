@@ -430,7 +430,8 @@ public class Aplicacion implements Serializable {
             throw new CancionNoExistente();
         }
 
-        c.setEstado(Cancion.Estado.BLOQUEADO);
+        c.setEstado(Cancion.Estado.REPORTADO);
+
         Reporte reporte = new Reporte(comentario, usuarioLogueado, c);
 
         reportes.add(reporte);
@@ -762,6 +763,7 @@ public class Aplicacion implements Serializable {
             }
             reporte.getUsuario().addNotificacion(new Notificacion("Nuestro equipo juridico ha confirmado el plagio" +
                     "que usted reporto, acerca de la cancion " + nombre + ". Muchas gracias por su colaboracion."));
+
         } else if(plagio == false) {
             reporte.getUsuario().setFechaBloqueo(getFechaActual().plusMonths(1));
             reporte.getCancionReportada().setEstado(Cancion.Estado.VALIDADO);

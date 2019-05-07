@@ -45,9 +45,10 @@ public class Cancion extends Reproducible  implements Serializable {
      * - BLOQUEDO si la cancion esta bloqueada o su autor lo esta
      * - NUEVO si la cancion se acaba de subir y aun no ha sido validada por el admin
      * - VALIDADO si la cancion ha sido validada por el Admin
+     * - REPORTADO si la cancion ha sido reportada
      */
     public enum Estado{
-        BORRADO, BLOQUEADO, NUEVO, VALIDADO
+        BORRADO, BLOQUEADO, NUEVO, VALIDADO, REPORTADO
     }
 
     /**

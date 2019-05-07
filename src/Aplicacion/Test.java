@@ -4,6 +4,7 @@ import Exceptions.CancionNoExistente;
 import Exceptions.ContrasenaIncorrecta;
 import Exceptions.UsuarioNoExistente;
 import Exceptions.UsuarioYaExistente;
+import Reporte.Reporte;
 import Reproducible.Cancion;
 import Reproducible.Lista;
 import Reproducible.Album;
@@ -302,7 +303,13 @@ public class Test {
 
         System.out.println(app2.buscarCancionPorTitulo("Chicle"));
 
+        Cancion canc = app2.mostrarReportes().get(0).getCancionReportada();
+
+        System.out.println(canc.getEstado());
+
         app2.procesarPlagio(app2.mostrarReportes().get(0),false);
+
+        System.out.println(canc.getEstado());
 
         app2.cerrarSesion();
 
