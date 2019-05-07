@@ -226,25 +226,6 @@ public class ControladorMenuPrincipal implements ActionListener {
                     app.getUsuarioLogueado().getReproducibles().remove(l);
                 }
             }
-        }else if(actionEvent.getActionCommand().equals("ReproducirValidaciones")) {
-
-            int[] selected = panelMenuPrincipal.getBuscarCanciones().getTabla().getSelectedRows();
-            Cancion[] cancionesSeleccionadas = new Cancion[selected.length];
-
-            int i;
-            if (cancionesSeleccionadas.length > 0) {
-                for (i = 0; i < selected.length; i++) {
-                    cancionesSeleccionadas[i] = panelMenuPrincipal.getBuscarCanciones().getResultados()[selected[i]];
-                }
-
-                try {
-                    app.reproducir(cancionesSeleccionadas);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (Mp3PlayerException e) {
-                    e.printStackTrace();
-                }
-            }
         }else if(actionEvent.getActionCommand().equals("Confirmar")){
             int[] selected = panelMenuPrincipal.getReportes().getTabla().getSelectedRows();
             Reporte[] reportesSeleccionados = new Reporte[selected.length];
@@ -257,6 +238,7 @@ public class ControladorMenuPrincipal implements ActionListener {
 
                     app.procesarPlagio(reportesSeleccionados[i], true);
                 }
+                JOptionPane.showMessageDialog(panelMenuPrincipal, "Plagios confirmados correctamente", "Ok", JOptionPane.INFORMATION_MESSAGE);
             }
         }else if(actionEvent.getActionCommand().equals("Desmentir")){
             int[] selected = panelMenuPrincipal.getReportes().getTabla().getSelectedRows();
@@ -270,9 +252,101 @@ public class ControladorMenuPrincipal implements ActionListener {
 
                     app.procesarPlagio(reportesSeleccionados[i], false);
                 }
+                JOptionPane.showMessageDialog(panelMenuPrincipal, "Plagios desmentidos correctamente", "Ok", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }else if(actionEvent.getActionCommand().equals("ReproducirReportes")) {
+
+            int[] selected = panelMenuPrincipal.getReportes().getTabla().getSelectedRows();
+            Cancion[] cancionesSeleccionadas = new Cancion[selected.length];
+
+            int i;
+            if (cancionesSeleccionadas.length > 0) {
+                for (i = 0; i < selected.length; i++) {
+                    cancionesSeleccionadas[i] = panelMenuPrincipal.getReportes().getResultados()[selected[i]].getCancionReportada();
+                }
+
+                try {
+                    app.reproducir(cancionesSeleccionadas);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (Mp3PlayerException e) {
+                    e.printStackTrace();
+                }
+            }
+        }else if(actionEvent.getActionCommand().equals("ReproducirValidaciones")) {
+
+            int[] selected = panelMenuPrincipal.getValidaciones().getTabla().getSelectedRows();
+            Cancion[] cancionesSeleccionadas = new Cancion[selected.length];
+
+            int i;
+            if (cancionesSeleccionadas.length > 0) {
+                for (i = 0; i < selected.length; i++) {
+                    cancionesSeleccionadas[i] = panelMenuPrincipal.getValidaciones().getResultados()[selected[i]];
+                }
+
+                try {
+                    app.reproducir(cancionesSeleccionadas);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (Mp3PlayerException e) {
+                    e.printStackTrace();
+                }
+            }
+        }else if(actionEvent.getActionCommand().equals("ValidarAutorizado")){
+            int[] selected = panelMenuPrincipal.getValidaciones().getTabla().getSelectedRows();
+            Cancion[] cancionesSeleccionadas = new Cancion[selected.length];
+
+            int i;
+            if (cancionesSeleccionadas.length > 0) {
+                for (i = 0; i < selected.length; i++) {
+                    cancionesSeleccionadas[i] = panelMenuPrincipal.getValidaciones().getResultados()[selected[i]];
+                    panelMenuPrincipal.getValidaciones().getModeloDatos().removeRow(selected[i] - i);
+
+                    try{
+                        app.validarCancion(cancionesSeleccionadas[i], Cancion.Contenido.AUTORIZADO);
+                    }catch (CancionNoExistente e){
+                        e.printStackTrace();
+                    }
+                }
+                JOptionPane.showMessageDialog(panelMenuPrincipal, "Canciones validadas correctamente con contenido autorizado", "Ok", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }else if(actionEvent.getActionCommand().equals("ValidarExplicito")){
+            int[] selected = panelMenuPrincipal.getValidaciones().getTabla().getSelectedRows();
+            Cancion[] cancionesSeleccionadas = new Cancion[selected.length];
+
+            int i;
+            if (cancionesSeleccionadas.length > 0) {
+                for (i = 0; i < selected.length; i++) {
+                    cancionesSeleccionadas[i] = panelMenuPrincipal.getValidaciones().getResultados()[selected[i]];
+                    panelMenuPrincipal.getValidaciones().getModeloDatos().removeRow(selected[i] - i);
+
+                    try{
+                        app.validarCancion(cancionesSeleccionadas[i], Cancion.Contenido.EXPLICITO);
+                    }catch (CancionNoExistente e){
+                        e.printStackTrace();
+                    }
+                }
+                JOptionPane.showMessageDialog(panelMenuPrincipal, "Canciones validadas correctamente con contenido explicito", "Ok", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }else if(actionEvent.getActionCommand().equals("Rechazar")){
+            int[] selected = panelMenuPrincipal.getValidaciones().getTabla().getSelectedRows();
+            Cancion[] cancionesSeleccionadas = new Cancion[selected.length];
+
+            int i;
+            if (cancionesSeleccionadas.length > 0) {
+                for (i = 0; i < selected.length; i++) {
+                    cancionesSeleccionadas[i] = panelMenuPrincipal.getValidaciones().getResultados()[selected[i]];
+                    panelMenuPrincipal.getValidaciones().getModeloDatos().removeRow(selected[i] - i);
+
+                    try{
+                        app.validarCancion(cancionesSeleccionadas[i], Cancion.Contenido.NOVALIDO);
+                    }catch (CancionNoExistente e){
+                        e.printStackTrace();
+                    }
+                }
+                JOptionPane.showMessageDialog(panelMenuPrincipal, "Canciones no validadas ", "Ok", JOptionPane.INFORMATION_MESSAGE);
             }
         }
-
     }
 
 }

@@ -15,6 +15,7 @@ public class Reportes extends JPanel {
     DefaultTableModel modeloDatos;
     private JButton confirmar;
     private JButton desmentir;
+    private JButton reproducir;
     private Reporte[] resultados;
 
 
@@ -32,19 +33,24 @@ public class Reportes extends JPanel {
 
         confirmar = new JButton("Confirmar");
         desmentir = new JButton("Desmentir");
+        reproducir = new JButton("Reproducir");
 
         this.add(scroll);
         layout.putConstraint(SpringLayout.WEST, scroll, 30, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.NORTH, scroll, 30, SpringLayout.NORTH, this);
 
+        layout.putConstraint(SpringLayout.WEST, reproducir, 30, SpringLayout.EAST, scroll);
+        layout.putConstraint(SpringLayout.NORTH, reproducir, 30, SpringLayout.NORTH, this);
+
         layout.putConstraint(SpringLayout.WEST, confirmar, 30, SpringLayout.EAST, scroll);
-        layout.putConstraint(SpringLayout.NORTH, confirmar, 30, SpringLayout.NORTH, this);
+        layout.putConstraint(SpringLayout.NORTH, confirmar, 30, SpringLayout.NORTH, reproducir);
 
         layout.putConstraint(SpringLayout.WEST, desmentir, 30, SpringLayout.EAST, scroll);
         layout.putConstraint(SpringLayout.NORTH, desmentir, 30, SpringLayout.NORTH, confirmar);
 
         this.add(confirmar);
         this.add(desmentir);
+        this.add(reproducir);
 
     }
 
@@ -53,6 +59,8 @@ public class Reportes extends JPanel {
         confirmar.addActionListener(c);
         desmentir.setActionCommand("Desmentir");
         desmentir.addActionListener(c);
+        reproducir.setActionCommand("ReproducirReportes");
+        reproducir.addActionListener(c);
     }
 
     public void limpiarTabla() {
