@@ -360,6 +360,10 @@ public class ControladorMenuPrincipal implements ActionListener {
                 }
                 JOptionPane.showMessageDialog(panelMenuPrincipal, "Canciones no validadas ", "Ok", JOptionPane.INFORMATION_MESSAGE);
             }
+        }else if(actionEvent.getActionCommand().equals("CambiarRepToPremium")){
+            if(panelMenuPrincipal.getAjustes().getNewRepToPremium(). > 0){
+
+            }
         } else if(actionEvent.getActionCommand().equals("ReproducirLista")){
             if (app.getUsuarioLogueado().esPremium() == false) {
                 JOptionPane.showMessageDialog(panelMenuPrincipal, "Funcion para usuarios Premium", "Funcion Premium", JOptionPane.INFORMATION_MESSAGE);

@@ -157,6 +157,8 @@ public class ControladorInicio implements ActionListener {
                 }
                 panelMenuPrincipal.getReportes().guardarResultados(r);
 
+                panelMenuPrincipal.getAjustes().setMaxRepNoPremium(app.getMaxRepNoPremium());
+                panelMenuPrincipal.getAjustes().setRepToPremium(app.getRepToPremium());
 
 
             }

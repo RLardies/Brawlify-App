@@ -68,7 +68,8 @@ public class Validaciones extends JPanel {
         rechazar.setActionCommand("Rechazar");
         rechazar.addActionListener(c);
         reproducir.setActionCommand("ReproducirValidaciones");
-        reproducir.addActionListener(c);    }
+        reproducir.addActionListener(c);
+    }
 
     public void limpiarTabla() {
         int i;
