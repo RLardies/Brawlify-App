@@ -436,6 +436,8 @@ public class ControladorMenuPrincipal implements ActionListener {
             }
             JOptionPane.showMessageDialog(panelMenuPrincipal,"Cancion subida correctamente", "Ok",JOptionPane.INFORMATION_MESSAGE);
 
+        } else if(actionEvent.getActionCommand().equals("Stop")) {
+            app.stopReproductor();
         }
     }
 

@@ -21,7 +21,9 @@ public class PanelMenuPrincipal extends JPanel {
     private Validaciones validaciones = new Validaciones();
     private Ajustes ajustes = new Ajustes();
     private SubirCancion subirCancion = new SubirCancion();
-    private JButton unlogin;
+
+    private JButton unlogin = new JButton("Cerrar Sesion");
+    private JButton stop = new JButton("Stop Music");
 
     public PanelMenuPrincipal(){
 
@@ -30,8 +32,12 @@ public class PanelMenuPrincipal extends JPanel {
         tabbedPane.setPreferredSize(new Dimension(950,600));
 
         JPanel botonera = new JPanel();
-        unlogin = new JButton("Cerrar Sesion");
+        GridLayout layout = new GridLayout();
+        layout.setColumns(1);
+        layout.setRows(2);
+        botonera.setLayout(layout);
         botonera.add(unlogin);
+        botonera.add(stop);
 
         this.add(tabbedPane, BorderLayout.CENTER);
         this.add(botonera,BorderLayout.EAST);
@@ -49,6 +55,8 @@ public class PanelMenuPrincipal extends JPanel {
 
         unlogin.setActionCommand("Unlogin");
         unlogin.addActionListener(c);
+        stop.setActionCommand("Stop");
+        stop.addActionListener(c);
     }
 
     public BuscarCanciones getBuscarCanciones() {
