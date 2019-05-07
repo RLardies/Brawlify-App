@@ -15,8 +15,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import Exceptions.*;
 
 public class ControladorMenuPrincipal implements ActionListener {
 
@@ -92,6 +94,7 @@ public class ControladorMenuPrincipal implements ActionListener {
             panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getReportes());
             panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getValidaciones());
             panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getAjustes());
+            panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getSubirCancion());
             ventana.mostrarPanel(GuiBrawlify.PANEL_LOGIN);
 
         }else if(actionEvent.getActionCommand().equals("Borrar")){
@@ -415,6 +418,23 @@ public class ControladorMenuPrincipal implements ActionListener {
                     panelMenuPrincipal.getMisListas().getModeloDatos().addRow(new Object[]{nombre,0,0});
                 }
             }
+
+        } else if(actionEvent.getActionCommand().equals("Examinar")) {
+            int seleccion = panelMenuPrincipal.getSubirCancion().getFileChooser().showOpenDialog(panelMenuPrincipal.getSubirCancion());
+            if (seleccion == JFileChooser.APPROVE_OPTION) {
+                File fichero = panelMenuPrincipal.getSubirCancion().getFileChooser().getSelectedFile();
+                panelMenuPrincipal.getSubirCancion().getArchivoRuta().setText(fichero.getAbsolutePath());
+            }
+
+        } else if(actionEvent.getActionCommand().equals("Subir")) {
+
+            try {
+                app.subirCancion(panelMenuPrincipal.getSubirCancion().getTituloTexto().getText(), panelMenuPrincipal.getSubirCancion().getArchivoRuta().getText());
+            } catch (CancionInvalida e) {
+                JOptionPane.showMessageDialog(panelMenuPrincipal,"La cancion no es valida", "Error",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            JOptionPane.showMessageDialog(panelMenuPrincipal,"Cancion subida correctamente", "Ok",JOptionPane.INFORMATION_MESSAGE);
 
         }
     }

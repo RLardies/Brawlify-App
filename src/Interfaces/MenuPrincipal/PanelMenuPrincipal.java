@@ -20,6 +20,7 @@ public class PanelMenuPrincipal extends JPanel {
     private Reportes reportes = new Reportes();
     private Validaciones validaciones = new Validaciones();
     private Ajustes ajustes = new Ajustes();
+    private SubirCancion subirCancion = new SubirCancion();
     private JButton unlogin;
 
     public PanelMenuPrincipal(){
@@ -41,6 +42,7 @@ public class PanelMenuPrincipal extends JPanel {
         misCanciones.setControlador(c);
         misListas.setControlador(c);
         misNotificaciones.setControlador(c);
+        subirCancion.setControlador(c);
         reportes.setControlador(c);
         validaciones.setControlador(c);
         ajustes.setControlador(c);
@@ -79,5 +81,9 @@ public class PanelMenuPrincipal extends JPanel {
 
     public Ajustes getAjustes() {
         return ajustes;
+    }
+
+    public SubirCancion getSubirCancion() {
+        return subirCancion;
     }
 }

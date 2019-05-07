@@ -23,9 +23,6 @@ import pads.musicPlayer.exceptions.Mp3PlayerException;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 
 public class Aplicacion implements Serializable {
 
@@ -456,7 +453,7 @@ public class Aplicacion implements Serializable {
      * @param rutaFichero Ruta del fichero que contiene la cancion
      * @return true si se ha subido, false si ha habido algun problema
      */
-    public boolean subirCancion(String titulo, String rutaFichero){
+    public boolean subirCancion(String titulo, String rutaFichero) throws CancionInvalida {
         Integer duracion;
 
         if(usuarioLogueado == null) {
@@ -467,15 +464,15 @@ public class Aplicacion implements Serializable {
             try {
                 duracion = (int) Mp3Player.getDuration(rutaFichero);
             } catch (FileNotFoundException e) {
-                return false;
+                throw new CancionInvalida();
             }
         } else {
-            return false;
+            throw new CancionInvalida();
         }
 
 
         if(duracion > 1800) {
-            return false; //Cancion dura demasiado
+            throw new CancionInvalida();
         }
 
         Cancion c = new Cancion(titulo, duracion, usuarioLogueado, rutaFichero);

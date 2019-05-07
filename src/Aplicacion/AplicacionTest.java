@@ -95,7 +95,7 @@ public class AplicacionTest {
 
 
     @Test
-    public void subirCancion() {
+    public void subirCancion() throws CancionInvalida{
         app.subirCancion("Prueba2","hive.mp3");
         for(Reproducible r : app.getReproducibles()){
             if(r.esCancion() && r.getAutor().equals(app.getUsuarioLogueado()) && r.getTitulo().equals("Prueba2")){
@@ -105,7 +105,7 @@ public class AplicacionTest {
     }
 
     @Test
-    public void modificarCancion() throws CancionNoExistente, UsuarioNoExistente, ContrasenaIncorrecta, UsuarioBloqueado {
+    public void modificarCancion() throws CancionNoExistente, UsuarioNoExistente, ContrasenaIncorrecta, UsuarioBloqueado, CancionInvalida {
         app.login("fidel","12345");
         app.subirCancion("Prueba2","hive.mp3");
         for(Reproducible r : app.getReproducibles()){
@@ -132,7 +132,7 @@ public class AplicacionTest {
     }
 
     @Test
-    public void borrarCancion() throws CancionNoExistente {
+    public void borrarCancion() throws CancionNoExistente, CancionInvalida {
         app.subirCancion("Prueba2", "hive.mp3");
         for (Reproducible r : app.getReproducibles()) {
             if (r.esCancion() && r.getAutor().equals(app.getUsuarioLogueado()) && r.getTitulo().equals("Prueba2")) {
@@ -146,7 +146,7 @@ public class AplicacionTest {
     }
 
     @Test
-    public void validarCancion() throws CancionNoExistente{
+    public void validarCancion() throws CancionNoExistente, CancionInvalida{
         app.subirCancion("Prueba2", "hive.mp3");
         for (Reproducible r : app.getReproducibles()) {
             if (r.esCancion() && r.getAutor().equals(app.getUsuarioLogueado()) && r.getTitulo().equals("Prueba2")) {

@@ -97,19 +97,7 @@ public class Usuario  implements Serializable {
      * @return cadena
      */
     public String toString() {
-        return "Usuario{" +
-                "username='" + username + '\'' +
-                ", contrasena='" + contrasena + '\'' +
-                ", fechaNac=" + fechaNac +
-                ", nombre='" + nombre + '\'' +
-                ", reproducciones=" + reproducciones +
-                ", repToPremium=" + repToPremium +
-                ", fechaBloqueo=" + fechaBloqueo +
-                ", notificaciones=" + notificaciones +
-                ", reproducibles=" + reproducibles +
-                ", usuariosSeguidos=" + usuariosSeguidos +
-                ", fechaPremium=" + fechaPremium +
-                '}';
+        return username + ", " + nombre;
     }
 
     /**

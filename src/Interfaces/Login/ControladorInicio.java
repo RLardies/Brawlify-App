@@ -58,6 +58,7 @@ public class ControladorInicio implements ActionListener {
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Canciones", panelMenuPrincipal.getMisCanciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Listas", panelMenuPrincipal.getMisListas());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Notificaciones", panelMenuPrincipal.getMisNotificaciones());
+                panelMenuPrincipal.getTabbedPane().addTab("Subir Cancion", panelMenuPrincipal.getSubirCancion());
                 panelMenuPrincipal.getTabbedPane().addTab("Reportes", panelMenuPrincipal.getReportes());
                 panelMenuPrincipal.getTabbedPane().addTab("Ajustes", panelMenuPrincipal.getAjustes());
                 panelMenuPrincipal.getTabbedPane().addTab("Validaciones", panelMenuPrincipal.getValidaciones());
@@ -67,11 +68,13 @@ public class ControladorInicio implements ActionListener {
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Canciones", panelMenuPrincipal.getMisCanciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Listas", panelMenuPrincipal.getMisListas());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Notificaciones", panelMenuPrincipal.getMisNotificaciones());
+                panelMenuPrincipal.getTabbedPane().addTab("Subir Cancion", panelMenuPrincipal.getSubirCancion());
             } else {
                 panelMenuPrincipal.getTabbedPane().addTab("Buscar Canciones", panelMenuPrincipal.getBuscarCanciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Canciones", panelMenuPrincipal.getMisCanciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Listas", panelMenuPrincipal.getMisListas());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Notificaciones", panelMenuPrincipal.getMisNotificaciones());
+                panelMenuPrincipal.getTabbedPane().addTab("Subir Cancion", panelMenuPrincipal.getSubirCancion());
             }
 
             panelMenuPrincipal.getTabbedPane().setSelectedIndex(0);
