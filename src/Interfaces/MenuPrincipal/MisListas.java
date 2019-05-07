@@ -15,6 +15,7 @@ public class MisListas extends JPanel {
     private JButton reproducir;
     private JButton borrar;
     private JButton eliminar;
+    private JButton crear;
     private Lista[] resultados;
     private Lista listaSelec;
     private Reproducible[] reps;
@@ -50,6 +51,7 @@ public class MisListas extends JPanel {
         borrar = new JButton("Borrar");
         mostrar = new JButton("Mostrar");
         eliminar = new JButton("Eliminar");
+        crear = new JButton("Crear:");
 
         this.add(scroll);
         this.add(scroll2);
@@ -57,6 +59,7 @@ public class MisListas extends JPanel {
         this.add(borrar);
         this.add(mostrar);
         this.add(eliminar);
+        this.add(crear);
 
         layout.putConstraint(SpringLayout.WEST, scroll, 30, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.NORTH, scroll, 30, SpringLayout.NORTH, this);
@@ -64,7 +67,7 @@ public class MisListas extends JPanel {
         layout.putConstraint(SpringLayout.WEST, scroll2, 0, SpringLayout.WEST, scroll);
         layout.putConstraint(SpringLayout.NORTH, scroll2, 40, SpringLayout.SOUTH, scroll);
 
-        layout.putConstraint(SpringLayout.EAST, mostrar, 210, SpringLayout.EAST, scroll);
+        layout.putConstraint(SpringLayout.EAST, mostrar, 170, SpringLayout.EAST, scroll);
         layout.putConstraint(SpringLayout.NORTH, mostrar, 30, SpringLayout.NORTH, scroll);
 
         layout.putConstraint(SpringLayout.WEST, reproducir, 0, SpringLayout.WEST, mostrar);
@@ -72,6 +75,9 @@ public class MisListas extends JPanel {
 
         layout.putConstraint(SpringLayout.WEST, borrar, 0, SpringLayout.WEST, reproducir);
         layout.putConstraint(SpringLayout.NORTH, borrar, 50, SpringLayout.NORTH, reproducir);
+
+        layout.putConstraint(SpringLayout.WEST, crear, 0, SpringLayout.WEST, borrar);
+        layout.putConstraint(SpringLayout.NORTH, crear, 50, SpringLayout.NORTH, borrar);
 
         layout.putConstraint(SpringLayout.WEST, eliminar, 0, SpringLayout.WEST, borrar);
         layout.putConstraint(SpringLayout.NORTH, eliminar, 230, SpringLayout.NORTH, borrar);
@@ -86,6 +92,9 @@ public class MisListas extends JPanel {
 
         mostrar.setActionCommand("Mostrar");
         mostrar.addActionListener(c);
+
+        crear.setActionCommand("Crear");
+        crear.addActionListener(c);
 
         eliminar.setActionCommand("Eliminar");
         eliminar.addActionListener(c);
