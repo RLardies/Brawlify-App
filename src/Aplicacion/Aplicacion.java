@@ -892,9 +892,9 @@ public class Aplicacion implements Serializable {
             mp3.add(c.getFichero());
         }
 
-        for(i = 0; i < mp3.size(); i++) {
+        /*for(i = 0; i < mp3.size(); i++) {
             reproductor.add(mp3.get(i));
-        }
+        }*/
 
         if(usuarioLogueado == null) {
             reproductor.add(mp3.get(0));
