@@ -464,7 +464,14 @@ public class ControladorMenuPrincipal implements ActionListener {
                 panelMenuPrincipal.getSubirCancion().getArchivoRuta().setText(fichero.getAbsolutePath());
             }
 
-        } else if(actionEvent.getActionCommand().equals("Subir")) {
+        }else if(actionEvent.getActionCommand().equals("ExaminarMisCanciones")) {
+            int seleccion = panelMenuPrincipal.getMisCanciones().getFileChooser().showOpenDialog(panelMenuPrincipal.getMisCanciones());
+            if (seleccion == JFileChooser.APPROVE_OPTION) {
+                File fichero = panelMenuPrincipal.getMisCanciones().getFileChooser().getSelectedFile();
+                panelMenuPrincipal.getMisCanciones().getArchivoRuta().setText(fichero.getAbsolutePath());
+            }
+
+        }else if(actionEvent.getActionCommand().equals("Subir")) {
 
             try {
                 Cancion c = app.subirCancion(panelMenuPrincipal.getSubirCancion().getTituloTexto().getText(), panelMenuPrincipal.getSubirCancion().getArchivoRuta().getText());
@@ -476,6 +483,58 @@ public class ControladorMenuPrincipal implements ActionListener {
             }
             actualizaAlbums();
             JOptionPane.showMessageDialog(panelMenuPrincipal,"Cancion subida correctamente", "Ok",JOptionPane.INFORMATION_MESSAGE);
+
+        }else if(actionEvent.getActionCommand().equals("ModificarCancion")) {
+
+            int[] selected = panelMenuPrincipal.getMisCanciones().getTabla().getSelectedRows();
+
+
+            int i;
+            if (selected.length == 1) {
+                Cancion cancionSeleccionada = panelMenuPrincipal.getMisCanciones().getResultados()[selected[0]];
+                if(panelMenuPrincipal.getMisCanciones().getArchivoRuta().getText().isEmpty()){
+                    if(panelMenuPrincipal.getMisCanciones().getTituloTexto().getText().isEmpty()){
+                        JOptionPane.showMessageDialog(panelMenuPrincipal,"Introduzca un nombre", "Error",JOptionPane.INFORMATION_MESSAGE);
+                    }else{
+                        try{
+                            if(app.modificarCancion(cancionSeleccionada,panelMenuPrincipal.getMisCanciones().getTituloTexto().getText()) == false){
+                                JOptionPane.showMessageDialog(panelMenuPrincipal,"Solo se puede modificar una cancion que no ha sido validada, y duranta un periodo de 3 dias", "Error",JOptionPane.INFORMATION_MESSAGE);
+                            }else{
+                                JOptionPane.showMessageDialog(panelMenuPrincipal,"Cancion modificada", "Error",JOptionPane.INFORMATION_MESSAGE);
+                            }
+
+                        }catch (CancionNoExistente c){
+
+                        }
+
+                    }
+
+
+                }else{
+                    if(panelMenuPrincipal.getMisCanciones().getTituloTexto().getText().isEmpty()){
+                        JOptionPane.showMessageDialog(panelMenuPrincipal,"Introduzca un nombre", "Error",JOptionPane.INFORMATION_MESSAGE);
+                    }else{
+                        try{
+                            if(app.modificarCancion(cancionSeleccionada,panelMenuPrincipal.getMisCanciones().getTituloTexto().getText(), panelMenuPrincipal.getMisCanciones().getArchivoRuta().getText()) == false){
+                                JOptionPane.showMessageDialog(panelMenuPrincipal,"Solo se puede modificar una cancion que no ha sido validada, y duranta un periodo de 3 dias", "Error",JOptionPane.INFORMATION_MESSAGE);
+                            }else{
+                                JOptionPane.showMessageDialog(panelMenuPrincipal,"Cancion modificada", "Error",JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        }catch (CancionInvalida c){
+
+                        }catch (IOException c){
+
+                        }
+
+                    }
+
+                }
+
+
+            }else{
+                JOptionPane.showMessageDialog(panelMenuPrincipal,"Seleccione solamente una cancion para modificar", "Ok",JOptionPane.INFORMATION_MESSAGE);
+            }
+
 
         } else if(actionEvent.getActionCommand().equals("Stop")) {
             app.stopReproductor();
@@ -667,7 +726,7 @@ public class ControladorMenuPrincipal implements ActionListener {
                 JOptionPane.showMessageDialog(panelMenuPrincipal, "Seleccione una única lista", "Selección no válida", JOptionPane.ERROR_MESSAGE);
 
         }else if(actionEvent.getActionCommand().equals("Pagar")){
-            if(!(panelMenuPrincipal.getNumeroTarjeta().equals(""))){
+            if(!(panelMenuPrincipal.getNumeroTarjeta().isEmpty())){
 
 
                 try {
