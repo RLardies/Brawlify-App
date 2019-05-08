@@ -56,7 +56,6 @@ public class GuiBrawlify extends JFrame {
         Aplicacion finalApp = app;
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent evt) {
-                //Hacer aqui lo que sea
                 finalApp.guardarDatos();
                 System.exit(0);
             }
