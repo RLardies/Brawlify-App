@@ -75,15 +75,15 @@ public class Registro extends JPanel {
         registroButton.addActionListener(c);
     }
 
-    public String getUserText() {
-        return userText.getText();
+    public JTextField getUserText() {
+        return userText;
     }
 
-    public String getPasswordText() {
-        return passwordText.getText();
+    public JTextField getPasswordText() {
+        return passwordText;
     }
 
-    public String getNombretext(){ return nombreText.getText(); }
+    public JTextField getNombretext(){ return nombreText; }
 
-    public String getFechaText(){ return fechaText.getText(); }
+    public JTextField getFechaText(){ return fechaText; }
 }

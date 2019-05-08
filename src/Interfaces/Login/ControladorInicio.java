@@ -19,6 +19,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -242,11 +243,27 @@ public class ControladorInicio implements ActionListener {
                 //Comprobar que los campos no sean null
                 //Comprobar que la fecha este en formato correcto (Da error si no: java.time.format.DateTimeParseException)
                 //Si se ha registrado correcctamente poner el mensaje, pero no loguear directamente
-                app.registrarUsuario(registro.getUserText(),registro.getPasswordText(), LocalDate.parse(registro.getFechaText()),registro.getNombretext());
+
+                if(registro.getUserText().getText().isEmpty() || registro.getPasswordText().getText().isEmpty() || registro.getFechaText().getText().isEmpty() || registro.getNombretext().getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(panelInicio,"Debe rellenar todos los campos","Error",JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                app.registrarUsuario(registro.getUserText().getText(),registro.getPasswordText().getText(), LocalDate.parse(registro.getFechaText().getText()) ,registro.getNombretext().getText());
             } catch (UsuarioYaExistente e) {
                 JOptionPane.showMessageDialog(panelInicio,"Este usuario ya existe","Error",JOptionPane.ERROR_MESSAGE);
                 return;
+            } catch (DateTimeException e) {
+                JOptionPane.showMessageDialog(panelInicio,"Formato de fecha incorrecto","Error",JOptionPane.ERROR_MESSAGE);
             }
+
+            JOptionPane.showMessageDialog(panelInicio,"Usuario Registrado Correctamente","Ok",JOptionPane.INFORMATION_MESSAGE);
+            panelInicio.setSelectedIndex(2);
+            registro.getUserText().setText("");
+            registro.getNombretext().setText("");
+            registro.getFechaText().setText("");
+            registro.getPasswordText().setText("");
+
         }
 
     }
