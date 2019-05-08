@@ -13,7 +13,10 @@ public class MisCanciones extends JPanel {
     private SpringLayout layout;
     private JButton reproducir;
     private JButton borrar;
+    private JButton crear;
     private Cancion[] resultados;
+    private JLabel nombreLabel;
+    private JTextField nombre;
     DefaultTableModel modeloDatos;
 
 
@@ -33,10 +36,16 @@ public class MisCanciones extends JPanel {
 
         reproducir = new JButton("Reproducir");
         borrar = new JButton("Borrar");
+        crear = new JButton("Crear");
+        nombreLabel = new JLabel("Nombre del Album:");
+        nombre = new JTextField(15);
 
         this.add(scroll);
         this.add(reproducir);
         this.add(borrar);
+        this.add(crear);
+        this.add(nombre);
+        this.add(nombreLabel);
 
         layout.putConstraint(SpringLayout.WEST, scroll, 30, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.NORTH, scroll, 30, SpringLayout.NORTH, this);
@@ -47,6 +56,15 @@ public class MisCanciones extends JPanel {
         layout.putConstraint(SpringLayout.WEST, borrar, 0, SpringLayout.WEST, reproducir);
         layout.putConstraint(SpringLayout.NORTH, borrar, 50, SpringLayout.NORTH, reproducir);
 
+        layout.putConstraint(SpringLayout.WEST, crear, 0, SpringLayout.WEST, borrar);
+        layout.putConstraint(SpringLayout.NORTH, crear, 50, SpringLayout.NORTH, borrar);
+
+        layout.putConstraint(SpringLayout.WEST, nombreLabel, 0, SpringLayout.WEST, crear);
+        layout.putConstraint(SpringLayout.NORTH, nombreLabel, 40, SpringLayout.NORTH, crear);
+
+        layout.putConstraint(SpringLayout.WEST, nombre, 0, SpringLayout.WEST, nombreLabel);
+        layout.putConstraint(SpringLayout.NORTH, nombre, 10, SpringLayout.SOUTH, nombreLabel);
+
     }
     public void setControlador(ActionListener c) {
         reproducir.setActionCommand("ReproducirMis");
@@ -54,6 +72,9 @@ public class MisCanciones extends JPanel {
 
         borrar.setActionCommand("Borrar");
         borrar.addActionListener(c);
+
+        crear.setActionCommand("CrearAlbum");
+        crear.addActionListener(c);
     }
 
     public JTable getTabla() {
@@ -78,6 +99,9 @@ public class MisCanciones extends JPanel {
         return modeloDatos;
     }
 
+    public JTextField getNombre() {
+        return nombre;
+    }
 
     public void guardarResultados(Cancion[] canciones) {
         resultados = canciones;

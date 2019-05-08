@@ -31,7 +31,7 @@ public class MisAlbums extends JPanel {
         layout = new SpringLayout();
         this.setLayout(layout);
 
-        String[] titulos = {"Albums", "Nº de Canciones", "Duración"};
+        String[] titulos = {"Albums", "Nº de Canciones", "Año"};
         Object[][] filas = new Object[0][3];
         modeloDatos = new DefaultTableModel(filas, titulos);
 

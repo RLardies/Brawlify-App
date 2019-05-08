@@ -122,7 +122,7 @@ public class ControladorInicio implements ActionListener {
                         panelMenuPrincipal.getMisCanciones().getModeloDatos().addRow(new Object[]{r.getTitulo(), r.getEstado(), r.getDuracion()});
                     }else if(r.esAlbum()){
                         albums.add((Album)r);
-                        panelMenuPrincipal.getMisAlbums().getModeloDatos().addRow(new Object[]{r.getTitulo(),r.getNumeroCanciones(),r.getDuracion()});
+                        panelMenuPrincipal.getMisAlbums().getModeloDatos().addRow(new Object[]{r.getTitulo(),r.getNumeroCanciones(),((Album) r).getAnioPublic()});
                     }
                 }
 

@@ -22,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import Exceptions.*;
 
@@ -669,6 +670,37 @@ public class ControladorMenuPrincipal implements ActionListener {
                 JOptionPane.showMessageDialog(panelMenuPrincipal, "Introduzca un numero de tarjeta", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             }
 
+        } else if(actionEvent.getActionCommand().equals("CrearAlbum")){
+
+            String nombre = panelMenuPrincipal.getMisCanciones().getNombre().getText();
+
+            if(nombre.length() == 0){
+                JOptionPane.showMessageDialog(panelMenuPrincipal,"Escriba un nombre para el album","Nombre de Lista",JOptionPane.ERROR_MESSAGE);
+            }else {
+                int[] selected = panelMenuPrincipal.getMisCanciones().getTabla().getSelectedRows();
+                Cancion[] cancionesSeleccionadas = new Cancion[selected.length];
+                ArrayList<Cancion> canciones = new ArrayList<Cancion>();
+
+                if(selected.length > 0){
+                    int i;
+                    for (i = 0; i < selected.length; i++) {
+                        cancionesSeleccionadas[i] = panelMenuPrincipal.getMisCanciones().getResultados()[selected[i]];
+                    }
+
+                    for(Cancion c : cancionesSeleccionadas){
+                        canciones.add(c);
+                    }
+                    try {
+                        app.crearAlbum(nombre, canciones);
+                    }catch (CancionNoExistente e){
+                        JOptionPane.showMessageDialog(panelMenuPrincipal,"No es posible introducirla en el album","Cancion no existente",JOptionPane.ERROR_MESSAGE);
+                    }
+                }else
+                    JOptionPane.showMessageDialog(panelMenuPrincipal,"Seleccione al menos una Cancion","Selección no válida",JOptionPane.ERROR_MESSAGE);
+
+                JOptionPane.showMessageDialog(panelMenuPrincipal,"Album creado con éxito.","Album creado",JOptionPane.INFORMATION_MESSAGE);
+                panelMenuPrincipal.getMisAlbums().getModeloDatos().addRow(new Object[]{nombre, canciones.size(),LocalDate.now().getYear()});
+            }
         }
     }
 
