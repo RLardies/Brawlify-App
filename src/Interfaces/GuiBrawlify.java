@@ -8,6 +8,9 @@ import Interfaces.MenuPrincipal.PanelMenuPrincipal;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -48,12 +51,21 @@ public class GuiBrawlify extends JFrame {
         this.pack();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+
+        Aplicacion finalApp = app;
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent evt) {
+                //Hacer aqui lo que sea
+                finalApp.guardarDatos();
+                System.exit(0);
+            }
+        });
 
     }
 
     public void mostrarPanel(String nombrePanel) {
         layout.show(this.getContentPane(), nombrePanel);
     }
+
 }
