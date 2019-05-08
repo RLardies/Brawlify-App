@@ -9,6 +9,7 @@ import Usuario.Usuario;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -95,7 +96,7 @@ public class AplicacionTest {
 
 
     @Test
-    public void subirCancion() throws CancionInvalida{
+    public void subirCancion() throws CancionInvalida, IOException {
         app.subirCancion("Prueba2","hive.mp3");
         for(Reproducible r : app.getReproducibles()){
             if(r.esCancion() && r.getAutor().equals(app.getUsuarioLogueado()) && r.getTitulo().equals("Prueba2")){
@@ -105,7 +106,7 @@ public class AplicacionTest {
     }
 
     @Test
-    public void modificarCancion() throws CancionNoExistente, UsuarioNoExistente, ContrasenaIncorrecta, UsuarioBloqueado, CancionInvalida {
+    public void modificarCancion() throws CancionNoExistente, UsuarioNoExistente, ContrasenaIncorrecta, UsuarioBloqueado, CancionInvalida, IOException {
         app.login("fidel","12345");
         app.subirCancion("Prueba2","hive.mp3");
         for(Reproducible r : app.getReproducibles()){
@@ -132,7 +133,7 @@ public class AplicacionTest {
     }
 
     @Test
-    public void borrarCancion() throws CancionNoExistente, CancionInvalida {
+    public void borrarCancion() throws CancionNoExistente, CancionInvalida, IOException {
         app.subirCancion("Prueba2", "hive.mp3");
         for (Reproducible r : app.getReproducibles()) {
             if (r.esCancion() && r.getAutor().equals(app.getUsuarioLogueado()) && r.getTitulo().equals("Prueba2")) {
@@ -146,7 +147,7 @@ public class AplicacionTest {
     }
 
     @Test
-    public void validarCancion() throws CancionNoExistente, CancionInvalida{
+    public void validarCancion() throws CancionNoExistente, CancionInvalida, IOException {
         app.subirCancion("Prueba2", "hive.mp3");
         for (Reproducible r : app.getReproducibles()) {
             if (r.esCancion() && r.getAutor().equals(app.getUsuarioLogueado()) && r.getTitulo().equals("Prueba2")) {

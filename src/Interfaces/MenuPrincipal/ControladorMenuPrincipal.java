@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import Exceptions.*;
 
@@ -76,6 +77,8 @@ public class ControladorMenuPrincipal implements ActionListener {
                     e.printStackTrace();
                 } catch (Mp3PlayerException e) {
                     e.printStackTrace();
+                } catch (NoRepLeft noRepLeft) {
+                    JOptionPane.showMessageDialog(panelMenuPrincipal, "Se te han acabado las reproducciones por este mes. Pasate a premium para seguir escuchando música", "Ups", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
 
@@ -137,6 +140,8 @@ public class ControladorMenuPrincipal implements ActionListener {
                     e.printStackTrace();
                 } catch (Mp3PlayerException e) {
                     e.printStackTrace();
+                } catch (NoRepLeft noRepLeft) {
+                    JOptionPane.showMessageDialog(panelMenuPrincipal, "Se te han acabado las reproducciones por este mes. Pasate a premium para seguir escuchando música", "Ups", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
 
@@ -289,6 +294,8 @@ public class ControladorMenuPrincipal implements ActionListener {
                     e.printStackTrace();
                 } catch (Mp3PlayerException e) {
                     e.printStackTrace();
+                } catch (NoRepLeft noRepLeft) {
+                    noRepLeft.printStackTrace();
                 }
             }
         }else if(actionEvent.getActionCommand().equals("ReproducirValidaciones")) {
@@ -308,6 +315,8 @@ public class ControladorMenuPrincipal implements ActionListener {
                     e.printStackTrace();
                 } catch (Mp3PlayerException e) {
                     e.printStackTrace();
+                } catch (NoRepLeft noRepLeft) {
+                    JOptionPane.showMessageDialog(panelMenuPrincipal, "Se te han acabado las reproducciones por este mes. Pasate a premium para seguir escuchando música", "Ups", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         }else if(actionEvent.getActionCommand().equals("ValidarAutorizado")){
@@ -436,6 +445,8 @@ public class ControladorMenuPrincipal implements ActionListener {
             } catch (CancionInvalida e) {
                 JOptionPane.showMessageDialog(panelMenuPrincipal,"La cancion no es valida", "Error",JOptionPane.ERROR_MESSAGE);
                 return;
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(panelMenuPrincipal,"Error Subiendo la canción", "Error",JOptionPane.ERROR_MESSAGE);
             }
             JOptionPane.showMessageDialog(panelMenuPrincipal,"Cancion subida correctamente", "Ok",JOptionPane.INFORMATION_MESSAGE);
 

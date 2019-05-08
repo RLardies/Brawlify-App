@@ -21,7 +21,9 @@ import pads.musicPlayer.Mp3Player;
 import pads.musicPlayer.exceptions.Mp3PlayerException;
 
 import java.io.*;
+import java.nio.file.Path;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Aplicacion implements Serializable {
@@ -453,7 +455,7 @@ public class Aplicacion implements Serializable {
      * @param rutaFichero Ruta del fichero que contiene la cancion
      * @return true si se ha subido, false si ha habido algun problema
      */
-    public boolean subirCancion(String titulo, String rutaFichero) throws CancionInvalida {
+    public boolean subirCancion(String titulo, String rutaFichero) throws CancionInvalida, IOException {
         Integer duracion;
 
         if(usuarioLogueado == null) {
@@ -475,12 +477,34 @@ public class Aplicacion implements Serializable {
             throw new CancionInvalida();
         }
 
-        Cancion c = new Cancion(titulo, duracion, usuarioLogueado, rutaFichero);
+        File archivo = new File(rutaFichero);
+
+        String ruta = new String();
+        ruta = System.getProperty("user.dir") + "/canciones/" + LocalDateTime.now() + " - " + this.getUsuarioLogueado().getUsername() + " - " + titulo + " - " + archivo.getName();
+
+        File archivo2 = new File(ruta);
+        archivo2.getParentFile().mkdirs();
+
+        copyFile(rutaFichero, ruta);
+
+        Cancion c = new Cancion(titulo, duracion, usuarioLogueado, ruta);
 
         usuarioLogueado.addReproducible(c);
         reproducibles.add(c);
 
         return true;
+    }
+
+    public void copyFile(String pathOrg, String pathDest) throws IOException {
+        InputStream f1 = new FileInputStream(pathOrg);
+        OutputStream f2 = new FileOutputStream(pathDest);
+        byte[] buffer = new byte[1024];
+        int length;
+
+        while ((length = f1.read(buffer)) > 0)
+            f2.write(buffer, 0, length);
+
+        return;
     }
 
     /**
@@ -581,6 +605,8 @@ public class Aplicacion implements Serializable {
         }
 
         c.setEstado(Cancion.Estado.BORRADO);
+        File archivo = new File(c.getFichero());
+        archivo.delete();
         return true;
     }
 
@@ -755,6 +781,7 @@ public class Aplicacion implements Serializable {
                     r.setEstado(Cancion.Estado.BLOQUEADO);
                 }
             }
+
             reporte.getUsuario().addNotificacion(new Notificacion("Nuestro equipo juridico ha confirmado el plagio" +
                     "que usted reporto, acerca de la cancion " + nombre + ". Muchas gracias por su colaboracion."));
 
@@ -788,7 +815,7 @@ public class Aplicacion implements Serializable {
      * @throws FileNotFoundException
      * @throws Mp3PlayerException
      */
-    public void reproducir(Cancion ... cancion) throws FileNotFoundException, Mp3PlayerException {
+    public void reproducir(Cancion ... cancion) throws FileNotFoundException, Mp3PlayerException, NoRepLeft {
         if(reproductor != null) {
             reproductor.stop();
         }
@@ -819,6 +846,10 @@ public class Aplicacion implements Serializable {
         } else {
             rep_left = maxRepNoPremium - usuarioLogueado.getReproducciones();
 
+            if(rep_left < 1) {
+                throw new NoRepLeft();
+            }
+
             for(i = 0; i < mp3.size() && i < rep_left; i++) {
                 reproductor.add(mp3.get(i));
                 usuarioLogueado.setReproducciones(usuarioLogueado.getReproducciones() + 1);
@@ -836,8 +867,6 @@ public class Aplicacion implements Serializable {
                 i++;
             }
         }
-
-
 
         reproductor.play();
     }
