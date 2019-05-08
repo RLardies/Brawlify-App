@@ -13,6 +13,7 @@ import Reporte.Reporte;
 import Reproducible.Reproducible;
 import Reproducible.Cancion;
 import Reproducible.Lista;
+import Usuario.Usuario;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -121,6 +122,27 @@ public class ControladorInicio implements ActionListener {
                 }
 
                 panelMenuPrincipal.getMisCanciones().guardarResultados(resultados);
+            }
+
+            if(app.getUsuarioLogueado().getUsuariosSeguidos().size() > 0){
+
+                panelMenuPrincipal.getMisSuscripciones().limpiarTabla();
+
+                ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+
+                for(Usuario u : app.getUsuarioLogueado().getUsuariosSeguidos()){
+                    usuarios.add(u);
+                    panelMenuPrincipal.getMisSuscripciones().getModeloDatos().addRow(new Object[]{u.getUsername()});
+
+                }
+
+                Usuario[] resultados = new Usuario[usuarios.size()];
+                int i;
+                for(i = 0; i < usuarios.size(); i++){
+                    resultados[i] = usuarios.get(i);
+                }
+
+                panelMenuPrincipal.getMisSuscripciones().guardarResultados(resultados);
             }
 
             if(app.getUsuarioLogueado().esPremium()){

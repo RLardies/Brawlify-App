@@ -488,8 +488,9 @@ public class ControladorMenuPrincipal implements ActionListener {
             int i;
             if (autoresSeleccionados.length > 0) {
                 for (i = 0; i < selected.length; i++) {
-                    autoresSeleccionados[i] = panelMenuPrincipal.getMisSuscripciones().getResultados()[selected[i]];
 
+                    autoresSeleccionados[i] = panelMenuPrincipal.getMisSuscripciones().getResultados()[selected[i]];
+                    panelMenuPrincipal.getMisSuscripciones().getModeloDatos().removeRow(selected[i] - i);
                     app.getUsuarioLogueado().removeAutor(autoresSeleccionados[i]);
 
                 }
