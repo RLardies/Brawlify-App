@@ -3,6 +3,7 @@ package Interfaces.MenuPrincipal;
 import Reproducible.Cancion;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -19,6 +20,14 @@ public class MisCanciones extends JPanel {
     private JTextField nombre;
     DefaultTableModel modeloDatos;
 
+    private JLabel titulo = new JLabel("Titulo de la Cancion:");
+    private JTextField tituloTexto = new JTextField(15);
+    private JLabel archivo = new JLabel("Archivo:");
+    private JTextField archivoRuta = new JTextField(15);
+
+    JFileChooser fileChooser = new JFileChooser();
+    private JButton examinar = new JButton("Examinar");
+    private JButton modificarCancion = new JButton("Modificar Cancion");
 
     public MisCanciones() {
         layout = new SpringLayout();
@@ -36,7 +45,7 @@ public class MisCanciones extends JPanel {
 
         reproducir = new JButton("Reproducir");
         borrar = new JButton("Borrar");
-        crear = new JButton("Crear");
+        crear = new JButton("Crear Album");
         nombreLabel = new JLabel("Nombre del Album:");
         nombre = new JTextField(15);
 
@@ -46,6 +55,13 @@ public class MisCanciones extends JPanel {
         this.add(crear);
         this.add(nombre);
         this.add(nombreLabel);
+        this.add(titulo);
+        this.add(tituloTexto);
+        this.add(archivo);
+        this.add(archivoRuta);
+        this.add(examinar);
+        this.add(modificarCancion);
+        fileChooser.setFileFilter(new FileNameExtensionFilter("MP3", "mp3"));
 
         layout.putConstraint(SpringLayout.WEST, scroll, 30, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.NORTH, scroll, 30, SpringLayout.NORTH, this);
@@ -56,14 +72,34 @@ public class MisCanciones extends JPanel {
         layout.putConstraint(SpringLayout.WEST, borrar, 0, SpringLayout.WEST, reproducir);
         layout.putConstraint(SpringLayout.NORTH, borrar, 50, SpringLayout.NORTH, reproducir);
 
-        layout.putConstraint(SpringLayout.WEST, crear, 0, SpringLayout.WEST, borrar);
-        layout.putConstraint(SpringLayout.NORTH, crear, 50, SpringLayout.NORTH, borrar);
-
-        layout.putConstraint(SpringLayout.WEST, nombreLabel, 0, SpringLayout.WEST, crear);
-        layout.putConstraint(SpringLayout.NORTH, nombreLabel, 40, SpringLayout.NORTH, crear);
+        layout.putConstraint(SpringLayout.WEST, nombreLabel, 0, SpringLayout.WEST, borrar);
+        layout.putConstraint(SpringLayout.NORTH, nombreLabel, 100, SpringLayout.NORTH, borrar);
 
         layout.putConstraint(SpringLayout.WEST, nombre, 0, SpringLayout.WEST, nombreLabel);
         layout.putConstraint(SpringLayout.NORTH, nombre, 10, SpringLayout.SOUTH, nombreLabel);
+
+        layout.putConstraint(SpringLayout.WEST, crear, 0, SpringLayout.WEST, nombre);
+        layout.putConstraint(SpringLayout.NORTH, crear, 30, SpringLayout.NORTH, nombre);
+
+        layout.putConstraint(SpringLayout.WEST, titulo, 0, SpringLayout.WEST, nombre);
+        layout.putConstraint(SpringLayout.NORTH, titulo, 100, SpringLayout.NORTH, crear);
+
+        layout.putConstraint(SpringLayout.WEST, tituloTexto, 0, SpringLayout.WEST, titulo);
+        layout.putConstraint(SpringLayout.NORTH, tituloTexto, 20, SpringLayout.NORTH, titulo);
+
+        layout.putConstraint(SpringLayout.WEST, archivo, 0, SpringLayout.WEST, titulo);
+        layout.putConstraint(SpringLayout.NORTH, archivo, 20, SpringLayout.NORTH, tituloTexto);
+
+        layout.putConstraint(SpringLayout.WEST, archivoRuta, 0, SpringLayout.WEST, titulo);
+        layout.putConstraint(SpringLayout.NORTH, archivoRuta, 20, SpringLayout.NORTH, archivo);
+
+        layout.putConstraint(SpringLayout.WEST, examinar, 0, SpringLayout.WEST, titulo);
+        layout.putConstraint(SpringLayout.NORTH, examinar, 30, SpringLayout.NORTH, archivoRuta);
+
+        layout.putConstraint(SpringLayout.WEST, modificarCancion, 0, SpringLayout.WEST, titulo);
+        layout.putConstraint(SpringLayout.NORTH, modificarCancion, 30, SpringLayout.NORTH, examinar);
+
+
 
     }
     public void setControlador(ActionListener c) {
@@ -75,6 +111,12 @@ public class MisCanciones extends JPanel {
 
         crear.setActionCommand("CrearAlbum");
         crear.addActionListener(c);
+
+        examinar.addActionListener(c);
+        examinar.setActionCommand("ExaminarMisCanciones");
+
+        modificarCancion.addActionListener(c);
+        modificarCancion.setActionCommand("ModificarCancion");
     }
 
     public JTable getTabla() {
@@ -106,4 +148,17 @@ public class MisCanciones extends JPanel {
     public void guardarResultados(Cancion[] canciones) {
         resultados = canciones;
     }
+
+    public JTextField getArchivoRuta() {
+        return archivoRuta;
+    }
+
+    public JFileChooser getFileChooser() {
+        return fileChooser;
+    }
+
+    public JTextField getTituloTexto() {
+        return tituloTexto;
+    }
+
 }
