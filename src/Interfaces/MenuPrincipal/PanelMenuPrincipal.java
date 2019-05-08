@@ -25,6 +25,7 @@ public class PanelMenuPrincipal extends JPanel {
 
     private JButton unlogin = new JButton("Cerrar Sesion");
     private JButton stop = new JButton("Stop Music");
+    private InfoUser infoUser = new InfoUser();
 
     public PanelMenuPrincipal(){
 
@@ -40,8 +41,23 @@ public class PanelMenuPrincipal extends JPanel {
         botonera.add(unlogin);
         botonera.add(stop);
 
+        JPanel barraLateral = new JPanel();
+        SpringLayout layoutBarraLateral = new SpringLayout();
+        barraLateral.setLayout(layoutBarraLateral);
+
+        layoutBarraLateral.putConstraint(SpringLayout.WEST, infoUser, 10, SpringLayout.WEST, barraLateral);
+        layoutBarraLateral.putConstraint(SpringLayout.NORTH, infoUser, 10, SpringLayout.NORTH, barraLateral);
+
+        layoutBarraLateral.putConstraint(SpringLayout.WEST, botonera, 0, SpringLayout.WEST, infoUser);
+        layoutBarraLateral.putConstraint(SpringLayout.NORTH, botonera, 10, SpringLayout.SOUTH, infoUser);
+
+        barraLateral.setPreferredSize(new Dimension(300 ,500));
+        barraLateral.add(infoUser);
+        barraLateral.add(botonera);
+
+
         this.add(tabbedPane, BorderLayout.CENTER);
-        this.add(botonera,BorderLayout.EAST);
+        this.add(barraLateral,BorderLayout.EAST);
     }
 
     public void setControlador(ActionListener c) {
@@ -99,5 +115,9 @@ public class PanelMenuPrincipal extends JPanel {
 
     public MisSuscripciones getMisSuscripciones() {
         return misSuscripciones;
+    }
+
+    public InfoUser getInfoUser() {
+        return infoUser;
     }
 }

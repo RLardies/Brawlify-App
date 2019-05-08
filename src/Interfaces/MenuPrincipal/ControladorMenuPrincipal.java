@@ -89,6 +89,7 @@ public class ControladorMenuPrincipal implements ActionListener {
             panelMenuPrincipal.getMisNotificaciones().limpiarTabla();
             panelMenuPrincipal.getMisCanciones().limpiarTabla();
             panelMenuPrincipal.getMisListas().limpiarTabla();
+            panelMenuPrincipal.getInfoUser().limpiarInfo();
             app.stopReproductor();
 
             panelMenuPrincipal.getTabbedPane().remove(panelMenuPrincipal.getBuscarCanciones());

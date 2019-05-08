@@ -80,6 +80,17 @@ public class ControladorInicio implements ActionListener {
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Suscripciones", panelMenuPrincipal.getMisSuscripciones());
             }
 
+            panelMenuPrincipal.getInfoUser().getNombre().setText(app.getUsuarioLogueado().getNombre());
+            panelMenuPrincipal.getInfoUser().getUsername().setText(app.getUsuarioLogueado().getUsername());
+            if(app.getUsuarioLogueado().esPremium() || app.getUsuarioLogueado().esAdmin()) {
+                panelMenuPrincipal.getInfoUser().getPremium().setText("Servicio Premium: Activado");
+                panelMenuPrincipal.getInfoUser().getReproduccionesRestantes().setText("Reproducciones Restantes: Ilimitadas");
+            } else {
+                panelMenuPrincipal.getInfoUser().getPremium().setText("Servicio Premium: Desactivado");
+                panelMenuPrincipal.getInfoUser().getReproduccionesRestantes().setText("Reproducciones Restantes: " + (app.getMaxRepNoPremium() - app.getUsuarioLogueado().getReproducciones()));
+            }
+
+
             panelMenuPrincipal.getTabbedPane().setSelectedIndex(0);
             ventana.mostrarPanel(GuiBrawlify.PANEL_PRINCIPAL);
             if(app.getUsuarioLogueado().getNotificaciones().size() > 0) {
