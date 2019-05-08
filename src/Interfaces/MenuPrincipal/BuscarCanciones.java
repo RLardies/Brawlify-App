@@ -1,6 +1,7 @@
 package Interfaces.MenuPrincipal;
 
 import Reproducible.Cancion;
+import Reproducible.Lista;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -14,15 +15,21 @@ public class BuscarCanciones extends JPanel {
     private JComboBox filtro;
     private JButton iniciarBusqueda;
     private JTable tabla;
+    private JTable tablaListas;
     private JScrollPane scroll;
+    private JScrollPane scroll2;
     private SpringLayout layout;
     private JButton reproducir;
+    private JButton añadirLista;
     private Cancion[] resultados;
+    private Lista[] listas;
+    private Lista listaSelec;
     private JButton reportarCancion;
     private JButton suscribirseAAutor;
     private JLabel comentarioLabel;
     private JTextField comentario;
     DefaultTableModel modeloDatos;
+    DefaultTableModel modeloListas;
 
     public BuscarCanciones() {
         layout = new SpringLayout();
@@ -40,9 +47,17 @@ public class BuscarCanciones extends JPanel {
         tabla = new JTable(modeloDatos);
         JScrollPane scroll = new JScrollPane(tabla);
 
+        String[] titulos2 = {"Nombre"};
+        Object[][] filas2 = new Object[0][1];
+        modeloListas = new DefaultTableModel(filas2, titulos2);
+        tablaListas = new JTable(modeloListas);
+        JScrollPane scroll2 = new JScrollPane(tablaListas);
+
+        scroll2.setPreferredSize(new Dimension(300, 230));
+
         reportarCancion = new JButton("Reportar Cancion");
         suscribirseAAutor = new JButton("Suscribirse A Autor");
-
+        añadirLista = new JButton("Añadir a Lista");
         reproducir = new JButton("Reproducir");
 
         comentarioLabel = new JLabel("Comentario del reporte:");
@@ -76,6 +91,12 @@ public class BuscarCanciones extends JPanel {
         layout.putConstraint(SpringLayout.WEST, suscribirseAAutor, 0, SpringLayout.WEST, comentarioLabel);
         layout.putConstraint(SpringLayout.NORTH, suscribirseAAutor, 40, SpringLayout.SOUTH, comentario);
 
+        layout.putConstraint(SpringLayout.WEST, añadirLista, 0, SpringLayout.WEST, suscribirseAAutor);
+        layout.putConstraint(SpringLayout.NORTH, añadirLista, 40, SpringLayout.SOUTH, suscribirseAAutor);
+
+        layout.putConstraint(SpringLayout.WEST, scroll2, 0, SpringLayout.WEST, añadirLista);
+        layout.putConstraint(SpringLayout.NORTH, scroll2, 20, SpringLayout.SOUTH, añadirLista);
+
         this.add(textoABuscar);
         this.add(iniciarBusqueda);
         this.add(filtro);
@@ -85,6 +106,8 @@ public class BuscarCanciones extends JPanel {
         this.add(comentario);
         this.add(comentarioLabel);
         this.add(suscribirseAAutor);
+        this.add(scroll2);
+        this.add(añadirLista);
     }
 
 
@@ -97,6 +120,8 @@ public class BuscarCanciones extends JPanel {
         reportarCancion.addActionListener(c);
         suscribirseAAutor.setActionCommand("Suscribirse");
         suscribirseAAutor.addActionListener(c);
+        añadirLista.setActionCommand("AñadirLista");
+        añadirLista.addActionListener(c);
     }
 
     public String getTextoABuscar() {
@@ -106,6 +131,12 @@ public class BuscarCanciones extends JPanel {
     public JTable getTabla() {
         return tabla;
     }
+
+    public Lista[] getListas(){
+        return listas;
+    }
+
+    public JTable getTablaListas(){ return tablaListas; }
 
 
     public JComboBox getFiltro() {
@@ -124,6 +155,10 @@ public class BuscarCanciones extends JPanel {
         resultados = canciones;
     }
 
+    public void guardarListas(Lista[] l) {
+        listas = l;
+    }
+
     public void limpiarTabla() {
         int i;
         int rows = modeloDatos.getRowCount();
@@ -133,7 +168,34 @@ public class BuscarCanciones extends JPanel {
         modeloDatos.fireTableDataChanged();
     }
 
+    public void limpiarListas() {
+        int i;
+        int rows = modeloListas.getRowCount();
+        for(i = 0; i < rows; i++) {
+            modeloListas.removeRow(0);
+        }
+        modeloListas.fireTableDataChanged();
+    }
+
     public JTextField getComentario() {
         return comentario;
     }
+
+    public DefaultTableModel getModeloListas() {
+        return modeloListas;
+    }
+
+    public JButton getAñadirLista() {
+        return añadirLista;
+    }
+
+    public Lista getListaSelec(){
+        return listaSelec;
+    }
+
+    public void setListaSelec(Lista l){
+        listaSelec = l;
+    }
+
+
 }

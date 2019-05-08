@@ -114,12 +114,14 @@ public class ControladorInicio implements ActionListener {
 
             if(app.getUsuarioLogueado().esPremium()){
                 panelMenuPrincipal.getMisListas().limpiarTabla();
+                panelMenuPrincipal.getBuscarCanciones().limpiarListas();
 
                 ArrayList<Lista> listas = new ArrayList<Lista>();
 
                 for(Reproducible r : app.getUsuarioLogueado().getReproducibles()){
                     if(r.esLista() && r.getEstado() != Cancion.Estado.BLOQUEADO){
                         listas.add((Lista) r);
+                        panelMenuPrincipal.getBuscarCanciones().getModeloListas().addRow(new Object[]{r.getTitulo()});
                         panelMenuPrincipal.getMisListas().getModeloDatos().addRow(new Object[]{r.getTitulo(),r.getNumeroCanciones(),r.getDuracion()});
                     }
                 }
@@ -131,6 +133,7 @@ public class ControladorInicio implements ActionListener {
                 }
 
                 panelMenuPrincipal.getMisListas().guardarResultados(l);
+                panelMenuPrincipal.getBuscarCanciones().guardarListas(l);
 
             }
 

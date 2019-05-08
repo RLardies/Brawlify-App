@@ -491,6 +491,48 @@ public class ControladorMenuPrincipal implements ActionListener {
                 JOptionPane.showMessageDialog(panelMenuPrincipal, "Has eliminado tu suscripcion a los autores", "Ok", JOptionPane.INFORMATION_MESSAGE);
 
             }
+        } else if(actionEvent.getActionCommand().equals("AñadirLista")){
+            if (app.getUsuarioLogueado().esPremium() == false) {
+                JOptionPane.showMessageDialog(panelMenuPrincipal, "Funcion para usuarios Premium", "Funcion Premium", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                int[] selected = panelMenuPrincipal.getBuscarCanciones().getTabla().getSelectedRows();
+                Cancion[] cancionesSeleccionadas = new Cancion[selected.length];
+
+                int[] selected2 = panelMenuPrincipal.getBuscarCanciones().getTablaListas().getSelectedRows();
+                Lista listaSeleccionada;
+
+                if (selected2.length == 1) {
+                    listaSeleccionada = panelMenuPrincipal.getBuscarCanciones().getListas()[selected2[0]];
+                    panelMenuPrincipal.getBuscarCanciones().setListaSelec(listaSeleccionada);
+
+
+                    int i;
+                    boolean flag = false;
+                    if (cancionesSeleccionadas.length > 0) {
+                        for (i = 0; i < selected.length; i++) {
+                            cancionesSeleccionadas[i] = panelMenuPrincipal.getBuscarCanciones().getResultados()[selected[i]];
+                        }
+
+                        for (Cancion c : cancionesSeleccionadas) {
+                            if (listaSeleccionada.containsCancion(c)) {
+                                flag = true;
+                            }
+                            else{
+                                listaSeleccionada.addReproducible(c);
+                            }
+                        }
+
+                        if(flag){
+                            JOptionPane.showMessageDialog(panelMenuPrincipal, "Alguna cancion seleccionada ya pertenece a la Lista", "Cancion ya introducida", JOptionPane.ERROR_MESSAGE);
+                        }else
+                            JOptionPane.showMessageDialog(panelMenuPrincipal, "Canciones Introducidas con Éxito", "Canciones Introducidas", JOptionPane.INFORMATION_MESSAGE);
+                    }else
+                        JOptionPane.showMessageDialog(panelMenuPrincipal, "Seleccione alguna cancion", "Seleccion no valida", JOptionPane.ERROR_MESSAGE);
+                }else
+                    JOptionPane.showMessageDialog(panelMenuPrincipal, "Seleccione una única lista", "Selección no válida", JOptionPane.ERROR_MESSAGE);
+
+
+            }
         }
     }
 
