@@ -1030,6 +1030,10 @@ public class Aplicacion implements Serializable {
             return false;
         }
 
+        if(usuarioLogueado.esAdmin()) {
+            return true;
+        }
+
         if(reproducible.esCancion()){
 
             if(reproducible.getEstado() == Cancion.Estado.VALIDADO) {
