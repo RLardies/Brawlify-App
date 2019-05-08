@@ -21,6 +21,7 @@ public class PanelMenuPrincipal extends JPanel {
     private Validaciones validaciones = new Validaciones();
     private Ajustes ajustes = new Ajustes();
     private SubirCancion subirCancion = new SubirCancion();
+    private MisSuscripciones misSuscripciones = new MisSuscripciones();
 
     private JButton unlogin = new JButton("Cerrar Sesion");
     private JButton stop = new JButton("Stop Music");
@@ -52,6 +53,7 @@ public class PanelMenuPrincipal extends JPanel {
         reportes.setControlador(c);
         validaciones.setControlador(c);
         ajustes.setControlador(c);
+        misSuscripciones.setControlador(c);
 
         unlogin.setActionCommand("Unlogin");
         unlogin.addActionListener(c);
@@ -93,5 +95,9 @@ public class PanelMenuPrincipal extends JPanel {
 
     public SubirCancion getSubirCancion() {
         return subirCancion;
+    }
+
+    public MisSuscripciones getMisSuscripciones() {
+        return misSuscripciones;
     }
 }

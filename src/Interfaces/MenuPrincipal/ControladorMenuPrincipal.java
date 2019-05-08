@@ -9,6 +9,7 @@ import Notificacion.Notificacion;
 import Reporte.Reporte;
 import Reproducible.Cancion;
 import Reproducible.*;
+import Usuario.Usuario;
 import pads.musicPlayer.exceptions.Mp3PlayerException;
 
 import javax.swing.*;
@@ -460,6 +461,23 @@ public class ControladorMenuPrincipal implements ActionListener {
                 }
             }
 
+        }else if(actionEvent.getActionCommand().equals("RemoveAutor")) {
+
+
+            int[] selected = panelMenuPrincipal.getMisSuscripciones().getTabla().getSelectedRows();
+            Usuario[] autoresSeleccionados = new Usuario[selected.length];
+
+            int i;
+            if (autoresSeleccionados.length > 0) {
+                for (i = 0; i < selected.length; i++) {
+                    autoresSeleccionados[i] = panelMenuPrincipal.getMisSuscripciones().getResultados()[selected[i]];
+
+                    app.getUsuarioLogueado().removeAutor(autoresSeleccionados[i]);
+
+                }
+                JOptionPane.showMessageDialog(panelMenuPrincipal, "Has eliminado tu suscripcion a los autores", "Ok", JOptionPane.INFORMATION_MESSAGE);
+
+            }
         }
     }
 
