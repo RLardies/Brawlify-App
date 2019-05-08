@@ -367,6 +367,7 @@ public class ControladorMenuPrincipal implements ActionListener {
         }else if(actionEvent.getActionCommand().equals("CambiarRepToPremium")){
             if(Integer.parseInt(panelMenuPrincipal.getAjustes().getNewRepToPremium()) > 0){
                 app.setRepToPremium(Integer.parseInt(panelMenuPrincipal.getAjustes().getNewRepToPremium()));
+                panelMenuPrincipal.getAjustes().getT1().setText("Reproducciones mensuales para obtener el premium: " + app.getRepToPremium());
                 JOptionPane.showMessageDialog(panelMenuPrincipal, "Los cambios se han realizado correctamente", "Ok", JOptionPane.INFORMATION_MESSAGE);
 
             }else {
@@ -376,6 +377,7 @@ public class ControladorMenuPrincipal implements ActionListener {
         }else if(actionEvent.getActionCommand().equals("CambiarMaxRepNoPremium")){
             if(Integer.parseInt(panelMenuPrincipal.getAjustes().getNewMaxRepNoPremium()) > 0){
                 app.setRepToPremium(Integer.parseInt(panelMenuPrincipal.getAjustes().getNewMaxRepNoPremium()));
+                panelMenuPrincipal.getAjustes().getT2().setText("Reproducciones mensuales maximas para usuarios no premium: " + app.getMaxRepNoPremium());
                 JOptionPane.showMessageDialog(panelMenuPrincipal, "Los cambios se han realizado correctamente", "Ok", JOptionPane.INFORMATION_MESSAGE);
 
             }else {

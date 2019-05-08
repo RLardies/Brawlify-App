@@ -167,8 +167,8 @@ public class ControladorInicio implements ActionListener {
                 }
                 panelMenuPrincipal.getReportes().guardarResultados(r);
 
-                panelMenuPrincipal.getAjustes().setMaxRepNoPremium(app.getMaxRepNoPremium());
-                panelMenuPrincipal.getAjustes().setRepToPremium(app.getRepToPremium());
+                panelMenuPrincipal.getAjustes().getT1().setText("Reproducciones mensuales para obtener el premium: " + app.getRepToPremium());
+                panelMenuPrincipal.getAjustes().getT2().setText("Reproducciones mensuales maximas para usuarios no premium: " + app.getMaxRepNoPremium());
 
 
             }

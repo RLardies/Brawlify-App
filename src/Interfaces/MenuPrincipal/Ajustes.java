@@ -8,10 +8,9 @@ public class Ajustes extends JPanel {
     private JTextField newMaxRepNoPremium;
     private JButton cambiar1;
     private JButton cambiar2;
-    private JLabel t1;
-    private JLabel t2;
-    private int maxRepNoPremium;
-    private int repToPremium;
+    private JLabel t1 = new JLabel();
+    private JLabel t2 = new JLabel();
+
 
 
     public Ajustes() {
@@ -22,8 +21,9 @@ public class Ajustes extends JPanel {
         newMaxRepNoPremium = new JTextField(5);
         cambiar1 = new JButton("Cambiar repToPremium");
         cambiar2 = new JButton("Cambiar maxRepNoPremium");
-        t1 = new JLabel("Reproducciones mensuales para obtener el premium: " + repToPremium);
-        t2 = new JLabel("Reproducciones mensuales maximas para usuarios no premium: "+ maxRepNoPremium);
+
+
+
 
         layout.putConstraint(SpringLayout.WEST, t1, 30, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.NORTH, t1, 30, SpringLayout.NORTH, this);
@@ -69,19 +69,13 @@ public class Ajustes extends JPanel {
         cambiar2.addActionListener(c);
 
     }
-    public int getMaxRepNoPremium() {
-        return maxRepNoPremium;
+
+    public JLabel getT1() {
+        return t1;
     }
 
-    public void setMaxRepNoPremium(int maxRepNoPremium) {
-        this.maxRepNoPremium = maxRepNoPremium;
+    public JLabel getT2() {
+        return t2;
     }
 
-    public int getRepToPremium() {
-        return repToPremium;
-    }
-
-    public void setRepToPremium(int repToPremium) {
-        this.repToPremium = repToPremium;
-    }
 }
