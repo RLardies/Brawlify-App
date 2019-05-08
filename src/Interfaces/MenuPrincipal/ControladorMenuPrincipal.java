@@ -447,7 +447,6 @@ public class ControladorMenuPrincipal implements ActionListener {
 
             try {
                 Cancion c = app.subirCancion(panelMenuPrincipal.getSubirCancion().getTituloTexto().getText(), panelMenuPrincipal.getSubirCancion().getArchivoRuta().getText());
-                panelMenuPrincipal.getMisCanciones().getModeloDatos().addRow(new Object[]{c.getTitulo(), c.getAutor().getUsername(), c.getDuracion()});
             } catch (CancionInvalida e) {
                 JOptionPane.showMessageDialog(panelMenuPrincipal,"La cancion no es valida", "Error",JOptionPane.ERROR_MESSAGE);
                 return;
