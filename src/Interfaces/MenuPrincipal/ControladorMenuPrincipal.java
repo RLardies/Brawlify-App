@@ -116,7 +116,7 @@ public class ControladorMenuPrincipal implements ActionListener {
             if(cancionesSeleccionadas.length > 0) {
                 for (i = 0; i < selected.length; i++) {
                     cancionesSeleccionadas[i] = panelMenuPrincipal.getMisCanciones().getResultados()[selected[i]];
-                    panelMenuPrincipal.getMisCanciones().getModeloDatos().removeRow(selected[i]-i);
+
                 }
 
 
@@ -128,7 +128,10 @@ public class ControladorMenuPrincipal implements ActionListener {
                     }
                 }
                 panelMenuPrincipal.getBuscarCanciones().limpiarTabla();
+                actualizaAlbums();
+                actualizaListas();
             }
+
 
         } else if(actionEvent.getActionCommand().equals("ReproducirMis")) {
 
@@ -234,6 +237,8 @@ public class ControladorMenuPrincipal implements ActionListener {
                         panelMenuPrincipal.getMisListas().getListaSelec().removeReproducible(r);
                     }
                 }
+
+                actualizaListas();
             }
 
         }else if(actionEvent.getActionCommand().equals("BorrarLista")){
@@ -249,7 +254,6 @@ public class ControladorMenuPrincipal implements ActionListener {
                 if (listasSeleccionadas.length > 0) {
                     for (i = 0; i < selected.length; i++) {
                         listasSeleccionadas[i] = panelMenuPrincipal.getMisListas().getResultados()[selected[i]];
-                        panelMenuPrincipal.getMisListas().getModeloDatos().removeRow(selected[i] - i);
                     }
 
                     for (Lista l : listasSeleccionadas) {
@@ -257,6 +261,7 @@ public class ControladorMenuPrincipal implements ActionListener {
                         app.getUsuarioLogueado().getReproducibles().remove(l);
                     }
                 }
+                actualizaListas();
             }
         }else if(actionEvent.getActionCommand().equals("Confirmar")){
             int[] selected = panelMenuPrincipal.getReportes().getTabla().getSelectedRows();
@@ -270,6 +275,8 @@ public class ControladorMenuPrincipal implements ActionListener {
 
                     app.procesarPlagio(reportesSeleccionados[i], true);
                 }
+                actualizaListas();
+                actualizaAlbums();
                 JOptionPane.showMessageDialog(panelMenuPrincipal, "Plagios confirmados correctamente", "Ok", JOptionPane.INFORMATION_MESSAGE);
             }
         }else if(actionEvent.getActionCommand().equals("Desmentir")){
@@ -284,6 +291,8 @@ public class ControladorMenuPrincipal implements ActionListener {
 
                     app.procesarPlagio(reportesSeleccionados[i], false);
                 }
+                actualizaListas();
+                actualizaAlbums();
                 JOptionPane.showMessageDialog(panelMenuPrincipal, "Plagios desmentidos correctamente", "Ok", JOptionPane.INFORMATION_MESSAGE);
             }
         }else if(actionEvent.getActionCommand().equals("ReproducirReportes")) {
@@ -344,6 +353,7 @@ public class ControladorMenuPrincipal implements ActionListener {
                         e.printStackTrace();
                     }
                 }
+                actualizaAlbums();
                 JOptionPane.showMessageDialog(panelMenuPrincipal, "Canciones validadas correctamente con contenido autorizado", "Ok", JOptionPane.INFORMATION_MESSAGE);
             }
         }else if(actionEvent.getActionCommand().equals("ValidarExplicito")){
@@ -362,6 +372,7 @@ public class ControladorMenuPrincipal implements ActionListener {
                         e.printStackTrace();
                     }
                 }
+                actualizaAlbums();
                 JOptionPane.showMessageDialog(panelMenuPrincipal, "Canciones validadas correctamente con contenido explicito", "Ok", JOptionPane.INFORMATION_MESSAGE);
             }
         }else if(actionEvent.getActionCommand().equals("Rechazar")){
@@ -436,7 +447,7 @@ public class ControladorMenuPrincipal implements ActionListener {
                     JOptionPane.showMessageDialog(panelMenuPrincipal,"Escriba un nombre para la lista","Nombre de Lista",JOptionPane.ERROR_MESSAGE);
                 }else {
                     app.crearLista(nombre);
-                    panelMenuPrincipal.getMisListas().getModeloDatos().addRow(new Object[]{nombre,0,0});
+                    actualizaListas();
                 }
             }
 
@@ -457,6 +468,7 @@ public class ControladorMenuPrincipal implements ActionListener {
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(panelMenuPrincipal,"Error Subiendo la canción", "Error",JOptionPane.ERROR_MESSAGE);
             }
+            actualizaAlbums();
             JOptionPane.showMessageDialog(panelMenuPrincipal,"Cancion subida correctamente", "Ok",JOptionPane.INFORMATION_MESSAGE);
 
         } else if(actionEvent.getActionCommand().equals("Stop")) {
@@ -532,6 +544,8 @@ public class ControladorMenuPrincipal implements ActionListener {
                             }
                         }
 
+                        actualizaListas();
+
                         if(flag){
                             JOptionPane.showMessageDialog(panelMenuPrincipal, "Alguna cancion seleccionada ya pertenece a la Lista", "Cancion ya introducida", JOptionPane.ERROR_MESSAGE);
                         }else
@@ -597,7 +611,6 @@ public class ControladorMenuPrincipal implements ActionListener {
             if (albums.length > 0) {
                 for (i = 0; i < selected.length; i++) {
                     albums[i] = panelMenuPrincipal.getMisAlbums().getResultados()[selected[i]];
-                    panelMenuPrincipal.getMisAlbums().getModeloDatos().removeRow(selected[i] - i);
                 }
                 panelMenuPrincipal.getMisAlbums().limpiarTablaReproducibles();
 
@@ -605,6 +618,7 @@ public class ControladorMenuPrincipal implements ActionListener {
                     app.getReproducibles().remove(a);
                     app.getUsuarioLogueado().getReproducibles().remove(a);
                 }
+                actualizaAlbums();
             }
         }else if(actionEvent.getActionCommand().equals("AñadirAlbumLista")){
             int[] selected = panelMenuPrincipal.getMisAlbums().getTabla().getSelectedRows();
@@ -633,6 +647,9 @@ public class ControladorMenuPrincipal implements ActionListener {
                             listaSeleccionada.addReproducible(a);
                         }
                     }
+
+                    actualizaAlbums();
+                    actualizaListas();
 
                     if(flag){
                         JOptionPane.showMessageDialog(panelMenuPrincipal, "Algun album seleccionada ya pertenece a la Lista", "Album ya introducido", JOptionPane.ERROR_MESSAGE);
@@ -698,9 +715,9 @@ public class ControladorMenuPrincipal implements ActionListener {
                 }else
                     JOptionPane.showMessageDialog(panelMenuPrincipal,"Seleccione al menos una Cancion","Selección no válida",JOptionPane.ERROR_MESSAGE);
 
+                actualizaAlbums();
                 JOptionPane.showMessageDialog(panelMenuPrincipal,"Album creado con éxito.","Album creado",JOptionPane.INFORMATION_MESSAGE);
-                panelMenuPrincipal.getMisAlbums().getModeloDatos().addRow(new Object[]{nombre, canciones.size(),LocalDate.now().getYear()});
-            }
+                }
         }
     }
 
@@ -719,4 +736,61 @@ public class ControladorMenuPrincipal implements ActionListener {
         }
     }
 
+    public void actualizaListas(){
+        panelMenuPrincipal.getMisListas().limpiarTabla();
+        panelMenuPrincipal.getBuscarCanciones().limpiarListas();
+        panelMenuPrincipal.getMisAlbums().limpiarListas();
+
+        ArrayList<Lista> listas = new ArrayList<Lista>();
+
+        for(Reproducible r : app.getUsuarioLogueado().getReproducibles()){
+            if(r.esLista() && r.getEstado() != Cancion.Estado.BLOQUEADO){
+                listas.add((Lista) r);
+                panelMenuPrincipal.getBuscarCanciones().getModeloListas().addRow(new Object[]{r.getTitulo()});
+                panelMenuPrincipal.getMisListas().getModeloDatos().addRow(new Object[]{r.getTitulo(),r.getNumeroCanciones(),r.getDuracion()});
+                panelMenuPrincipal.getMisAlbums().getModeloListas().addRow(new Object[]{r.getTitulo()});
+            }
+        }
+
+        Lista[] l = new Lista[listas.size()];
+        int j;
+        for(j=0; j < listas.size(); j++){
+            l[j] = listas.get(j);
+        }
+
+        panelMenuPrincipal.getMisListas().guardarResultados(l);
+        panelMenuPrincipal.getBuscarCanciones().guardarListas(l);
+        panelMenuPrincipal.getMisAlbums().guardarListas(l);
+    }
+
+    public void actualizaAlbums(){
+        panelMenuPrincipal.getMisCanciones().limpiarTabla();
+        panelMenuPrincipal.getMisAlbums().limpiarTabla();
+
+        ArrayList<Cancion> canciones = new ArrayList<Cancion>();
+        ArrayList<Album> albums = new ArrayList<Album>();
+
+        for(Reproducible r : app.getUsuarioLogueado().getReproducibles()){
+            if(r.esCancion() && r.getEstado() != Cancion.Estado.BORRADO){
+                canciones.add((Cancion)r);
+                panelMenuPrincipal.getMisCanciones().getModeloDatos().addRow(new Object[]{r.getTitulo(), r.getEstado(), r.getDuracion()});
+            }else if(r.esAlbum()){
+                albums.add((Album)r);
+                panelMenuPrincipal.getMisAlbums().getModeloDatos().addRow(new Object[]{r.getTitulo(),r.getNumeroCanciones(),((Album) r).getAnioPublic()});
+            }
+        }
+
+        Cancion[] resultados = new Cancion[canciones.size()];
+        Album[] a = new Album[albums.size()];
+        int i;
+        for(i = 0; i < canciones.size(); i++){
+            resultados[i] = canciones.get(i);
+        }
+        for(i=0; i < albums.size(); i++){
+            a[i] = albums.get(i);
+        }
+
+        panelMenuPrincipal.getMisCanciones().guardarResultados(resultados);
+        panelMenuPrincipal.getMisAlbums().guardarResultados(a);
+    }
 }
