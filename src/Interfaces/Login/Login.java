@@ -59,12 +59,12 @@ public class Login extends JPanel {
         continuar.addActionListener(c);
     }
 
-    public String getUserText() {
-        return userText.getText();
+    public JTextField getUserText() {
+        return userText;
     }
 
-    public String getPasswordText() {
-        return passwordText.getText();
+    public JTextField getPasswordText() {
+        return passwordText;
     }
 
 

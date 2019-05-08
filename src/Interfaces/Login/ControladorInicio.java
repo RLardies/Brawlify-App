@@ -43,7 +43,11 @@ public class ControladorInicio implements ActionListener {
         if(actionEvent.getActionCommand().equals("Loguearse")) {    //LOGIN
             Login login = panelInicio.getLogin();
             try {
-                app.login(login.getUserText(), login.getPasswordText());
+                if(login.getUserText().getText().isEmpty() || login.getPasswordText().getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(panelInicio, "Rellene todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                app.login(login.getUserText().getText(), login.getPasswordText().getText());
             } catch (UsuarioNoExistente e) {
                 JOptionPane.showMessageDialog(panelInicio, "Usuario no existente", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
