@@ -1,11 +1,15 @@
 package Interfaces.MenuPrincipal;
-
+/**
+ * Panel donde se muestran todas las suscripciones del usuario. Visible para los usuarios registrados
+ * @author Jesus Blanco, Rodrigo Lardies, Daniel Calonge
+ */
 import Usuario.Usuario;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
+
 
 public class MisSuscripciones extends JPanel{
     private JTable tabla;

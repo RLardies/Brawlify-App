@@ -1,5 +1,10 @@
 package Interfaces.MenuPrincipal;
 
+/**
+ * Panel en el que se muestran las canciones a validar(Solo visible por el admin)
+ * @author Jesus Blanco, Rodrigo Lardies, Daniel Calonge
+ */
+
 import Reporte.Reporte;
 import Reproducible.Cancion;
 import Reproducible.Lista;

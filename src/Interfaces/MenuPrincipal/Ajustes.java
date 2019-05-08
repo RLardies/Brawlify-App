@@ -1,5 +1,8 @@
 package Interfaces.MenuPrincipal;
-
+/**
+ * Ventana con ajustes de la aplicacion. Solo es visible para el admin
+ * @author Jesus Blanco, Rodrigo Lardies, Daniel Calonge
+ */
 import javax.swing.*;
 import java.awt.event.ActionListener;
 

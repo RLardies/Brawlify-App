@@ -1,5 +1,8 @@
 package Interfaces.Login;
-
+/**
+ * Controlador del panel de inicio
+ * @author Jesus Blanco, Rodrigo Lardies, Daniel Calonge
+ */
 import Aplicacion.Aplicacion;
 import Exceptions.ContrasenaIncorrecta;
 import Exceptions.UsuarioBloqueado;
