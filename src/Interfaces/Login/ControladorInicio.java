@@ -11,7 +11,7 @@ import Interfaces.MenuPrincipal.Reportes;
 import Notificacion.Notificacion;
 import Reporte.Reporte;
 import Reproducible.Reproducible;
-import Reproducible.Cancion;
+import Reproducible.*;
 import Reproducible.Lista;
 import Usuario.Usuario;
 
@@ -58,6 +58,7 @@ public class ControladorInicio implements ActionListener {
                 panelMenuPrincipal.getTabbedPane().addTab("Buscar Canciones", panelMenuPrincipal.getBuscarCanciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Canciones", panelMenuPrincipal.getMisCanciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Listas", panelMenuPrincipal.getMisListas());
+                panelMenuPrincipal.getTabbedPane().addTab("Mis Álbums",panelMenuPrincipal.getMisAlbums());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Notificaciones", panelMenuPrincipal.getMisNotificaciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Subir Cancion", panelMenuPrincipal.getSubirCancion());
                 panelMenuPrincipal.getTabbedPane().addTab("Reportes", panelMenuPrincipal.getReportes());
@@ -69,6 +70,7 @@ public class ControladorInicio implements ActionListener {
                 panelMenuPrincipal.getTabbedPane().addTab("Buscar Canciones", panelMenuPrincipal.getBuscarCanciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Canciones", panelMenuPrincipal.getMisCanciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Listas", panelMenuPrincipal.getMisListas());
+                panelMenuPrincipal.getTabbedPane().addTab("Mis Álbums",panelMenuPrincipal.getMisAlbums());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Notificaciones", panelMenuPrincipal.getMisNotificaciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Subir Cancion", panelMenuPrincipal.getSubirCancion());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Suscripciones", panelMenuPrincipal.getMisSuscripciones());
@@ -76,6 +78,7 @@ public class ControladorInicio implements ActionListener {
                 panelMenuPrincipal.getTabbedPane().addTab("Buscar Canciones", panelMenuPrincipal.getBuscarCanciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Canciones", panelMenuPrincipal.getMisCanciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Listas", panelMenuPrincipal.getMisListas());
+                panelMenuPrincipal.getTabbedPane().addTab("Mis Álbums",panelMenuPrincipal.getMisAlbums());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Notificaciones", panelMenuPrincipal.getMisNotificaciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Subir Cancion", panelMenuPrincipal.getSubirCancion());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Suscripciones", panelMenuPrincipal.getMisSuscripciones());
@@ -105,23 +108,33 @@ public class ControladorInicio implements ActionListener {
             if(app.getUsuarioLogueado().getReproducibles().size() > 0){
 
                 panelMenuPrincipal.getMisCanciones().limpiarTabla();
+                panelMenuPrincipal.getMisAlbums().limpiarTabla();
 
                 ArrayList<Cancion> canciones = new ArrayList<Cancion>();
+                ArrayList<Album> albums = new ArrayList<Album>();
 
                 for(Reproducible r : app.getUsuarioLogueado().getReproducibles()){
                     if(r.esCancion() && r.getEstado() != Cancion.Estado.BORRADO){
                         canciones.add((Cancion)r);
                         panelMenuPrincipal.getMisCanciones().getModeloDatos().addRow(new Object[]{r.getTitulo(), r.getEstado(), r.getDuracion()});
+                    }else if(r.esAlbum()){
+                        albums.add((Album)r);
+                        panelMenuPrincipal.getMisAlbums().getModeloDatos().addRow(new Object[]{r.getTitulo(),r.getNumeroCanciones(),r.getDuracion()});
                     }
                 }
 
                 Cancion[] resultados = new Cancion[canciones.size()];
+                Album[] a = new Album[albums.size()];
                 int i;
                 for(i = 0; i < canciones.size(); i++){
                     resultados[i] = canciones.get(i);
                 }
+                for(i=0; i < albums.size(); i++){
+                    a[i] = albums.get(i);
+                }
 
                 panelMenuPrincipal.getMisCanciones().guardarResultados(resultados);
+                panelMenuPrincipal.getMisAlbums().guardarResultados(a);
             }
 
             if(app.getUsuarioLogueado().getUsuariosSeguidos().size() > 0){
@@ -148,6 +161,7 @@ public class ControladorInicio implements ActionListener {
             if(app.getUsuarioLogueado().esPremium()){
                 panelMenuPrincipal.getMisListas().limpiarTabla();
                 panelMenuPrincipal.getBuscarCanciones().limpiarListas();
+                panelMenuPrincipal.getMisAlbums().limpiarListas();
 
                 ArrayList<Lista> listas = new ArrayList<Lista>();
 
@@ -156,6 +170,7 @@ public class ControladorInicio implements ActionListener {
                         listas.add((Lista) r);
                         panelMenuPrincipal.getBuscarCanciones().getModeloListas().addRow(new Object[]{r.getTitulo()});
                         panelMenuPrincipal.getMisListas().getModeloDatos().addRow(new Object[]{r.getTitulo(),r.getNumeroCanciones(),r.getDuracion()});
+                        panelMenuPrincipal.getMisAlbums().getModeloListas().addRow(new Object[]{r.getTitulo()});
                     }
                 }
 
@@ -167,6 +182,7 @@ public class ControladorInicio implements ActionListener {
 
                 panelMenuPrincipal.getMisListas().guardarResultados(l);
                 panelMenuPrincipal.getBuscarCanciones().guardarListas(l);
+                panelMenuPrincipal.getMisAlbums().guardarListas(l);
 
             }
 

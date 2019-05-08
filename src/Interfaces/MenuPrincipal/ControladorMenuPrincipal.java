@@ -539,6 +539,106 @@ public class ControladorMenuPrincipal implements ActionListener {
 
 
             }
+        } else if(actionEvent.getActionCommand().equals("MostrarAlbum")){
+
+            int[] selected = panelMenuPrincipal.getMisAlbums().getTabla().getSelectedRows();
+            Album  albumSeleccionado;
+
+            if (selected.length == 1) {
+                albumSeleccionado = panelMenuPrincipal.getMisAlbums().getResultados()[selected[0]];
+                panelMenuPrincipal.getMisAlbums().limpiarTablaReproducibles();
+
+                panelMenuPrincipal.getMisAlbums().setAlbumSelec(albumSeleccionado);
+
+                Cancion[] canciones = new Cancion[albumSeleccionado.getCanciones().size()];
+
+                int k = 0;
+                for (Cancion c : albumSeleccionado.getCanciones()) {
+
+                    panelMenuPrincipal.getMisAlbums().getModeloReproducibles().addRow(new Object[]{c.getTitulo()});
+
+                    canciones[k] = c;
+                    k++;
+                }
+                panelMenuPrincipal.getMisAlbums().guardarCanciones(canciones);
+
+            }
+            else
+                JOptionPane.showMessageDialog(panelMenuPrincipal, "Seleccione un único Album", "Selección no válida", JOptionPane.ERROR_MESSAGE);
+
+        }else if(actionEvent.getActionCommand().equals("ReproducirAlbum")){
+            int[] selected = panelMenuPrincipal.getMisAlbums().getTabla().getSelectedRows();
+            Album album;
+
+            if (selected.length == 1) {
+                album = panelMenuPrincipal.getMisAlbums().getResultados()[selected[0]];
+
+                panelMenuPrincipal.getMisAlbums().setAlbumSelec(album);
+
+                try {
+                    app.reproducir(album);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (Mp3PlayerException e) {
+                    e.printStackTrace();
+                }
+            }else
+                JOptionPane.showMessageDialog(panelMenuPrincipal, "Seleccione un único Album", "Selección no válida", JOptionPane.ERROR_MESSAGE);
+
+        }else if(actionEvent.getActionCommand().equals("BorrarAlbum")){
+            int[] selected = panelMenuPrincipal.getMisAlbums().getTabla().getSelectedRows();
+            Album[] albums = new Album[selected.length];
+
+            int i;
+            if (albums.length > 0) {
+                for (i = 0; i < selected.length; i++) {
+                    albums[i] = panelMenuPrincipal.getMisAlbums().getResultados()[selected[i]];
+                    panelMenuPrincipal.getMisAlbums().getModeloDatos().removeRow(selected[i] - i);
+                }
+                panelMenuPrincipal.getMisAlbums().limpiarTablaReproducibles();
+
+                for (Album a : albums) {
+                    app.getReproducibles().remove(a);
+                    app.getUsuarioLogueado().getReproducibles().remove(a);
+                }
+            }
+        }else if(actionEvent.getActionCommand().equals("AñadirAlbumLista")){
+            int[] selected = panelMenuPrincipal.getMisAlbums().getTabla().getSelectedRows();
+            Album[] albums = new Album[selected.length];
+
+            int[] selected2 = panelMenuPrincipal.getMisAlbums().getTabla3().getSelectedRows();
+            Lista listaSeleccionada;
+
+            if (selected2.length == 1) {
+                listaSeleccionada = panelMenuPrincipal.getMisAlbums().getListas()[selected2[0]];
+                panelMenuPrincipal.getMisAlbums().setListaSelec(listaSeleccionada);
+
+
+                int i;
+                boolean flag = false;
+                if (albums.length > 0) {
+                    for (i = 0; i < selected.length; i++) {
+                        albums[i] = panelMenuPrincipal.getMisAlbums().getResultados()[selected[i]];
+                    }
+
+                    for (Album a : albums) {
+                        if (listaSeleccionada.containsAlbum(a)) {
+                            flag = true;
+                        }
+                        else{
+                            listaSeleccionada.addReproducible(a);
+                        }
+                    }
+
+                    if(flag){
+                        JOptionPane.showMessageDialog(panelMenuPrincipal, "Algun album seleccionada ya pertenece a la Lista", "Album ya introducido", JOptionPane.ERROR_MESSAGE);
+                    }else
+                        JOptionPane.showMessageDialog(panelMenuPrincipal, "Albums Introducidos con Éxito", "Albums Introducidos", JOptionPane.INFORMATION_MESSAGE);
+                }else
+                    JOptionPane.showMessageDialog(panelMenuPrincipal, "Seleccione algun album", "Seleccion no valida", JOptionPane.ERROR_MESSAGE);
+            }else
+                JOptionPane.showMessageDialog(panelMenuPrincipal, "Seleccione una única lista", "Selección no válida", JOptionPane.ERROR_MESSAGE);
+
         }
     }
 
