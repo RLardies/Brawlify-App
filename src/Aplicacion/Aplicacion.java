@@ -552,8 +552,8 @@ public class Aplicacion implements Serializable {
      * @return true si se ha modificado, false si no
      * @throws CancionNoExistente
      */
-    public boolean modificarCancion(Cancion cancion, String titulo, String rutaFichero) throws CancionNoExistente {
-        Integer duracion;
+    public boolean modificarCancion(Cancion cancion, String titulo, String rutaFichero) throws IOException, CancionInvalida {
+        /*Integer duracion;
 
         if(reproducibles.contains(cancion) == false){
             throw new CancionNoExistente();
@@ -581,7 +581,8 @@ public class Aplicacion implements Serializable {
 
         cancion.setDuracion(duracion);
         cancion.setFichero(rutaFichero);
-        cancion.setFecha(LocalDate.of(2000,1,1));
+        cancion.setFecha(LocalDate.of(2000,1,1));*/
+        cancion = subirCancion(titulo, rutaFichero);
         return true;
     }
 
