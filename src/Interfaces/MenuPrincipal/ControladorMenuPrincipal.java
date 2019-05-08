@@ -438,6 +438,28 @@ public class ControladorMenuPrincipal implements ActionListener {
 
         } else if(actionEvent.getActionCommand().equals("Stop")) {
             app.stopReproductor();
+        }else if(actionEvent.getActionCommand().equals("Suscribirse")) {
+            if (app.getUsuarioLogueado() == null) {
+                JOptionPane.showMessageDialog(panelMenuPrincipal, "Inicia sesión para suscribirse a un autor", "Inicia Sesion", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+
+
+                int[] selected = panelMenuPrincipal.getBuscarCanciones().getTabla().getSelectedRows();
+                Cancion[] cancionesSeleccionadas = new Cancion[selected.length];
+
+                int i;
+                if (cancionesSeleccionadas.length > 0) {
+                    for (i = 0; i < selected.length; i++) {
+                        cancionesSeleccionadas[i] = panelMenuPrincipal.getBuscarCanciones().getResultados()[selected[i]];
+
+                        app.getUsuarioLogueado().suscribirseAAutor(cancionesSeleccionadas[i].getAutor());
+
+                    }
+                    JOptionPane.showMessageDialog(panelMenuPrincipal, "Te has suscrito a los autores de las canciones", "Ok", JOptionPane.INFORMATION_MESSAGE);
+
+                }
+            }
+
         }
     }
 

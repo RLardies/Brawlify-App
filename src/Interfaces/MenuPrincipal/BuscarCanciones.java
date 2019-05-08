@@ -19,6 +19,7 @@ public class BuscarCanciones extends JPanel {
     private JButton reproducir;
     private Cancion[] resultados;
     private JButton reportarCancion;
+    private JButton suscribirseAAutor;
     private JLabel comentarioLabel;
     private JTextField comentario;
     DefaultTableModel modeloDatos;
@@ -40,6 +41,7 @@ public class BuscarCanciones extends JPanel {
         JScrollPane scroll = new JScrollPane(tabla);
 
         reportarCancion = new JButton("Reportar Cancion");
+        suscribirseAAutor = new JButton("Suscribirse A Autor");
 
         reproducir = new JButton("Reproducir");
 
@@ -71,6 +73,9 @@ public class BuscarCanciones extends JPanel {
         layout.putConstraint(SpringLayout.WEST, comentario, 0, SpringLayout.WEST, comentarioLabel);
         layout.putConstraint(SpringLayout.NORTH, comentario, 10, SpringLayout.SOUTH, comentarioLabel);
 
+        layout.putConstraint(SpringLayout.WEST, suscribirseAAutor, 0, SpringLayout.WEST, comentarioLabel);
+        layout.putConstraint(SpringLayout.NORTH, suscribirseAAutor, 40, SpringLayout.SOUTH, comentario);
+
         this.add(textoABuscar);
         this.add(iniciarBusqueda);
         this.add(filtro);
@@ -79,6 +84,7 @@ public class BuscarCanciones extends JPanel {
         this.add(reportarCancion);
         this.add(comentario);
         this.add(comentarioLabel);
+        this.add(suscribirseAAutor);
     }
 
 
@@ -89,6 +95,8 @@ public class BuscarCanciones extends JPanel {
         reproducir.addActionListener(c);
         reportarCancion.setActionCommand("Reportar");
         reportarCancion.addActionListener(c);
+        suscribirseAAutor.setActionCommand("Suscribirse");
+        suscribirseAAutor.addActionListener(c);
     }
 
     public String getTextoABuscar() {
