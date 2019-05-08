@@ -645,24 +645,27 @@ public class ControladorMenuPrincipal implements ActionListener {
         }else if(actionEvent.getActionCommand().equals("Pagar")){
             if(!(panelMenuPrincipal.getNumeroTarjeta().equals(""))){
 
-                /*if(app.getSistemaPago().isValidCardNumber(panelMenuPrincipal.getNumeroTarjeta())){
-                    try {
-                        app.pagarPremium(panelMenuPrincipal.getNumeroTarjeta());
-                    } catch (InvalidCardNumberException c) {
-                        c.printStackTrace();
-                    } catch (FailedInternetConnectionException i) {
-                        i.printStackTrace();
-                    } catch (OrderRejectedException o) {
-                        o.printStackTrace();
+
+                try {
+                    if(app.pagarPremium(panelMenuPrincipal.getNumeroTarjeta()) == true) {
+                        JOptionPane.showMessageDialog(panelMenuPrincipal, "El pago se ha realizado correctamente. Vuelva a iniciar sesion para aplicar los cambios", "Ok", JOptionPane.INFORMATION_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(panelMenuPrincipal, "Introduzca un numero de tarjeta valido", "ERROR", JOptionPane.INFORMATION_MESSAGE);
                     }
-                    JOptionPane.showMessageDialog(panelMenuPrincipal, "El pago se ha realizado correctamente. Vuelva a iniciar sesion para aplicar los cambios", "Ok", JOptionPane.INFORMATION_MESSAGE);
 
-                }else{
-                    JOptionPane.showMessageDialog(panelMenuPrincipal, "Introduzca un numero de tarjeta valido", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+                } catch (InvalidCardNumberException c) {
+                    c.printStackTrace();
+                } catch (FailedInternetConnectionException i) {
+                    i.printStackTrace();
+                } catch (OrderRejectedException o) {
+                    o.printStackTrace();
                 }
-*/
 
-            }else {
+
+            }
+
+
+            else {
                 JOptionPane.showMessageDialog(panelMenuPrincipal, "Introduzca un numero de tarjeta", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             }
 
