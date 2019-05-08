@@ -1,5 +1,8 @@
 package Interfaces.MenuPrincipal;
-
+/**
+ * Panel en el que se muestran las notificaciones
+ * @author Jesus Blanco, Rodrigo Lardies, Daniel Calonge
+ */
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;

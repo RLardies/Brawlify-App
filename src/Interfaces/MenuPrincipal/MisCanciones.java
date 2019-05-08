@@ -1,5 +1,8 @@
 package Interfaces.MenuPrincipal;
-
+/**
+ * Panel en el que se muestran las canciones del autor. En el se pueden borrar, modificar canciones y crear albums. Disponible para usuarios registrados
+ * @author Jesus Blanco, Rodrigo Lardies, Daniel Calonge
+ */
 import Reproducible.Cancion;
 
 import javax.swing.*;

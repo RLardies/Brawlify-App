@@ -1,5 +1,8 @@
 package Interfaces.MenuPrincipal;
-
+/**
+ * Ventana con los reportes pendientes de procesar. Solo es visible por el admin
+ * @author Jesus Blanco, Rodrigo Lardies, Daniel Calonge
+ */
 import Reporte.Reporte;
 import Reproducible.Cancion;
 

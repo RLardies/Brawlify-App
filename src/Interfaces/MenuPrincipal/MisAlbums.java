@@ -1,5 +1,8 @@
 package Interfaces.MenuPrincipal;
-
+/**
+ * Panel en el que se muestran los albums del usuario
+ * @author Jesus Blanco, Rodrigo Lardies, Daniel Calonge
+ */
 import Reproducible.*;
 
 import javax.swing.*;

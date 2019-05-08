@@ -1,4 +1,8 @@
 package Interfaces.MenuPrincipal;
+/**
+ * Ventana para subir una cancion, disponible para cualquier usuario registrado
+ * @author Jesus Blanco, Rodrigo Lardies, Daniel Calonge
+ */
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;

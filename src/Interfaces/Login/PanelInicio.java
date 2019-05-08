@@ -1,5 +1,8 @@
 package Interfaces.Login;
-
+/**
+ * Panel de inicio de la aplicacion
+ * @author Jesus Blanco, Rodrigo Lardies, Daniel Calonge
+ */
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;

@@ -1,5 +1,8 @@
 package Interfaces.MenuPrincipal;
-
+/**
+ * Panel del menu principal
+ * @author Jesus Blanco, Rodrigo Lardies, Daniel Calonge
+ */
 import Interfaces.Login.Ayuda;
 import Interfaces.Login.Inicio;
 import Interfaces.Login.Login;

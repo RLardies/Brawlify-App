@@ -1,5 +1,8 @@
 package Interfaces.MenuPrincipal;
-
+/**
+ * Ventana para buscar canciones. Tambien se pueden reportar canciones si eres un usuario registrado
+ * @author Jesus Blanco, Rodrigo Lardies, Daniel Calonge
+ */
 import Reproducible.Cancion;
 import Reproducible.Lista;
 

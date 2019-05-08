@@ -1,5 +1,8 @@
 package Interfaces.MenuPrincipal;
-
+/**
+ * Panel en el que se muestran las listas de reproduccion propias. Solo es visible para los usuarios premium
+ * @author Jesus Blanco, Rodrigo Lardies, Daniel Calonge
+ */
 import Reproducible.*;
 
 import javax.swing.*;

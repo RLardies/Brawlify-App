@@ -1,5 +1,8 @@
 package Interfaces.MenuPrincipal;
-
+/**
+ * Controlador del panel del menu principal
+ * @author Jesus Blanco, Rodrigo Lardies, Daniel Calonge
+ */
 import Aplicacion.Aplicacion;
 import Exceptions.CancionNoExistente;
 import Interfaces.GuiBrawlify;

@@ -1,5 +1,8 @@
 package Interfaces.MenuPrincipal;
-
+/**
+ * Panel con informacion del usuario
+ * @author Jesus Blanco, Rodrigo Lardies, Daniel Calonge
+ */
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;

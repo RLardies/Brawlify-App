@@ -1,5 +1,8 @@
 package Interfaces.Login;
-
+/**
+ * Ventana para registrarse como nuevo usuario
+ * @author Jesus Blanco, Rodrigo Lardies, Daniel Calonge
+ */
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
