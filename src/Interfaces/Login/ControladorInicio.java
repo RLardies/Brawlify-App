@@ -55,6 +55,7 @@ public class ControladorInicio implements ActionListener {
             }
 
             if(app.getUsuarioLogueado().esAdmin()) {
+                panelMenuPrincipal.esconderPagar();
                 panelMenuPrincipal.getTabbedPane().addTab("Buscar Canciones", panelMenuPrincipal.getBuscarCanciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Canciones", panelMenuPrincipal.getMisCanciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Listas", panelMenuPrincipal.getMisListas());
@@ -67,6 +68,7 @@ public class ControladorInicio implements ActionListener {
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Suscripciones", panelMenuPrincipal.getMisSuscripciones());
 
             } else if(app.getUsuarioLogueado().esPremium()) {
+                panelMenuPrincipal.esconderPagar();
                 panelMenuPrincipal.getTabbedPane().addTab("Buscar Canciones", panelMenuPrincipal.getBuscarCanciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Canciones", panelMenuPrincipal.getMisCanciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Listas", panelMenuPrincipal.getMisListas());
@@ -75,6 +77,7 @@ public class ControladorInicio implements ActionListener {
                 panelMenuPrincipal.getTabbedPane().addTab("Subir Cancion", panelMenuPrincipal.getSubirCancion());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Suscripciones", panelMenuPrincipal.getMisSuscripciones());
             } else {
+                panelMenuPrincipal.mostrarPagar();
                 panelMenuPrincipal.getTabbedPane().addTab("Buscar Canciones", panelMenuPrincipal.getBuscarCanciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Canciones", panelMenuPrincipal.getMisCanciones());
                 panelMenuPrincipal.getTabbedPane().addTab("Mis Listas", panelMenuPrincipal.getMisListas());
@@ -229,6 +232,8 @@ public class ControladorInicio implements ActionListener {
         } else if(actionEvent.getActionCommand().equals("ContinuarSinRegistrarse")) {
 
             ventana.mostrarPanel(GuiBrawlify.PANEL_PRINCIPAL);
+            panelMenuPrincipal.esconderPagar();
+
             panelMenuPrincipal.getTabbedPane().addTab("Buscar Canciones", panelMenuPrincipal.getBuscarCanciones());
 
         }else if(actionEvent.getActionCommand().equals("Registrarse")){

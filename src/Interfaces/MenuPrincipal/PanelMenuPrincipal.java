@@ -28,6 +28,11 @@ public class PanelMenuPrincipal extends JPanel {
     private JButton stop = new JButton("Stop Music");
     private InfoUser infoUser = new InfoUser();
 
+    private JLabel tarjeta = new JLabel("Numero de tarjeta: ");
+    private JTextField numeroTarjeta = new JTextField(20);
+    private JButton pagar = new JButton("Pagar Premium");
+
+    JPanel panelPagar = new JPanel();
     public PanelMenuPrincipal(){
 
         layout = new BorderLayout();
@@ -43,8 +48,25 @@ public class PanelMenuPrincipal extends JPanel {
         botonera.add(stop);
 
         JPanel barraLateral = new JPanel();
+
+        SpringLayout layoutPagar = new SpringLayout();
         SpringLayout layoutBarraLateral = new SpringLayout();
         barraLateral.setLayout(layoutBarraLateral);
+        panelPagar.setLayout(layoutPagar);
+
+        panelPagar.setPreferredSize(new Dimension(300, 100));
+        layoutPagar.putConstraint(SpringLayout.WEST, tarjeta, 10, SpringLayout.WEST, panelPagar);
+        layoutPagar.putConstraint(SpringLayout.NORTH, tarjeta, 10, SpringLayout.NORTH, panelPagar);
+
+        layoutPagar.putConstraint(SpringLayout.WEST, numeroTarjeta, 0, SpringLayout.WEST, tarjeta);
+        layoutPagar.putConstraint(SpringLayout.NORTH, numeroTarjeta, 10, SpringLayout.SOUTH, tarjeta);
+
+        layoutPagar.putConstraint(SpringLayout.WEST, pagar, 0, SpringLayout.WEST, tarjeta);
+        layoutPagar.putConstraint(SpringLayout.NORTH, pagar, 10, SpringLayout.SOUTH, numeroTarjeta);
+
+        panelPagar.add(tarjeta);
+        panelPagar.add(numeroTarjeta);
+        panelPagar.add(pagar);
 
         layoutBarraLateral.putConstraint(SpringLayout.WEST, infoUser, 10, SpringLayout.WEST, barraLateral);
         layoutBarraLateral.putConstraint(SpringLayout.NORTH, infoUser, 10, SpringLayout.NORTH, barraLateral);
@@ -52,9 +74,14 @@ public class PanelMenuPrincipal extends JPanel {
         layoutBarraLateral.putConstraint(SpringLayout.WEST, botonera, 0, SpringLayout.WEST, infoUser);
         layoutBarraLateral.putConstraint(SpringLayout.NORTH, botonera, 10, SpringLayout.SOUTH, infoUser);
 
+        layoutBarraLateral.putConstraint(SpringLayout.WEST, panelPagar, 0, SpringLayout.WEST, infoUser);
+        layoutBarraLateral.putConstraint(SpringLayout.NORTH, panelPagar, 100, SpringLayout.SOUTH, botonera);
+
+
         barraLateral.setPreferredSize(new Dimension(300 ,500));
         barraLateral.add(infoUser);
         barraLateral.add(botonera);
+        barraLateral.add(panelPagar);
 
 
         this.add(tabbedPane, BorderLayout.CENTER);
@@ -77,6 +104,8 @@ public class PanelMenuPrincipal extends JPanel {
         unlogin.addActionListener(c);
         stop.setActionCommand("Stop");
         stop.addActionListener(c);
+        pagar.setActionCommand("Pagar");
+        pagar.addActionListener(c);
     }
 
     public BuscarCanciones getBuscarCanciones() {
@@ -123,5 +152,13 @@ public class PanelMenuPrincipal extends JPanel {
 
     public InfoUser getInfoUser() {
         return infoUser;
+    }
+
+    public void esconderPagar(){panelPagar.setVisible(false);}
+
+    public void mostrarPagar(){panelPagar.setVisible(true);}
+
+    public String getNumeroTarjeta() {
+        return numeroTarjeta.getText();
     }
 }

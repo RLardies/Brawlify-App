@@ -10,6 +10,9 @@ import Reporte.Reporte;
 import Reproducible.Cancion;
 import Reproducible.*;
 import Usuario.Usuario;
+import es.uam.eps.padsof.telecard.FailedInternetConnectionException;
+import es.uam.eps.padsof.telecard.InvalidCardNumberException;
+import es.uam.eps.padsof.telecard.OrderRejectedException;
 import pads.musicPlayer.exceptions.Mp3PlayerException;
 
 import javax.swing.*;
@@ -638,6 +641,30 @@ public class ControladorMenuPrincipal implements ActionListener {
                     JOptionPane.showMessageDialog(panelMenuPrincipal, "Seleccione algun album", "Seleccion no valida", JOptionPane.ERROR_MESSAGE);
             }else
                 JOptionPane.showMessageDialog(panelMenuPrincipal, "Seleccione una única lista", "Selección no válida", JOptionPane.ERROR_MESSAGE);
+
+        }else if(actionEvent.getActionCommand().equals("Pagar")){
+            if(!(panelMenuPrincipal.getNumeroTarjeta().equals(""))){
+
+                /*if(app.getSistemaPago().isValidCardNumber(panelMenuPrincipal.getNumeroTarjeta())){
+                    try {
+                        app.pagarPremium(panelMenuPrincipal.getNumeroTarjeta());
+                    } catch (InvalidCardNumberException c) {
+                        c.printStackTrace();
+                    } catch (FailedInternetConnectionException i) {
+                        i.printStackTrace();
+                    } catch (OrderRejectedException o) {
+                        o.printStackTrace();
+                    }
+                    JOptionPane.showMessageDialog(panelMenuPrincipal, "El pago se ha realizado correctamente. Vuelva a iniciar sesion para aplicar los cambios", "Ok", JOptionPane.INFORMATION_MESSAGE);
+
+                }else{
+                    JOptionPane.showMessageDialog(panelMenuPrincipal, "Introduzca un numero de tarjeta valido", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+                }
+*/
+
+            }else {
+                JOptionPane.showMessageDialog(panelMenuPrincipal, "Introduzca un numero de tarjeta", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            }
 
         }
     }
