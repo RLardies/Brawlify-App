@@ -491,7 +491,7 @@ public class ControladorMenuPrincipal implements ActionListener {
 
                     }
                     JOptionPane.showMessageDialog(panelMenuPrincipal, "Te has suscrito a los autores de las canciones", "Ok", JOptionPane.INFORMATION_MESSAGE);
-
+                    actualizaSeguidores();
                 }
             }
 
@@ -506,10 +506,10 @@ public class ControladorMenuPrincipal implements ActionListener {
                 for (i = 0; i < selected.length; i++) {
 
                     autoresSeleccionados[i] = panelMenuPrincipal.getMisSuscripciones().getResultados()[selected[i]];
-                    panelMenuPrincipal.getMisSuscripciones().getModeloDatos().removeRow(selected[i] - i);
                     app.getUsuarioLogueado().removeAutor(autoresSeleccionados[i]);
 
                 }
+                actualizaSeguidores();
                 JOptionPane.showMessageDialog(panelMenuPrincipal, "Has eliminado tu suscripcion a los autores", "Ok", JOptionPane.INFORMATION_MESSAGE);
 
             }
@@ -792,5 +792,25 @@ public class ControladorMenuPrincipal implements ActionListener {
 
         panelMenuPrincipal.getMisCanciones().guardarResultados(resultados);
         panelMenuPrincipal.getMisAlbums().guardarResultados(a);
+    }
+
+    public void actualizaSeguidores(){
+        panelMenuPrincipal.getMisSuscripciones().limpiarTabla();
+
+        ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+
+        for(Usuario u : app.getUsuarioLogueado().getUsuariosSeguidos()){
+            usuarios.add(u);
+            panelMenuPrincipal.getMisSuscripciones().getModeloDatos().addRow(new Object[]{u.getUsername()});
+
+        }
+
+        Usuario[] resultados = new Usuario[usuarios.size()];
+        int i;
+        for(i = 0; i < usuarios.size(); i++){
+            resultados[i] = usuarios.get(i);
+        }
+
+        panelMenuPrincipal.getMisSuscripciones().guardarResultados(resultados);
     }
 }
