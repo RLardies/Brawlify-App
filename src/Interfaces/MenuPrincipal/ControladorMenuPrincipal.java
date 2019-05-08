@@ -80,6 +80,8 @@ public class ControladorMenuPrincipal implements ActionListener {
                 } catch (NoRepLeft noRepLeft) {
                     JOptionPane.showMessageDialog(panelMenuPrincipal, "Se te han acabado las reproducciones por este mes. Pasate a premium para seguir escuchando música", "Ups", JOptionPane.INFORMATION_MESSAGE);
                 }
+
+                actualizarInfoUser();
             }
 
 
@@ -144,6 +146,8 @@ public class ControladorMenuPrincipal implements ActionListener {
                 } catch (NoRepLeft noRepLeft) {
                     JOptionPane.showMessageDialog(panelMenuPrincipal, "Se te han acabado las reproducciones por este mes. Pasate a premium para seguir escuchando música", "Ups", JOptionPane.INFORMATION_MESSAGE);
                 }
+
+                actualizarInfoUser();
             }
 
         } else if(actionEvent.getActionCommand().equals("Mostrar")){
@@ -534,6 +538,21 @@ public class ControladorMenuPrincipal implements ActionListener {
 
 
             }
+        }
+    }
+
+    public void actualizarInfoUser() {
+        if(app.getUsuarioLogueado() == null) {
+            return;
+        }
+        panelMenuPrincipal.getInfoUser().getNombre().setText(app.getUsuarioLogueado().getNombre());
+        panelMenuPrincipal.getInfoUser().getUsername().setText(app.getUsuarioLogueado().getUsername());
+        if(app.getUsuarioLogueado().esPremium() || app.getUsuarioLogueado().esAdmin()) {
+            panelMenuPrincipal.getInfoUser().getPremium().setText("Servicio Premium: Activado");
+            panelMenuPrincipal.getInfoUser().getReproduccionesRestantes().setText("Reproducciones Restantes: Ilimitadas");
+        } else {
+            panelMenuPrincipal.getInfoUser().getPremium().setText("Servicio Premium: Desactivado");
+            panelMenuPrincipal.getInfoUser().getReproduccionesRestantes().setText("Reproducciones Restantes: " + (app.getMaxRepNoPremium() - app.getUsuarioLogueado().getReproducciones()));
         }
     }
 
