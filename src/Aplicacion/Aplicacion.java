@@ -455,11 +455,11 @@ public class Aplicacion implements Serializable {
      * @param rutaFichero Ruta del fichero que contiene la cancion
      * @return true si se ha subido, false si ha habido algun problema
      */
-    public boolean subirCancion(String titulo, String rutaFichero) throws CancionInvalida, IOException {
+    public Cancion subirCancion(String titulo, String rutaFichero) throws CancionInvalida, IOException {
         Integer duracion;
 
         if(usuarioLogueado == null) {
-            return false;
+            return null;
         }
 
         if(Mp3Player.isValidMp3File(rutaFichero)) {
@@ -492,7 +492,7 @@ public class Aplicacion implements Serializable {
         usuarioLogueado.addReproducible(c);
         reproducibles.add(c);
 
-        return true;
+        return c;
     }
 
     public void copyFile(String pathOrg, String pathDest) throws IOException {
